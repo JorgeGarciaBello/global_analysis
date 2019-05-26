@@ -1,0 +1,16 @@
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(871) : warning 197 - Variable RN_CHI2 has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1000) : warning 767 - The argument CHI2_MIN has not been used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1004) : warning 197 - Variable FUNC has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1098) : warning 242 - Variable FILENAME has been given a value but never used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1244) : warning 197 - Variable CHISQUAREPULL1 has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1245) : warning 197 - Variable CHISQUAREPULL2 has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1295) : warning 442 - SELECT statement expression is always constant
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1265) : warning 197 - Variable D has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1265) : warning 197 - Variable R has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1272) : warning 298 - Variable ETABKG26 has been used without being given an initial value
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1277) : warning 197 - Variable SIGMABKG26 has been declared but not used
+C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.F90(1425) : warning 242 - Variable DM32 has been given a value but never used
+WARNING the following symbols are missing:
+PPROMEDIO                                C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\lgotemp@.obj
+                                              (C:\USERS\ALUMNO\DROPBOX\PROYECTO DOCTORAL\PROGRAMACION\DB_DC_RN\DDR.F90)
+Creating executable: C:\Users\Alumno\Dropbox\Proyecto Doctoral\Programacion\DB_DC_RN\DDR.EXE
