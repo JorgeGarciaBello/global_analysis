@@ -101,14 +101,6 @@
 !
 !
 !
-module neu_osc_parameters
-    implicit none
-    real*8,save :: t12,t13,t14,t23,t24,t34   ! Are the mixing angles
-    real*8,save :: delta1,delta2,delta3      ! delta is the CP violation phase factor
-    real*8,save :: dm21,dm31,dm41            ! dm21,dm31,dm41 are the squared mass differences    
-
-end module neu_osc_parameters
-!
 !
 !
 !
@@ -212,7 +204,7 @@ end module neu_osc_parameters
     !
     !
     !
-    module db_data
+module db_data
     implicit none
     integer,parameter :: NDIM=9       ! NDIM is the number of pull parameters
     integer,parameter :: ADS=8         ! ADS is the number of detectors
@@ -246,91 +238,97 @@ end module neu_osc_parameters
     real*8 :: sigmaFarBkg(NBIN)       ! sigmaFarBkg is the total uncertainty for the far spectrum by bin 
     real*8 :: farBkg(NBIN)            ! farBkg is the total background in the far detector for the three period of data taking
     real*8 :: pullEngy
-    contains
-		subroutine readDBData()
-    implicit none
-    integer :: i,j,reason
-
-    open(16,file="data/dataService/weightsPerNearHall.dat", status="old")
-    open(17,file="data/dataService/weightsPerHs.dat", status="old")
-    open(18,file="data/dataService/weithsPerAd.dat", status="old")    
-    open(19,file="data/dataService/blue_spectrum_by_hall.dat", status="old")
-    open(20,file="data/dataService/black_spectrum_by_hall.dat", status="old")
-    !open(21,file="data/dataService/background_detector.dat", status="old")
-    open(21,file="data/dataService/background_detector_1809.dat", status="old")    
-    open(22,file="data/dataService/detector_sigma_background.dat", status="old")
-    open(23,file="data/dataService/fraction_nuclear_fission.dat", status="old")
-    open(24,file="data/dataService/IBD_fractions_dr.dat", status="old")
-    open(25,file="data/dataService/live_time_days_per_ad_1809.dat", status="old")
-    open(26,file="data/dataService/target_proton.dat", status="old")
-    open(27,file="data/dataService/lengths_detector_reactor.dat", status="old")
-    open(28,file="data/dataService/thermal_power_by_reactor.dat", status="old")
-    open(29,file="data/dataService/bines.dat", status="old")
-    open(30,file="data/dataService/v_ij_1.dat", status="old")
-    open(31,file='data/dataService/n_nom_array.dat', status='old')
-    open(32,file='data/dataService/n_obs.dat', status='old')
-    !open(33, file='data/dataService/Md_1607.dat', status='old')
-    open(33,file='data/dataService/Md_1809.dat', status='old')
-    open(34,file='data/dataService/dayabay_efficiency_weighted_target_protons.dat',status='old')
-    open(36,file='data/dataService/geometric_factor.dat',status='old')
-    open(37,file='data/dataService/dayabay_1809_far_obs_background_subtracted_spectrum_IBD.dat',status='old')
-    open(38,file='data/dataService/dayabay_1809_far_exp_background_subtracted_spectrum_IBD.dat',status='old')
-    open(39,file='data/dataService/dayabay_1809_total_period_uncertainty_of_background_H3_hall.dat',status='old')
-    open(72,file='data/dataService/dayabay_1809total_far_bkg_in_three_period_of_data_taking.dat',status='old')
     
-!        read(16,*,IOSTAT=reason) ((wNH(i,j), j=1,2), i=1,34)
-!        read(17,*,IOSTAT=reason) ((wH(i,j), j=1,8), i=1,34)
-!        read(18,*,IOSTAT=reason) ((wD(i,j), j=1,6), i=1,272)
-!        read(19,*,IOSTAT=reason) ((blueH(i,j),j=1,3),i=1,34)
-!        read(20,*,IOSTAT=reason) ((blackH(i,j),j=1,3),i=1,34)        
-        read(21,*,IOSTAT=reason) Bd
-        read(22,*,IOSTAT=reason) Sb
-        read(23,*,IOSTAT=reason) FNF
-        read(24,*,IOSTAT=reason) ((IBD_fdr(i,j), j=1,RCTS), i=1,ADS)
-        read(25,*,IOSTAT=reason) LT_d   ! [days]
-        read(26,*,IOSTAT=reason) TP_d
-        read(27,*,IOSTAT=reason) ((length_d_r(i,j), j=1,RCTS), i=1,ADS) ! [m]
-        read(28,*,IOSTAT=reason) TP_r
-        read(29,*,IOSTAT=reason) ((bines(i,j), j=1,2), i=1,26)
- !       read(30,*,IOSTAT=reason) ((v_ij_1(i,j), j=1,34), i=1,34)
-        read(31,*,IOSTAT=reason) N_nom
-        read(32,*,IOSTAT=reason) N_obs
-        read(33,*,IOSTAT=reason) Md_1607
-        read(34,*,IOSTAT=reason) N_e
-        read(36,*,IOSTAT=reason) ((gFactor(i,j), j=1,RCTS), i=1,4)
-        read(37,*,IOSTAT=reason) farObs
-        read(38,*,IOSTAT=reason) farExp
-        read(39,*,IOSTAT=reason) sigmaFarBkg
-        read(72,*,IOSTAT=reason) farBkg
-    close(16)
-    close(17)
-    close(18)
-    close(19)
-    close(20)
-    close(21)
-    close(22)
-    close(23)
-    close(24)
-    close(25)
-    close(26)
-    close(27)
-    close(28)
-    close(29)
-    close(30)
-    close(31)
-    close(32)
-    close(33)
-    close(34)
-    close(36)
-    close(37)
-    close(38)
-    close(39)
-    close(72)
-    !print*, 'farObs', farObs
-    !print*, 'farExp', farExp
-    return
-	end subroutine readDBData
-end module db_data    
+    contains
+
+        subroutine readDBData()            
+            implicit none
+            integer :: i,j,reason
+            open(16,file="daya_for_global_analysis/db_data/DB_weightsPerNearHall.dat", status="old")
+            open(17,file="daya_for_global_analysis/db_data/DB_weightsPerHs.dat", status="old")
+            open(18,file="daya_for_global_analysis/db_data/DB_weithsPerAd.dat", status="old")    
+            open(19,file="daya_for_global_analysis/db_data/DB_blue_spectrum_by_hall.dat", status="old")
+            open(20,file="daya_for_global_analysis/db_data/DB_black_spectrum_by_hall.dat", status="old")
+            !open(21,file="daya_for_global_analysis/db_data/DB_background_detector.dat", status="old")
+            open(21,file="daya_for_global_analysis/db_data/DB_background_detector_1809.dat", status="old")    
+            open(22,file="daya_for_global_analysis/db_data/DB_detector_sigma_background.dat", status="old")
+            open(23,file="daya_for_global_analysis/db_data/DB_fraction_nuclear_fission.dat", status="old")
+            open(24,file="daya_for_global_analysis/db_data/DB_IBD_fractions_dr.dat", status="old")
+            open(25,file="daya_for_global_analysis/db_data/DB_live_time_days_per_ad_1809.dat", status="old")
+            open(26,file="daya_for_global_analysis/db_data/DB_target_proton.dat", status="old")
+            open(27,file="daya_for_global_analysis/db_data/DB_lengths_detector_reactor.dat", status="old")
+            open(28,file="daya_for_global_analysis/db_data/DB_thermal_power_by_reactor.dat", status="old")
+            open(29,file="daya_for_global_analysis/db_data/DB_bines.dat", status="old")
+            open(30,file="daya_for_global_analysis/db_data/DB_v_ij_1.dat", status="old")
+            open(31,file='daya_for_global_analysis/db_data/DB_n_nom_array.dat', status='old')
+            open(32,file='daya_for_global_analysis/db_data/DB_n_obs.dat', status='old')
+            !open(33, file='daya_for_global_analysis/db_data/DB_Md_1607.dat', status='old')
+            open(33,file='daya_for_global_analysis/db_data/DB_Md_1809.dat', status='old')
+            open(34,file='daya_for_global_analysis/db_data/DB_dayabay_efficiency_weighted_target_protons.dat' &
+                          ,status='old')
+            open(36,file='daya_for_global_analysis/db_data/DB_geometric_factor.dat',status='old')
+            open(37,file='daya_for_global_analysis/db_data/dayabay_1809_far_obs_background_subtracted_spectrum_IBD.dat', &
+                          status='old')
+            open(38,file='daya_for_global_analysis/db_data/dayabay_1809_far_exp_background_subtracted_spectrum_IBD.dat', &
+                          status='old')
+            open(39,file='daya_for_global_analysis/db_data/dayabay_1809_total_period_uncertainty_of_background_H3_hall.dat', &
+                           status='old')
+            open(40,file='daya_for_global_analysis/db_data/dayabay_1809total_far_bkg_in_three_period_of_data_taking.dat', &
+                           status='old')
+            
+                read(16,*,IOSTAT=reason) ((wNH(i,j), j=1,2), i=1,34)
+                read(17,*,IOSTAT=reason) ((wH(i,j), j=1,8), i=1,34)
+                read(18,*,IOSTAT=reason) ((wD(i,j), j=1,6), i=1,272)
+                read(19,*,IOSTAT=reason) ((blueH(i,j),j=1,3),i=1,NBIN)
+                read(20,*,IOSTAT=reason) ((blackH(i,j),j=1,3),i=1,NBIN)        
+                read(21,*,IOSTAT=reason) Bd
+                read(22,*,IOSTAT=reason) Sb
+                read(23,*,IOSTAT=reason) FNF
+                read(24,*,IOSTAT=reason) ((IBD_fdr(i,j), j=1,RCTS), i=1,ADS)
+                read(25,*,IOSTAT=reason) LT_d   ! [days]
+                read(26,*,IOSTAT=reason) TP_d
+                read(27,*,IOSTAT=reason) ((length_d_r(i,j), j=1,RCTS), i=1,ADS) ! [m]
+                read(28,*,IOSTAT=reason) TP_r
+                read(29,*,IOSTAT=reason) ((bines(i,j), j=1,2), i=1,NBIN)
+                read(30,*,IOSTAT=reason) ((v_ij_1(i,j), j=1,34), i=1,NBIN)
+                read(31,*,IOSTAT=reason) N_nom
+                read(32,*,IOSTAT=reason) N_obs
+                read(33,*,IOSTAT=reason) Md_1607
+                read(34,*,IOSTAT=reason) N_e
+                read(36,*,IOSTAT=reason) ((gFactor(i,j), j=1,RCTS), i=1,4)
+                read(37,*,IOSTAT=reason) farObs
+                read(38,*,IOSTAT=reason) farExp
+                read(39,*,IOSTAT=reason) sigmaFarBkg
+                read(40,*,IOSTAT=reason) farBkg
+            close(16)
+            close(17)
+            close(18)
+            close(19)
+            close(20)
+            close(21)
+            close(22)
+            close(23)
+            close(24)
+            close(25)
+            close(26)
+            close(27)
+            close(28)
+            close(29)
+            close(30)
+            close(31)
+            close(32)
+            close(33)
+            close(34)
+            close(36)
+            close(37)
+            close(38)
+            close(39)
+            close(40)
+            !print*, 'farObs', farObs
+            !print*, 'farExp', farExp
+            return
+        end subroutine readDBData
+end module db_data
     !
     !
     !
@@ -866,9 +864,10 @@ Function DC_chi2(Y,DC_pulls)
     use RN_espectros
     use DC_espectros
     use db_data
+    use reno_data
     use condiciones
 	implicit none
-	real*8 minimo,sct,dm2min,dm,dt,RN_chi2,chi2,DC_chi2,chi2minDB
+	real*8 minimo,sct,dm2min,dm,dt,RN_chi2,chi2,DC_chi2,chi2minDB,chi2minRENO
     integer i,j,k,ii
     real porc
     real*8, dimension(3) :: coo2
@@ -881,6 +880,8 @@ Function DC_chi2(Y,DC_pulls)
     CALL ReadReno(RN_Nobs,RN_Nexp,RN_PP,RN_Enu)
     CALL ReadDC(DC_Nobs,DC_Nexp,DC_acc,DC_LiHe,DC_Enu,DC_PP)
     CALL readDBData()
+    CALL readRENOData()
+
     open(54,file='minimos.dat')         ! (coordenadas de los mínimos)
     !
 !	YY=1E8
@@ -889,7 +890,10 @@ Function DC_chi2(Y,DC_pulls)
     dm=4.d0/real(ciclos)
 	dt=0.7853981634d0/real(ciclos)
     minimo=1E8
-!    
+    open(501,file='RENO_chi_min_in_global_test.dat')
+    open(502,file='DC_chi_min_in_global_test.dat')
+    open(503,file='DB_chi_min_in_global_test.dat')
+    open(504,file='global_min_in_global_test.dat')
   	do i=0,ciclos
   		Y(2)=0.d0
   		do j=0,ciclos
@@ -903,29 +907,36 @@ Function DC_chi2(Y,DC_pulls)
             	DC_YY(k)=DC_chi2(Y,DC_entrada) !<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   			END DO  
 			CALL DC_AMOEBA(DC_PP,DC_YY,Y)	! Minimización de pulls DC
-            !
-            !
-            !
+            
+            
+            
        !!!!!!! Mininimizar Daya Bay
+       CALL chi2_db(Y,chi2minDB)
 
-		CALL chi2_db(Y,chi2minDB)
-	
        !!!!!!! Minimizar RENO
-            DO k=1,9
-            	do ii=1,8
-                	RN_entrada(ii)=RN_PP(k,ii)
-    			end do
-                RN_YY(k)=DC_chi2(Y,RN_entrada)
-           	end do
+       CALL renoChi2(Y,chi2minRENO)
+
+        !    DO k=1,9
+        !    	do ii=1,8
+        !        	RN_entrada(ii)=RN_PP(k,ii)
+        !   	end do
+        !        RN_YY(k)=DC_chi2(Y,RN_entrada)
+        !   	end do
  !           				! (minimización con AMOEBA)
-     		CALL RN_AMOEBA(RN_PP,RN_YY,Y)	! Minimización de pulls RENO
-            !
-			!
-            !
-            !
+        !	CALL RN_AMOEBA(RN_PP,RN_YY,Y)	! Minimización de pulls RENO
+            
+            
+            
             !  Se suman los tres
-            !
-            chi2=RN_YY(1)+DC_YY(1)+chi2minDB						! Valor de chi2 con pulls óptimos
+            !            
+            chi2=chi2minRENO+DC_YY(1)+chi2minDB                ! Valor de chi2 con pulls óptimos
+            !chi2=RN_YY(1)+DC_YY(1)+chi2minDB                 ! Valor de chi2 con pulls óptimos
+
+            
+            write(501,*) (sin(2.d0*Y(2)))**2, Y(11), RN_YY(1)
+            write(502,*) (sin(2.d0*Y(2)))**2, Y(11), DC_YY(1)
+            write(503,*) (sin(2.d0*Y(2)))**2, Y(11), chi2minDB
+            write(504,*) (sin(2.d0*Y(2)))**2, Y(11), chi2
             !
         if ((chi2<minimo) .or. (i==0 .and. j==0)) then     ! (Nuevo mínimo total)
         	minimo=chi2
@@ -948,6 +959,10 @@ Function DC_chi2(Y,DC_pulls)
         end if
         Y(2)=Y(2)+dt  
   		end do
+        write(501,*) ' '
+        write(502,*) ' '
+        write(503,*) ' '
+        write(504,*) ' '
 		Y(11)=exp((-4.0d0+dm*i)*2.3025)   ! el segundo ciclo corre logaritmicamente en dm2
 		porc=i*100.d0/real(ciclos)        ! imprime el avance en porcentaje
 		print *
@@ -956,168 +971,18 @@ Function DC_chi2(Y,DC_pulls)
 	end do
     56 format (3(E16.10,12X))
     close(54)
+
+    !close(501)
+    close(502)
+    !close(503)
+    !close(504)
     CALL RN_SaveP(RN_PP)
     CALL DC_SaveP(DC_PP)
 	return
 	end Subroutine MinTot
-    !##############################################################################################
-!
-!   Instituto Politécnico Nacional. 
-!   Escuela Superior de Física y Matemáticas
-!   
-!   Autor: M. en C. Jorge Garcia Bello
-!
-!   chi2_db. Subroutina del experimento Daya Bay.
-!       Tiene la estructura ( Vector Y: son los parámetros de oscilación en un modelo de 4 neutrinos,
-!                             chi2_min: es el valor minimo de la estaditica chi-square para
-!                                       valores definidos en el vector Y )
-!
-!   Descripción =>
-!
-!        Vector Y(12): t12 es el ángulo de mezcla theta_12
-!                    t13 es el ángulo de mezcla theta_13
-!                    t14 es el ángulo de mezcla theta_14
-!                    t23 es el ángulo de mezcla theta_23
-!                    t24 es el ángulo de mezcla theta_24
-!                    t34 es el ángulo de mezcla theta_34
-!                    delta1 es el factor de fase la violación de CP_13
-!                    delta2 es el factor de fase la violación de CP_24
-!                    delta3 es el factor de fase la violación de CP_34
-!                    dm21 es la direfencia del cuadrado de las masas Solar (m^2_2 - m^2_1)
-!                    dm31 es la direfencia del cuadrado de las masas       (m^2_3 - m^2_1)
-!                    dm41 es la direfencia del cuadrado de las masas       (m^2_4 - m^2_1)
-!
-!       chi2_min:    Es el valor minimo develto de la estadística chi utilizada en daya bay  
-!                    para valores definidos en Y (parámetros de osciulación)
-!
-!##############################################################################################
 
-subroutine chi2_db(Y,chi2_min)
-    use neu_osc_parameters
-    use db_data, only: NDIM
-    implicit none
-    real*8 :: Y(12)              ! Arreglo con los parámetros de oscilación
-    real*8 :: chi2_min           ! is the min value of the chi-square
-
-    real*8 :: Z(NDIM+1)
-    real*8 :: P(NDIM+1,NDIM)
-    real*8 :: FUNC
-
-    t12=Y(1)
-    t13=Y(2)
-    t14=Y(3)
-    t23=Y(4)
-    t24=Y(5)
-    t34=Y(6)
-    delta1=Y(7)
-    delta2=Y(8)
-    delta3=Y(9)
-    dm21=Y(10)
-    dm31=Y(11)
-    dm41=Y(12)
-    
-    call minimization(Z,P)   
-
-    chi2_min=Z(1)
-    !chi2_min=FUNC(0.0d0)
-    return
-end subroutine chi2_db
 !
 !
-!
-!
-!#####################################################
-!
-!   minimization es una subroutina que se encargar de 
-!       ejecutar las subroutinas paa realizar la 
-!       minimización de la función FUNC, y escribe
-!       los resultaods en un archivo.
-!
-!#####################################################
-subroutine minimization(Y,P)
-    use db_data, only:NDIM,pull_min
-    implicit none    
-    integer,parameter :: MP=NDIM+1                ! MP is the number of points for polygon of ABOEBA
-    integer,parameter :: NP=NDIM                  ! NP is the number of pulls                   
-    real*8 :: P(MP,NP), Y(MP)          ! Array con el que se construye AMOEBA    
-    real*8 :: FTOL=1.D-5               ! Required tolerance
-    integer :: ITER                     ! Número de iteraciones realizadas por AMOEBA
-
-    real*8 :: newSimplex(MP,NDIM)
-    integer :: i
-    
-    call readSimplex(P,Y)
-    do i=1,NDIM
-        newSimplex(i,:)=P(i,:)
-    end do
-
-    CALL AMOEBA(P,Y,MP,NP,NDIM,FTOL,ITER)
-    pull_min=P(1,:)
-
-    newSimplex(MP,:)=P(1,:)
-    call reWriteSimplex(newSimplex)
-    return
-end subroutine minimization
-!
-!
-!
-!
-subroutine reWriteSimplex(newSimplex)
-    use db_data, only: NDIM
-    implicit none
-    real*8 :: newSimplex(NDIM+1,NDIM)
-    integer :: i
-
-    open(200,file='data/dataService/db_simplex.dat',status='old')
-        do i=1,NDIM+1
-            write(200,*) newSimplex(i,:)
-        enddo
-    close(200)
-    return
-end subroutine reWriteSimplex
-!
-!
-!
-!################################################################
-!
-!   readSimplex: is the subroutine that read
-!                   the initial simplex and 
-!                   initialize the NDIM+1 polygon
-!################################################################
-subroutine readSimplex(P,Y)
-    use db_data, only:NDIM
-    implicit none    
-    integer,parameter :: MP=NDIM+1                    ! MP is the number of points for polygon of ABOEBA
-    integer,parameter :: NP=NDIM                      ! NP is the number of pulls                   
-    real*8,dimension(MP,NP) :: P          ! P is the set of MP points with NP coordenates that generate the polygon of AMOEBA
-    real*8,dimension(MP)    :: Y
-    real*8,dimension(NDIM)  :: PT
-             
-    real*8 :: FUNC
-    integer :: m,k,l,i
-    character(100) :: filename
-    ! Lectura de NDIM+1 puntos con NDIM coordenadas en readSimplex
-    
-    filename='db_simplex.dat'
-    ! Leer el array de pulls 
-    ! Se leer NDIM+1 vérties
-    ! con NDIM coordenadas
-    ! del archivo "filename"
-    !open(34,file="data/dataService/"//filename, status="old")
-    open(35,file="data/dataService/db_simplex.dat", status="old")
-    !open(20,file="dataService/PRUEBA_AMOEBA.dat", status="old")
-        read(35,*) ( (P(k,l), l=1,NP), k=1,MP )
-    close(35)
-
-    DO m=1, NDIM+1
-        ! Se carga la i-ésima coordenada del m-ésimo punto al arreglo PT    
-        do i=1,NDIM
-            PT(i)=P(m,i)
-        enddo        
-        Y(m)=FUNC(PT)    
-    END DO    
-    return
-end subroutine readSimplex
 !
 !
 !
@@ -1236,145 +1101,10 @@ DIMENSION P(MP,NP), Y(MP), PR(NMAX), PRR(NMAX), PBAR(NMAX)
 !
 !
 !
-real*8 function FUNC(P)
-    use db_data, only:NDIM
-    implicit none
-    real*8 :: P(NDIM)
-
-    real*8 :: chiSquarePull1
-    real*8 :: chiSquarePull2
-    real*8 :: chiSquareProposal
-
-    FUNC=0.0D0
-    !FUNC=chiSquarePull1(P)
-    !FUNC=chiSquarePull2(P)
-    FUNC=chiSquareProposal(P)
-    !print*,'FUNC',FUNC
-    return
-end function FUNC
-
 !
 !
 !
 !
-real*8 function chiSquareProposal(P)
-    use db_data, only:NDIM,NBIN,ADS,RCTS,gFactor,farObs,farExp,sigmaFarBkg,farBkg,pullEngy
-    use neu_osc_parameters, only: dm31
-    implicit none
-    real*8 :: P(NDIM)
-    integer :: d,r
-    integer :: i
-    real*8 :: model
-    real*8 :: mod
-
-    real*8 :: eps                ! is the parameter of absolute normalization
-    real*8 :: etaBkg(5)          ! is the pull parameter for the uncertainty of total background
-    real*8 :: etaBkg26(26)       ! is the pull parameter for the uncertainty of total background by bin
-    real*8 :: epsD               ! is the pull parameter for the uncertainty of detection efficiency
-    real*8 :: epsR               ! is the pull parameter for the uncertainty of neutrinos from the reactors
-
-    real*8 :: sigmaBkg(5)        ! is the uncertainty of the total background
-    real*8 :: sigmaBkg26(26)     ! is the uncertainty of the total background by bin
-    real*8 :: sigmaD             ! is the uncertainty of the detection efficiency
-    real*8 :: sigmaR             ! is the uncertainty of the production of neutrinos from the reactors
-
-    !sigmaBkg=294.0d0
-    sigmaBkg=(/33.8928791591803,33.8928791591803,271.143033273443,78.1539010315909,67.7857583183607/)
-
-    sigmaD=0.004d0
-    sigmaR=0.016d0
-
-    eps=P(1)
-    epsD=P(2)
-    epsR=P(3)
-    etaBkg=(/P(4),P(5),P(6),P(7),P(8)/)!,P(9),P(10),P(11),P(12),P(13)   &
-      !,P(14),P(15),P(16),P(17),P(18),P(19),P(20),P(21),P(22),P(23)   &
-      !,P(24),P(25),P(26),P(27),P(28),P(29)/)         
-
-    chiSquareProposal=0.0d0
-    select case(1)
-        case(1)
-            pullEngy=P(9)
-            !pullEngy=0.0d0
-            do i=1,NBIN                
-                mod=model(i)
-                chiSquareProposal = chiSquareProposal &
-                                  + (farObs(i)-farExp(i)*mod*(1.0d0+eps+epsD+epsR)+etaBkg(1) &
-                                                                                  +etaBkg(2) &
-                                                                                  +etaBkg(3) &
-                                                                                  +etaBkg(4) &
-                                                                                  +etaBkg(5))**2 &
-                                  / sigmaFarBkg(i)!(farObs(i)+farBkg(i))
-                                  !  sigmaFarBkg
-            end do
-            chiSquareProposal = chiSquareProposal        &
-                              + (   epsD/sigmaD   )**2   &
-                              + (   epsR/sigmaR   )**2
-            !do i=1,6
-            !chiSquareProposal = chiSquareProposal    &
-            !enddo
-            do i=1,5
-                chiSquareProposal = chiSquareProposal        &
-                                  + ( etaBkg(i)/sigmaBkg(i) )**2
-            end do
-
-            chiSquareProposal = chiSquareProposal        &
-                                  + ( pullEngy/0.002d0 )**2
-
-            chiSquareProposal = chiSquareProposal        &
-                                  + ( (dm31 - 2.68d-3) /0.14d-3 )**2
-        case(2) !Análisis de 26 bines adicionales, uno por cada bin de bkg
-            do i=1,NBIN
-                mod=model(i)
-                chiSquareProposal = chiSquareProposal &
-                                  + (farObs(i)-farExp(i)*mod*(1.0d0+eps+epsD+epsR)+etaBkg26(i))**2 &
-                                  / (farObs(i))
-            end do
-            chiSquareProposal = chiSquareProposal        &
-                              + (   epsD/sigmaD   )**2   &
-                              + (   epsR/sigmaR)**2
-            do i=1,NBIN
-                chiSquareProposal = chiSquareProposal        &
-                                  + ( etaBkg26(i)/sigmaFarBkg(i) )**2
-            end do
-        case(3)
-            print*, 'opcion incorrecta en chi_square_proposal'
-    end select 
-    
-    !print*,chiSquareProposal
-    return
-end function chiSquareProposal
-!
-!
-!
-!
-!
-!
-real*8 function model(i)
-use db_data, only: bines,ADS,RCTS,gFactor,length_d_r
-use neu_osc_parameters
-    implicit none
-    integer :: i
-    real*8 :: averageProbability3f
-    real*8 :: bin(2)
-    real*8 :: l
-    integer :: d,r
-    real*8 :: wegthsDays(4)
-
-    !t13=0.1472d0
-    !dm31=2.5d-3
-
-    wegthsDays=(/0.256929262781914,0.256929262781914,0.256929262781914,0.229212211654259/)
-    bin=bines(i,:)
-    model=0.0d0
-    do d=5,ADS
-        do r=1,RCTS
-            l=length_d_r(d,r)            
-            model=model+wegthsDays(d - 4)*gFactor(d-4,r)*averageProbability3f(bin,l,t13,dm31)
-        enddo        
-    enddo
-    return
-end function model
 !
 !
 !
@@ -1412,28 +1142,6 @@ end function averageProbability3f
 !
 !
 !
-!
-!
-real*8 function probability(t13,dm31,l,x)
-
- implicit none
- real*8 :: t13
- real*8 :: dm31
- real*8 :: l,x
-
- real*8 :: t12=0.5837630476d0
- real*8 :: dm32=2.44D-3
- real*8 :: dm21=7.53D-5
-
-probability= 1.0d0 -cos(t13)**4*sin(2.0d0*t12)**2*sin(1.267d0*dm21*l/x)**2   &
-                   -sin(2.0d0*t13)**2*sin(1.267d0*dm31*l/x)**2
-                   !(cos(t12)**2*sin(1.267d0*dm31*l/x)**2  &
-                   !+sin(t12)**2*sin(1.267d0*dm32*l/x)**2)
-
-return
-
-end function probability
-
 !
 !
 !
