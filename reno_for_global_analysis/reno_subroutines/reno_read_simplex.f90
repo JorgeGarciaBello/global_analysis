@@ -13,7 +13,7 @@ subroutine reno_readSimplex(P,Y)
     real(8),dimension(MP)    :: Y
     real(8),dimension(NDIM)  :: PT
              
-    real(8) :: FUNC
+    real(8) :: reno_FUNC
     integer :: m,k,l,i
     character(100) :: filename
     ! Lectura de NDIM+1 puntos con NDIM coordenadas en readSimplex
@@ -22,7 +22,7 @@ subroutine reno_readSimplex(P,Y)
     ! Se leer NDIM+1 vérties
     ! con NDIM coordenadas
     ! del archivo "filename"
-    open(102,file="reno_data/"//filename, status="old")
+    open(102,file="reno_for_global_analysis/reno_data/"//filename, status="old")
     !open(20,file="dataService/PRUEBA_AMOEBA.dat", status="old")
         read(102,*) ( (P(k,l), l=1,NP), k=1,MP )
     close(102)
@@ -32,7 +32,7 @@ subroutine reno_readSimplex(P,Y)
         do i=1,NDIM
             PT(i)=P(m,i)
         enddo
-        Y(m)=FUNC(PT)
+        Y(m)=reno_FUNC(PT)
     END DO    
     return
 end subroutine reno_readSimplex

@@ -50,12 +50,12 @@ DIMENSION P(MP,NP), Y(MP), PR(NMAX), PRR(NMAX), PBAR(NMAX)
     PBAR(J)=PBAR(J)/NDIM
     PR(J)=(1.d0+ALPHA)*PBAR(J) - ALPHA*P(IHI,J)
   END DO      
-  YPR=FUNC(PR)
+  YPR=reno_FUNC(PR)
   IF(YPR.LE.Y(ILO)) THEN
     DO J=1,NDIM
       PRR(J)=GAMMA*PR(J) + (1.d0-GAMMA)*PBAR(J)
     END DO
-    YPRR=FUNC(PRR)
+    YPRR=reno_FUNC(PRR)
     IF(YPRR.LT.Y(ILO)) THEN
       DO J=1, NDIM
         P(IHI,J)=PRR(J)
@@ -77,7 +77,7 @@ DIMENSION P(MP,NP), Y(MP), PR(NMAX), PRR(NMAX), PBAR(NMAX)
     DO J=1, NDIM
       PRR(J)=BETA*P(IHI,J) + (1.d0-BETA)*PBAR(J)
     END DO
-    YPRR=FUNC(PRR)
+    YPRR=reno_FUNC(PRR)
     IF(YPRR.LT.Y(IHI)) THEN
       DO J=1, NDIM
         P(IHI,J)=PRR(J)
@@ -90,7 +90,7 @@ DIMENSION P(MP,NP), Y(MP), PR(NMAX), PRR(NMAX), PBAR(NMAX)
             PR(J)=0.5d0*(P(I,J) + P(ILO,J))
       P(I,J)=PR(J)
       END DO
-          Y(I)=FUNC(PR)
+          Y(I)=reno_FUNC(PR)
     END IF
       END DO
     END IF
