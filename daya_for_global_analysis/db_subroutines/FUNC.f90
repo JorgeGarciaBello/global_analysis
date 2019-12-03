@@ -11,6 +11,6 @@ real(8) function FUNC(P)
     !FUNC=chiSquarePull1(P)
     !FUNC=chiSquarePull2(P)
     FUNC=chiSquareProposal(P)
-    print*,'FUNC',FUNC
+    !print*,'FUNC',FUNC
     return
 end function FUNC

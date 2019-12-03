@@ -21,7 +21,7 @@
             integer ciclos,diagon,mm,cambio
             real*8, dimension(4) :: region
             !
-!            open(62,file='dc_data/region.dat')  ! Región define el dominio de los parámetros de oscilación que se buscan
+!            open(62,file='double_chooz_for_global_analysis/dc_data/region.dat')  ! Región define el dominio de los parámetros de oscilación que se buscan
 !                read (62,*) region
 !            close(62)
 !            cambio=0
@@ -66,7 +66,7 @@
 !                read(*,*) region(4)
 !                print *
                 !
-!                open(62,file='dc_data/region.dat')
+!                open(62,file='double_chooz_for_global_analysis/dc_data/region.dat')
 !                write (62,*) region
 !                close(62)
 !            end if
@@ -101,38 +101,36 @@
 !
 !
     module DC_espectros
-    implicit none
-    real*8, dimension(40) :: Nobs,Nexp,acc,LiHe
-    real*8, dimension(41) :: Enu
-    contains
-        Subroutine ReadDC(Nobs,Nexp,acc,LiHe,Enu)   !Calcula las integrales Ppromedio
-            implicit none
+        implicit none
         real*8, dimension(40) :: Nobs,Nexp,acc,LiHe
         real*8, dimension(41) :: Enu
-            !
-        open(49,file='dc_data/DC_far_obs.dat')
+    end module
+
+    Subroutine ReadDC()   !Calcula las integrales Ppromedio
+        use DC_espectros
+        implicit none
+        open(49,file='double_chooz_for_global_analysis/dc_data/DC_far_obs.dat')
             read (49,*) Nobs
-            close(49)
+        close(49)
             !
-        open(50,file='dc_data/DC_far_exp.dat')
+        open(50,file='double_chooz_for_global_analysis/dc_data/DC_far_exp.dat')
             read (50,*) Nexp
-            close(50)
+        close(50)
         !
-        open(51,file='dc_data/DC_acc.dat')
+        open(51,file='double_chooz_for_global_analysis/dc_data/DC_acc.dat')
             read (51,*) acc
-            close(51)
+        close(51)
         !
-        open(52,file='dc_data/DC_LiHe.dat')
+        open(52,file='double_chooz_for_global_analysis/dc_data/DC_LiHe.dat')
             read (52,*) LiHe
-            close(52)
+        close(52)
         !
-        open(53,file='dc_data/DC_bins.dat')
+        open(53,file='double_chooz_for_global_analysis/dc_data/DC_bins.dat')
             read (53,*) Enu
-            close(53)
+        close(53)
             !
             return
     end Subroutine ReadDC
-    end module
 !
 !
 !
@@ -424,23 +422,23 @@ Subroutine ReadMat(Mst,Mrf,Mde,Mac,Mli)  !Calcula las integrales Ppromedio
     implicit none
     real*8, dimension(40,40) :: Mst,Mrf,Mde,Mac,Mli
     !
-    open(44,file='dc_data/DC_Mst.dat')
+    open(44,file='double_chooz_for_global_analysis/dc_data/DC_Mst.dat')
     read (44,*) Mst
     close(44)
     !
-    open(45,file='dc_data/DC_Mrf.dat')
+    open(45,file='double_chooz_for_global_analysis/dc_data/DC_Mrf.dat')
     read (45,*) Mrf
     close(45)
     !
-    open(46,file='dc_data/DC_Mde.dat')
+    open(46,file='double_chooz_for_global_analysis/dc_data/DC_Mde.dat')
     read (46,*) Mde
     close(46)
     !
-    open(47,file='dc_data/DC_Mli.dat')
+    open(47,file='double_chooz_for_global_analysis/dc_data/DC_Mli.dat')
     read (47,*) Mli
     close(47)
     !
-    open(48,file='dc_data/DC_Mac.dat')
+    open(48,file='double_chooz_for_global_analysis/dc_data/DC_Mac.dat')
     read (48,*) Mac
     close(48)
     !
@@ -463,7 +461,7 @@ Subroutine ReadMat(Mst,Mrf,Mde,Mac,Mli)  !Calcula las integrales Ppromedio
       !PP(i,i)=(RANDOM@()*4.d0)-2.d0
       PP(i+1,i)=0.d0
     end do
-    open(42,file='dc_data/DC_simplex.dat')
+    open(42,file='double_chooz_for_global_analysis/dc_data/DC_simplex.dat')
     write (42,59) PP
     close(42)
     59 format (9(E16.10,12X))

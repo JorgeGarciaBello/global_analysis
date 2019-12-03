@@ -18,7 +18,7 @@ use neu_osc_parameters
     do d=5,ADS
         do r=1,RCTS
             l=length_d_r(d,r)            
-            model=model+wegthsDays(d - 4)*gFactor(d-4,r)*averageProbability3f(bin,l,t13,dm31)
+            model=model+wegthsDays(d - 4)*gFactor(d-4,r)*averageProbability3f(bin,l,t13,dm31)            
         enddo        
     enddo
     return

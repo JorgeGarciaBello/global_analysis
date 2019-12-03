@@ -32,7 +32,7 @@ subroutine fittingSpectrum()
         enddo        
         Y(m)=fittingSpectrumFunction(PT)    
     END DO
-    CALL AMOEBAFF(P,Y,MP,NP,NDIM,FTOL,ITER)
+    CALL AMOEBA(P,Y,MP,NP,NDIM,FTOL,ITER)
     print*,'Result'
     print*,P
 

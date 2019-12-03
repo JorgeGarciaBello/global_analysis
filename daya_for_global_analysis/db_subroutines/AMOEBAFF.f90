@@ -33,7 +33,7 @@ DIMENSION P(MP,NP), Y(MP), PR(NMAX), PRR(NMAX), PBAR(NMAX)
 ! satisfactory.
   RTOL=2.d0*DABS(Y(IHI)-Y(ILO))/(DABS(Y(IHI))+DABS(Y(ILO)))
   IF(RTOL.LT.FTOL) RETURN
-!  IF(ITER.EQ.ITMAX) Pause ' AmoebaFF exceeding maximum iterations.'
+!  IF(ITER.EQ.ITMAX) Pause ' AmoebaFFFF exceeding maximum iterations.'
 
   ITER=ITER+1
   DO J=1, NDIM
@@ -103,4 +103,4 @@ DIMENSION P(MP,NP), Y(MP), PR(NMAX), PRR(NMAX), PBAR(NMAX)
   GO TO 1
   END
   
-!end of file tamoebaFF.f90
+!end of file amoebaFF.f90

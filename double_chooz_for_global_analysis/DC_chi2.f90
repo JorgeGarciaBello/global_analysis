@@ -1,3 +1,34 @@
+!##############################################################################################
+!
+!   Instituto Politécnico Nacional. 
+!   Escuela Superior de Física y Matemáticas
+!   
+!   Autor: M. en C. Benito Vargaz Perez
+!
+!   chi2_D_C. Subroutina del experimento de oscilaciones de neutrinos Double CHOOZ.
+!       Tiene la estructura ( Vector Y: son los parámetros de oscilación en un modelo de 4 neutrinos,
+!                             chi_doubleCHOOZ: es el valor minimo de la estadśitica chi-square para
+!                                       valores definidos en el vector Y )
+!
+!   Descripción =>
+!
+!        Vector Y(12): t12 es el ángulo de mezcla theta_12
+!                    t13 es el ángulo de mezcla theta_13
+!                    t14 es el ángulo de mezcla theta_14
+!                    t23 es el ángulo de mezcla theta_23
+!                    t24 es el ángulo de mezcla theta_24
+!                    t34 es el ángulo de mezcla theta_34
+!                    delta1 es el factor de fase la violación de CP_13
+!                    delta2 es el factor de fase la violación de CP_24
+!                    delta3 es el factor de fase la violación de CP_34
+!                    dm21 es la direfencia del cuadrado de las masas Solar (m^2_2 - m^2_1)
+!                    dm31 es la direfencia del cuadrado de las masas       (m^2_3 - m^2_1)
+!                    dm41 es la direfencia del cuadrado de las masas       (m^2_4 - m^2_1)
+!
+!       chi_doubleCHOOZ:    Es el valor minimo develto de la estadística chi utilizada en daya bay  
+!                    para valores definidos en Y (parámetros de osciulación)
+!
+!##############################################################################################
 !##################################################
 !
 !   subroutine chi2_D_C: subroutine que recibe un 
@@ -30,7 +61,7 @@ Subroutine chi2_D_C(Y,chi_doubleCHOOZ)  !Calcula las integrales Ppromedio
     !   Leyendo el simplex para double chooz
     !
     !###########################################
-    open(53,file='dc_data/DC_simplex.dat')
+    open(53,file='double_chooz_for_global_analysis/dc_data/DC_simplex.dat')
         read (53,*) PP
     close(53)
      !###########################################
