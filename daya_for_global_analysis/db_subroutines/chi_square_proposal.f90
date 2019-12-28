@@ -36,10 +36,9 @@ real(8) function chiSquareProposal(P)
       !,P(24),P(25),P(26),P(27),P(28),P(29)/)         
 
     chiSquareProposal=0.0d0
-    select case(1)
+    select case(2)
         case(1)
-            pullEngy=P(9)
-            !pullEngy=0.0d0
+            pullEngy=P(9)            
             do i=1,NBIN
                 !mod=model(i)
                 mod=expectedNeutrinoSpectrumByBinFar(i)
@@ -68,7 +67,41 @@ real(8) function chiSquareProposal(P)
 
             !hiSquareProposal = chiSquareProposal        &
              !                     + ( (dm31 - 2.68d-3) /0.14d-3 )**2
-        case(2) !Análisis de 26 bines adicionales, uno por cada bin de bkg
+        case(2)
+        !###################################################################################
+        !
+        !   Este análisis usa la misma chi que el case(1). Sin embargo, toma el
+        !   espectro esperado sin oscilaciones directamente del publicado en 
+        !   gráficas  publicadas por la colaboración Daya Bay
+        !
+        !####################################################################################  
+            pullEngy=P(9)            
+            do i=1,NBIN
+              mod=model(i)               
+              chiSquareProposal = chiSquareProposal &                                  
+                                  + (farObs(i)-farExp(i)*mod*(1.0d0+eps+epsD+epsR)          &
+                                                +etaBkg(1)                                  &
+                                                +etaBkg(2)                                  &
+                                                +etaBkg(3)                                  &
+                                                +etaBkg(4)                                  &
+                                                +etaBkg(5))**2                              &
+                                  / sigmaFarBkg(i)
+            end do
+            chiSquareProposal = chiSquareProposal        &
+                              + (   epsD/sigmaD   )**2   &
+                              + (   epsR/sigmaR   )**2
+            
+            do i=1,5
+                chiSquareProposal = chiSquareProposal        &
+                                  + ( etaBkg(i)/sigmaBkg(i) )**2
+            end do
+
+            chiSquareProposal = chiSquareProposal        &
+                                  + ( pullEngy/0.002d0 )**2
+
+            !hiSquareProposal = chiSquareProposal        &
+             !                     + ( (dm31 - 2.68d-3) /0.14d-3 )**2             
+        case(3) !Análisis de 26 bines adicionales, uno por cada bin de bkg
             do i=1,NBIN
                 mod=model(i)
                 chiSquareProposal = chiSquareProposal &
@@ -82,7 +115,7 @@ real(8) function chiSquareProposal(P)
                 chiSquareProposal = chiSquareProposal        &
                                   + ( etaBkg26(i)/sigmaFarBkg(i) )**2
             end do
-        case(3)
+        case(4)
             print*, 'opcion incorrecta en chi_square_proposal'
     end select 
     

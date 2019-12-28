@@ -1,4 +1,4 @@
-subroutine readDBData()
+subroutine readDBData4c()
     use db_data
     implicit none
     integer :: i,j,reason
@@ -14,8 +14,7 @@ subroutine readDBData()
     open(23,file="daya_for_global_analysis/db_data/DB_fraction_nuclear_fission.dat", status="old")
     open(24,file="daya_for_global_analysis/db_data/DB_IBD_fractions_dr.dat", status="old")
     open(25,file="daya_for_global_analysis/db_data/DB_live_time_days_per_ad_1809.dat", status="old")
-    open(26,file="daya_for_global_analysis/db_data/DB_target_proton.dat", status="old") ! Target proton, obtenidos de datos porpocionados por DIonisio Tun
-    !open(26,file="daya_for_global_analysis/db_data/DB_target_proton_from_arXiv_1603_03549.dat", status="old") ! Target proton, obtenidos de daots porpocionados por DIonisio Tun
+    open(26,file="daya_for_global_analysis/db_data/DB_target_proton.dat", status="old")
     open(27,file="daya_for_global_analysis/db_data/DB_lengths_detector_reactor.dat", status="old")
     open(28,file="daya_for_global_analysis/db_data/DB_thermal_power_by_reactor.dat", status="old")
     open(29,file="daya_for_global_analysis/db_data/DB_bines.dat", status="old")
@@ -42,7 +41,7 @@ subroutine readDBData()
         read(23,*,IOSTAT=reason) FNF
         read(24,*,IOSTAT=reason) ((IBD_fdr(i,j), j=1,RCTS), i=1,ADS)
         read(25,*,IOSTAT=reason) LT_d   ! [days]
-        read(26,*,IOSTAT=reason) TP_d   ! Target proton
+        read(26,*,IOSTAT=reason) TP_d
         read(27,*,IOSTAT=reason) ((length_d_r(i,j), j=1,RCTS), i=1,ADS) ! [m]
         read(28,*,IOSTAT=reason) TP_r
         read(29,*,IOSTAT=reason) ((bines(i,j), j=1,2), i=1,NBIN)
@@ -84,4 +83,4 @@ subroutine readDBData()
     
     
     return
-end subroutine readDBData
+end subroutine readDBData4c

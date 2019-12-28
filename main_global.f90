@@ -8,24 +8,25 @@ program main_global
     real(8) :: dm_jump,t13_jump
     integer :: i,j
 
-
     call readDBData()      ! Lee datos de Dayabay
-    call readRENOData()    ! Lee datos de RENO
-    CALL ReadDC()          ! Lee datos de Double CHOOZ
+    
+    !call readRENOData()    ! Lee datos de RENO
+    !CALL ReadDC()          ! Lee datos de Double CHOOZ
 
     Y=0.0
 
-    dm_min=2.0d-3
-    dm_max=3.0d-3
+    dm_min=2.2d-3
+    dm_max=2.8d-3
 
-    t13_min=0.05d0
-    t13_max=0.17d0
+    t13_min=0.16d0
+    t13_max=0.20d0
 
     dm_jump=(dm_max-dm_min)/real(n)
     t13_jump=(t13_max-t13_min)/real(n)    
-    
-   
+
+       
     !open(336,file='global_data.dat')
+    !open(337,file='db_data.dat', position="append", status="old")
     open(337,file='db_data.dat')
    ! open(338,file='reno_data.dat')
    ! open(339,file='dc_data.dat')
@@ -45,10 +46,15 @@ program main_global
             !write (339,*)  sin(2.0d0*Y(2))**2, Y(11), chi_doubleCHOOZ ! Escrotura de los datos del análisis dc
         enddo
         print*,i
+        write(337,*)
     enddo
     !close(336)
     close(337)
     !close(338)
     !close(339)
+    call get_chi_min_from_data_grid(n)    
     call confidenceRegions(n)
+
+    call db_chiDistributionT13(200)
+    call db_chiDistributionDmee(200)
 end program main_global

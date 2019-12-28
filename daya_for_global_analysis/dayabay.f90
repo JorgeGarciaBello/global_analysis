@@ -54,9 +54,9 @@ subroutine chi2_db(Y,chi2_min)
     dm31=Y(11)
     dm41=Y(12)
     
-    call minimization(Z,P)   
-
+    call minimization(Z,P)
     chi2_min=Z(1)
+    print*,chi2_min
     !chi2_min=FUNC(0.0d0)
     return
 end subroutine chi2_db

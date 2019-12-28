@@ -1,11 +1,13 @@
 module db_data
-    implicit none
-    integer,parameter :: NDIM=9       ! NDIM is the number of pull parameters
+    !use db_simplex_dimentions*
+    implicit none    
     integer,parameter :: ADS=8         ! ADS is the number of detectors
     integer,parameter :: RCTS=6        ! RCTS is the number of reactors
-    integer,parameter :: RIR=4         ! RIR is the number of radioactive isotopes in the reactors     
-    integer,parameter :: NBIN=26       ! NBIN is the number of energy's bin
-    integer,parameter :: osc=1         ! osc = 1 para oscilaciones,  2 para no oscilaciones 
+    integer,parameter :: RIR=4         ! RIR is the number of radioactive isotopes in the reactors         
+    integer,parameter :: osc=1         ! osc = 1 para oscilaciones,  2 para no oscilaciones
+    integer,parameter :: NDIM=9        ! NDIM is the number of pull parameters                    
+    integer,parameter :: NBIN=26       ! NBIN is the number of energy's bin                    
+    
     real(8) :: pull_min(NDIM)
     real(8) :: Bd(ADS)
     real(8) :: Sb(ADS)
@@ -32,6 +34,5 @@ module db_data
     real(8) :: sigmaFarBkg(NBIN)       ! sigmaFarBkg is the total uncertainty for the far spectrum by bin 
     real(8) :: farBkg(NBIN)            ! farBkg is the total background in the far detector for the three period of data taking
 
-   real(8) :: pullEngy
-
+    real(8) :: pullEngy   
 end module db_data

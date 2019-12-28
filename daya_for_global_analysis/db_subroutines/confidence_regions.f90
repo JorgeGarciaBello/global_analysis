@@ -5,35 +5,34 @@
 !       crear las regiones de confianza
 !
 !#####################################################
-subroutine confidenceRegions(dim_grid)
+subroutine confidenceRegions(n)
     implicit none
-    integer :: dim_grid
+    integer :: n
 
-    real(8) :: min_values(4)
+    real(8) :: min_values(3)
     real(8) :: min_val    
-    real(8) :: data(dim_grid,3)
+    real(8) :: data(n**2,3)
     integer :: i,j
     real(8) :: s13,m_ee,chi_2
     
     print*, 'Daya Bay: making confidence regions . . . '
-    open(107,                                                                                                            &
-         file='db_data/chiP_spctrm_grid_min_in_focus_min_results_1809_9PULL_sigmaFar_glob_bb.dat', &
+    ! Leyendo los valores minimios  ( chi_min, sen11t_!2_min, Dm2_ee_min )
+    open(107, file='daya_for_global_analysis/db_data/db_data_min_parameters.dat', &
          status='old')
         read(107,*) min_values
     close(107)
 
-
-    min_val=min_values(4)
-    open(106,file='db_data/chiP_spctrm_grid_min_in_focus_1809_9PULL_sigmaFar_glob_bb.dat', &
+    min_val=min_values(1)
+    open(106,file='db_data.dat', &
         status='old')
-        read(106,*) ( (data(i,j), j=1,3), i=1,dim_grid )
+        read(106,*) ( (data(i,j), j=1,3), i=1,n**2 )
     close(106)
 
-    open(41,file='db_data/crP_sFar_db_99_73_2018_bb_and_asimovD.dat')
-    open(42,file='db_data/crP_sFar_db_95_45_2018_bb_and_asimovD.dat')
-    open(43,file='db_data/crP_sFar_db_68_27_2018_bb_and_asimovD.dat')
+    open(41,file='daya_for_global_analysis/db_data/crP_sFar_db_99_73_2018_bin_to_bin_and_asimovD.dat')
+    open(42,file='daya_for_global_analysis/db_data/crP_sFar_db_95_45_2018_bin_to_bin_and_asimovD.dat')
+    open(43,file='daya_for_global_analysis/db_data/crP_sFar_db_68_27_2018_bin_to_bin_and_asimovD.dat')
 
-    do i=1,dim_grid
+    do i=1,n**2
         s13=data(i,1); m_ee=data(i,2); chi_2=data(i,3)-min_val
         !Confidence region 1 - 68.27% - 2.30 - (1-sigma)
         if((2.45d0.GE.chi_2).AND.(chi_2.GE.2.15d0)) then
@@ -51,5 +50,6 @@ subroutine confidenceRegions(dim_grid)
     close(41)
     close(42)
     close(43)
+    print*, 'Confidence regions ended'
     return
 end subroutine confidenceRegions
