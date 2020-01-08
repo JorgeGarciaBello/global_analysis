@@ -30,10 +30,13 @@ subroutine readDBData()
     open(38,file='daya_for_global_analysis/db_data/dayabay_1809_far_exp_background_subtracted_spectrum_IBD.dat',status='old')
     open(39,file='daya_for_global_analysis/db_data/dayabay_1809_total_period_uncertainty_of_background_H3_hall.dat',status='old')
     open(40,file='daya_for_global_analysis/db_data/dayabay_1809total_far_bkg_in_three_period_of_data_taking.dat',status='old')
+    open(41,file='daya_for_global_analysis/db_data/DB_bin_to_bin_calibration_to_paper_far_spetrum.dat',status='old')
+    open(42,file='daya_for_global_analysis/db_data/db_background_uncertainties_by_detector.dat',status='old')
+    open(43,file='daya_for_global_analysis/db_data/db_reactor_uncertainties_by_detector.dat',status='old')
+    open(44,file='daya_for_global_analysis/db_data/db_detector_uncertainties_by_detector.dat',status='old')        
     
-    
-        read(16,*,IOSTAT=reason) ((wNH(i,j), j=1,2), i=1,34)        
-        read(17,*,IOSTAT=reason) ((wH(i,j), j=1,8), i=1,34)
+        read(16,*,IOSTAT=reason) ((wNH(i,j), j=1,2), i=1,NBIN)
+        read(17,*,IOSTAT=reason) ((wH(i,j), j=1,8), i=1,NBIN)
         read(18,*,IOSTAT=reason) ((wD(i,j), j=1,6), i=1,272)
         read(19,*,IOSTAT=reason) ((blueH(i,j),j=1,3),i=1,NBIN)
         read(20,*,IOSTAT=reason) ((blackH(i,j),j=1,3),i=1,NBIN)        
@@ -46,16 +49,20 @@ subroutine readDBData()
         read(27,*,IOSTAT=reason) ((length_d_r(i,j), j=1,RCTS), i=1,ADS) ! [m]
         read(28,*,IOSTAT=reason) TP_r
         read(29,*,IOSTAT=reason) ((bines(i,j), j=1,2), i=1,NBIN)
-        read(30,*,IOSTAT=reason) ((v_ij_1(i,j), j=1,34), i=1,NBIN)
+        read(30,*,IOSTAT=reason) ((v_ij_1(i,j), j=1,NBIN), i=1,NBIN)
         read(31,*,IOSTAT=reason) N_nom
         read(32,*,IOSTAT=reason) N_obs
-        read(33,*,IOSTAT=reason) Md_1607
+        read(33,*,IOSTAT=reason) Md_2018
         read(34,*,IOSTAT=reason) N_e
         read(36,*,IOSTAT=reason) ((gFactor(i,j), j=1,RCTS), i=1,4)
         read(37,*,IOSTAT=reason) farObs
         read(38,*,IOSTAT=reason) farExp
         read(39,*,IOSTAT=reason) sigmaFarBkg
         read(40,*,IOSTAT=reason) farBkg
+        read(41,*,IOSTAT=reason) cal
+        read(42,*,IOSTAT=reason) sigma_BKG
+        read(43,*,IOSTAT=reason) sigma_r
+        read(44,*,IOSTAT=reason) sigma_d
         
     close(16)
     close(17)
@@ -81,6 +88,10 @@ subroutine readDBData()
     close(38)
     close(39)
     close(40)
+    close(41)
+    close(42)
+    close(43)
+    close(44)
     
     
     return

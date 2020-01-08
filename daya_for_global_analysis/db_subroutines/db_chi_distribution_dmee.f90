@@ -7,8 +7,8 @@ subroutine db_chiDistributionDmee(n)
 
     integer :: i,j
     real(8) :: m_jump
-    real(8) :: m_0=2.3d-3
-    real(8) :: m_1=2.6d-3
+    real(8) :: m_0=2.105d-3
+    real(8) :: m_1=2.805d-3
     real(8) :: sen2_2t_13
     real(8) :: min_val =1e+10,dmee_min
     real(8) :: dmee

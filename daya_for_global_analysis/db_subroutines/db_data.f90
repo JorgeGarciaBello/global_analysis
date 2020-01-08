@@ -5,11 +5,11 @@ module db_data
     integer,parameter :: RCTS=6        ! RCTS is the number of reactors
     integer,parameter :: RIR=4         ! RIR is the number of radioactive isotopes in the reactors         
     integer,parameter :: osc=1         ! osc = 1 para oscilaciones,  2 para no oscilaciones
-    integer,parameter :: NDIM=9        ! NDIM is the number of pull parameters                    
+    integer,parameter :: NDIM=9        ! NDIM=[9,23] is the number of pull parameters: 23 pull / 9 for proposal bines                    
     integer,parameter :: NBIN=26       ! NBIN is the number of energy's bin                    
     
     real(8) :: pull_min(NDIM)
-    real(8) :: Bd(ADS)
+    real(8) :: Bd(ADS)                 ! are the background per detector
     real(8) :: Sb(ADS)
     real(8) :: FNF(RIR)
     real(8) :: IBD_fdr(ADS,RCTS)       ! Set of data of the Daya Bay experimento
@@ -26,7 +26,7 @@ module db_data
     real(8) :: wH(NBIN,8)
     real(8) :: wD(272,6)               ! wH, wD  ate the contribution ratios per detector to a Hall and per reacto to detectors    
     real(8) :: wNH(NBIN,2)               ! wNH is the contribution ratios per near hall to the total per bin    
-    real(8) :: Md_1607(ADS)            ! Is the number of neutrino events per detector taken from  1607_05378 paper
+    real(8) :: Md_2018(ADS)            ! Is the number of neutrino events per detector taken from  1607_05378 paper
     real(8) :: N_e(ADS)
     real(8) :: gFactor(4,RCTS)         ! Are the geometric factor that gives the cnotribution of neutrino events per reactor to far-detectors by bin 
     real(8) :: farObs(NBIN)            ! far observed background subtracted spectrum 
@@ -35,4 +35,8 @@ module db_data
     real(8) :: farBkg(NBIN)            ! farBkg is the total background in the far detector for the three period of data taking
 
     real(8) :: pullEngy   
+    real(8) :: cal(NBIN)
+    real(8) :: sigma_BKG(ADS)          ! background uncertainties by detector
+    real(8) :: sigma_r(RCTS)           ! reactor uncertainties by detector 
+    real(8) :: sigma_d(ADS)            ! detector uncertainties by detector 
 end module db_data

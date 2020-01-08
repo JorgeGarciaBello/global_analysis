@@ -48,7 +48,7 @@ subroutine readDBData4c()
         read(30,*,IOSTAT=reason) ((v_ij_1(i,j), j=1,34), i=1,NBIN)
         read(31,*,IOSTAT=reason) N_nom
         read(32,*,IOSTAT=reason) N_obs
-        read(33,*,IOSTAT=reason) Md_1607
+        read(33,*,IOSTAT=reason) Md_2018
         read(34,*,IOSTAT=reason) N_e
         read(36,*,IOSTAT=reason) ((gFactor(i,j), j=1,RCTS), i=1,4)
         read(37,*,IOSTAT=reason) farObs

@@ -6,6 +6,7 @@
 !
 !##########################################################
 real(8) function expectedNumberNeutrinosDetector(d)
+    use db_data, only: pullEngy
     implicit none     
     integer :: d                  ! is the number of detector   
 
@@ -19,6 +20,7 @@ real(8) function expectedNumberNeutrinosDetector(d)
     expectedNumberNeutrinosDetector=0.0d0
     do i=1,n
         x=a+h*real(i-1)
+        !x=(1.0d0+pullEngy)*x
         expectedNumberNeutrinosDetector=expectedNumberNeutrinosDetector           &
                                          + h*(  expectedNeutrinoSpectrum_d(x,d)   &
                                                +expectedNeutrinoSpectrum_d(x+h,d) &

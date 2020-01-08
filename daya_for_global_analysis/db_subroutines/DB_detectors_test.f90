@@ -34,7 +34,7 @@ subroutine DBDetectorsTest()
     print*, 'You are in the detector testing subrputine'
     print*, 'IBD OBS '//' AND '//' IBD THEORY '    
     do d=1,ADS        
-        print*,Md_1607(d),expectedNumberNeutrinosDetector(d)
+        print*,Md_2018(d),expectedNumberNeutrinosDetector(d)
     enddo    
     return
 end subroutine DBDetectorsTest

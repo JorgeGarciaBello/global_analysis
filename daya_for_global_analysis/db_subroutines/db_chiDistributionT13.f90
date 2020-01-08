@@ -7,8 +7,8 @@ subroutine db_chiDistributionT13(n)
 
     integer :: i,j
     real(8) :: t_jump
-    real(8) :: t_0=0.13112756703d0   ! t_0= 0.112756703d0
-    real(8) :: t_1=0.16176870803      !0.198849708d0!0.785398163d0    
+    real(8) :: t_0=0.1288985016d0   ! t_0= 0.112756703d0
+    real(8) :: t_1=0.180649968323d0      !0.198849708d0!0.785398163d0    
     real(8) :: sen2_2t_13
     real(8) :: min_val =1e+10,t13_min
     real(8) :: t13
