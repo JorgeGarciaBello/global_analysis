@@ -2,7 +2,7 @@ program main_global
     implicit none
     real(8) :: chi_dayabay, chi_reno, chi_doubleCHOOZ, chi_min_global
     real(8) :: Y(12)                                          !Y=( t12 , t13 , t14 , t23 , t24 , t34 , d13 , d24 , d34 , dm21 , dm31 , dm41 )
-    integer :: n=100                                         ! Es el tamaño del grid
+    integer :: n=500                                         ! Es el tamaño del grid
     real(8) :: dm_min,dm_max
     real(8) :: t13_min,t13_max
     real(8) :: dm_jump,t13_jump
@@ -13,7 +13,9 @@ program main_global
     !call db_chiDistributionDmee(30)
     !call db_chiDistributionT13(350)
 
-    call gridMinLog()
+    !call gridMinLog()
+    call db_chiDistributionDmee_log(350)    
+    call db_chiDistributionT13_log(350)
 
 
     stop
