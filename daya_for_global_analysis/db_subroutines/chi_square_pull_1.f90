@@ -20,6 +20,7 @@ real(8)  function chiSquarePull1(P)
     real(8) :: eps_d(ADS)         ! are the pull parameters for the uncertainty of detection efficiency    
     real(8) :: eta_d(ADS)         ! are the uncertainties of the background per detector    
     real(8) :: expectedNumberNeutrinosDetector
+    real(8) :: expectedNumberOfNeutrinosByDetectorFromSumOfBins ! is the function that return the number of antineutrinos per detector from the sum of number of events per bin
     real(8) :: sum_W_alp
     real(8) :: alphaR(6)          ! is an array with pull parameters reactor
     real(8) :: N_d_exp 
@@ -30,11 +31,14 @@ real(8)  function chiSquarePull1(P)
     eps_d=(/P(8), P(9), P(10), P(11), P(12), P(13), P(14), P(15)/)
     eta_d=(/P(16), P(17), P(18), P(19), P(20), P(21), P(22), P(23)/)
     
-    OPT=(/1.46659434019648d0,1.48407165123355d0,1.44869327343884d0,1.46078095122313d0, &
-          1.40804288808937d0,1.42618536421602d0,1.40932607364135d0,1.43519286395241d0/)
+    !OPT=(/1.46659434019648d0,1.48407165123355d0,1.44869327343884d0,1.46078095122313d0, &
+    !      1.40804288808937d0,1.42618536421602d0,1.40932607364135d0,1.43519286395241d0/) !Calibración global por detector
+
+    OPT=1.0d0
     chiSquarePull1=0.0d0
       do d=1,ADS
-        N_d_exp=expectedNumberNeutrinosDetector(d)
+        !N_d_exp=expectedNumberNeutrinosDetector(d)
+        N_d_exp=expectedNumberOfNeutrinosByDetectorFromSumOfBins(d)
         chiSquarePull1 = chiSquarePull1 &
                                 + (Md_2018(d)-N_d_exp*OPT(d)*(1.0d0+eps+sum_W_alp(d,alphaR)+eps_d(d))+eta_d(d))**2 &
                                 / (Md_2018(d)+Bd(d))

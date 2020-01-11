@@ -17,8 +17,8 @@ subroutine gridMinLog()
     
     real(8) :: m_jump,t_jump
     
-    real(8) :: t_0=0.1d0
-    real(8) :: t_1=0.3d0!785398163d0
+    real(8) :: t_0=0.0d0
+    real(8) :: t_1=asin(1.0d0)/2
     real(8) :: exp_m_0=-4.d0
     real(8) :: exp_m_1=-1.d0
 

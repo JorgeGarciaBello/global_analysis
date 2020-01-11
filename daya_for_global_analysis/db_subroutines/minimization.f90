@@ -18,15 +18,15 @@ subroutine minimization(Y,P)
     real(8) :: newSimplex(MP,NDIM)
     integer :: i
     
-    call readSimplex(P,Y)
+    call readSimplex(P,Y)    
     do i=1,NDIM
-        newSimplex(i,:)=P(i,:)
+        newSimplex(i+1,:)=P(i,:)
     end do
 
     CALL AMOEBA(P,Y,MP,NP,NDIM,FTOL,ITER)
     pull_min=P(1,:)
 
-    newSimplex(MP,:)=P(1,:)
+    newSimplex(1,:)=P(1,:)    
     call reWriteSimplex(newSimplex)
     return
 end subroutine minimization

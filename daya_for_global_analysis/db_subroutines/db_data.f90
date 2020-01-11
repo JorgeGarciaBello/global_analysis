@@ -5,7 +5,7 @@ module db_data
     integer,parameter :: RCTS=6        ! RCTS is the number of reactors
     integer,parameter :: RIR=4         ! RIR is the number of radioactive isotopes in the reactors         
     integer,parameter :: osc=1         ! osc = 1 para oscilaciones,  2 para no oscilaciones
-    integer,parameter :: NDIM=9        ! NDIM=[9,23] is the number of pull parameters: 23 pull / 9 for proposal bines                    
+    integer,parameter :: NDIM=23        ! NDIM=[9,23] is the number of pull parameters: 23 pull / 9 for proposal bines                    
     integer,parameter :: NBIN=26       ! NBIN is the number of energy's bin                    
     
     real(8) :: pull_min(NDIM)

@@ -17,13 +17,13 @@ subroutine confidenceRegions(n)
     
     print*, 'Daya Bay: making confidence regions . . . '
     ! Leyendo los valores minimios  ( chi_min, sen11t_!2_min, Dm2_ee_min )
-    open(107, file='daya_for_global_analysis/db_data/db_data_min_parameters.dat', &
+    open(107, file='daya_for_global_analysis/db_data/analysis_3_c/db_data_min_parameters.dat', &
          status='old')
         read(107,*) min_values
     close(107)
 
     min_val=min_values(1)
-    open(106,file='db_data.dat', &
+    open(106,file='daya_for_global_analysis/db_data/analysis_3_c/db_data.dat', &
         status='old')
         read(106,*) ( (data(i,j), j=1,3), i=1,n**2 )
     close(106)
