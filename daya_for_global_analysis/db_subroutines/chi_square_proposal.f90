@@ -46,7 +46,7 @@ real(8) function chiSquareProposal(P)
     chiSquareProposal=0.0d0
     select case(1)
         case(1)
-            pullEngy=P(9)            
+            pullEngy=P(9)
             do i=1,NBIN
                 !mod=model(i)
                 mod=expectedNeutrinoSpectrumByBinFar(i)

@@ -14,7 +14,7 @@ program main_global
     !call db_chiDistributionT13(350)
 
     !call gridMinLog()
-    call db_chiDistributionDmee_log(350)    
+    call db_chiDistributionDmee_log(350)
     call db_chiDistributionT13_log(350)
 
 

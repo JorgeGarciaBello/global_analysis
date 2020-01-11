@@ -26,8 +26,8 @@ subroutine db_chiDistributionDmee_log(n)
     open(newunit=u, file='daya_for_global_analysis/db_data/analysis_1_a/cut_in_dmee_minimum_1.dat')
         write(u,*)
     close(u)
-    do i=1,n+1
-        call chi2_db((/0.0d0,0.0d0+t_jump*real(i-1),0.0d0,0.0d0,0.0d0, &
+    do i=1,n + 4
+        call chi2_db((/0.0d0,t_jump*real(i-1),0.0d0,0.0d0,0.0d0, &
                        0.0d0,0.0d0,0.0d0,0.0d0,0.0d0, &
                        dmee,0.0d0/),chi2_min)
         open(newunit=u, file='daya_for_global_analysis/db_data/analysis_1_a/cut_in_dmee_minimum_1.dat',position='append')
