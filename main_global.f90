@@ -10,8 +10,7 @@ program main_global
     real(8) :: time_1, time_2
 
     call readDBData()      ! Lee datos de Dayabay   
-    
-    
+        
     !call gridMinLog()
     
     !call readRENOData()    ! Lee datos de RENO
