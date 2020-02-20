@@ -39,21 +39,16 @@ real(8) function chiSquareProposal(P)
     eps=P(1)
     epsD=P(2)
     epsR=P(3)
-    etaBkg=(/P(4),P(5),P(6),P(7),P(8)/)!,P(9),P(10),P(11),P(12),P(13)   &
-      !,P(14),P(15),P(16),P(17),P(18),P(19),P(20),P(21),P(22),P(23)   &
-      !,P(24),P(25),P(26),P(27),P(28),P(29)/)         
-
+    etaBkg=(/P(4),P(5),P(6),P(7),P(8)/)
     chiSquareProposal=0.0d0
     select case(1)
         case(1)
             pullEngy=P(9)
-            do i=1,NBIN
-                !mod=model(i)
+            do i=1,NBIN                
                 mod=expectedNeutrinoSpectrumByBinFar(i)
-                !mod=expectedNumberNeutrinoByBinFar(i)
                 chiSquareProposal = chiSquareProposal &
                                   !+ (farObs(i)-farExp(i)*corrections(i)*mod*(1.0d0+eps+epsD+epsR)+etaBkg(1) &
-                                  + (farObs(i)-mod*(1.0d0+eps+epsD+epsR)+etaBkg(1) &
+                                  + (farObs(i)-mod*(1.0d0+eps+epsD+epsR)          +etaBkg(1) &
                                                                                   +etaBkg(2) &
                                                                                   +etaBkg(3) &
                                                                                   +etaBkg(4) &

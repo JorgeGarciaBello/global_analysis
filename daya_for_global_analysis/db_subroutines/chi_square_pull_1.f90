@@ -33,6 +33,8 @@ real(8)  function chiSquarePull1(P)
     
     !OPT=(/1.46659434019648d0,1.48407165123355d0,1.44869327343884d0,1.46078095122313d0, &
     !      1.40804288808937d0,1.42618536421602d0,1.40932607364135d0,1.43519286395241d0/) !Calibración global por detector
+    !OPT=(/1.06207465851755d0,1.07473240687018d0,1.04911650366577d0,1.05786906595822d0, &
+    !      1.01893728082238d0,1.03206438802066d0,1.01986297813767d0,1.03857977556369d0/)
 
     OPT=1.0d0
     chiSquarePull1=0.0d0
@@ -40,7 +42,8 @@ real(8)  function chiSquarePull1(P)
         !N_d_exp=expectedNumberNeutrinosDetector(d)
         N_d_exp=expectedNumberOfNeutrinosByDetectorFromSumOfBins(d)
         chiSquarePull1 = chiSquarePull1 &
-                                + (Md_2018(d)-N_d_exp*OPT(d)*(1.0d0+eps+sum_W_alp(d,alphaR)+eps_d(d))+eta_d(d))**2 &
+                                !+ (Md_2018(d)-N_d_exp*OPT(d)*(1.0d0+eps+sum_W_alp(d,alphaR)+eps_d(d))+eta_d(d))**2 &
+                                + (Md_2018(d)-N_d_exp*(1.0d0+eps+sum_W_alp(d,alphaR)+eps_d(d))+eta_d(d))**2 &
                                 / (Md_2018(d)+Bd(d))
       enddo
       do r=1,RCTS

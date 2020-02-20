@@ -8,7 +8,7 @@ SUBROUTINE get_chi_min_from_data_grid(m)
     integer :: i,j
 
     n=m**2
-    open(50,file='db_data.dat',status='old')
+    open(50,file='db_data_analysis_1_a.dat',status='old')
         read(50,*) ((data(i,j),j=1,3),i=1,n)
     close(50)
 

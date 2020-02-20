@@ -12,7 +12,7 @@ subroutine minimization(Y,P)
     integer,parameter :: MP=NDIM+1                ! MP is the number of points for polygon of ABOEBA
     integer,parameter :: NP=NDIM                  ! NP is the number of pulls                   
     real(8) :: P(MP,NP), Y(MP)          ! Array con el que se construye AMOEBA    
-    real(8) :: FTOL=1.D-5               ! Required tolerance
+    real(8) :: FTOL=1.D-4               ! Required tolerance
     integer :: ITER                     ! Número de iteraciones realizadas por AMOEBA
 
     real(8) :: newSimplex(MP,NDIM)

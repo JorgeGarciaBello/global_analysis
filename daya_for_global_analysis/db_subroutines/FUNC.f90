@@ -8,9 +8,9 @@ real(8) function FUNC(P)
     real(8) :: chiSquareProposal
 
     FUNC=0.0D0
-    FUNC=chiSquarePull1(P)
+    !FUNC=chiSquarePull1(P)
     !FUNC=chiSquarePull2(P)
-    !FUNC=chiSquareProposal(P)
+    FUNC=chiSquareProposal(P)
     !print*,'FUNC',FUNC
     return
 end function FUNC

@@ -7,8 +7,8 @@ subroutine db_chiDistributionT13(n)
 
     integer :: i,j
     real(8) :: t_jump
-    real(8) :: t_0=0.1288985016d0   ! t_0= 0.112756703d0
-    real(8) :: t_1=0.180649968323d0      !0.198849708d0!0.785398163d0    
+    real(8) :: t_0=0.1288985016d0   ! t_0= 0.112756703d0   asin(sqrt(0.045d0))/2.0d0
+    real(8) :: t_1=0.180649968323d0      !0.198849708d0!0.785398163d0    asin(sqrt(0.15d0))/2.0d0!
     real(8) :: sen2_2t_13
     real(8) :: min_val =1e+10,t13_min
     real(8) :: t13
@@ -21,13 +21,14 @@ subroutine db_chiDistributionT13(n)
     real(8) :: uncer_t13_right=0
     
     print*,'You are running db_chiDistributionT13() . . . '
-    open(90, file='daya_for_global_analysis/db_data/db_data_min_parameters.dat',status='old')
+    open(90, file='daya_for_global_analysis/db_data/analysis_1_a/db_data_min_parameters.dat',status='old')
         read(90,*,IOSTAT=reason) readminResults
     close(90)
 
-    open(194, file='daya_for_global_analysis/db_data/db_distribution_chi_t13.dat')
-    open(195, file='daya_for_global_analysis/db_data/db_distribution_chi_t13_min.dat')
+    open(194, file='daya_for_global_analysis/db_data/analysis_1_a/db_distribution_chi_t13.dat')
+    open(195, file='daya_for_global_analysis/db_data/analysis_1_a/db_distribution_chi_t13_min.dat')
     dmee=readminResults(3)
+    print*,'dmee', dmee
     t_jump = (t_1-t_0)/real(n)    ! For t13    
     t13=t_0
     do i=0,n        
@@ -46,14 +47,14 @@ subroutine db_chiDistributionT13(n)
     close(194)
     close(195)
 
-    open(91,file='daya_for_global_analysis/db_data/db_distribution_chi_t13_min.dat',status='old')
+    open(91,file='daya_for_global_analysis/db_data/analysis_1_a/db_distribution_chi_t13_min.dat',status='old')
         read(91,*) minT13
     close(91)
-    open(92,file='daya_for_global_analysis/db_data/db_distribution_chi_t13.dat',status='old')
+    open(92,file='daya_for_global_analysis/db_data/analysis_1_a/db_distribution_chi_t13.dat',status='old')
         read(92,*) ((valuesT13(i,j), j=1,2), i=1,n+1)
     close(92)
 
-    open(196,file='daya_for_global_analysis/db_data/db_distribution_chi_t13.dat',status='old')
+    open(196,file='daya_for_global_analysis/db_data/analysis_1_a/db_distribution_chi_t13.dat',status='old')
         do i=1,n+1
             new_chi=valuesT13(i,2)-minT13 !Valores de Delta chi
             write(196,*) valuesT13(i,1), new_chi
@@ -71,7 +72,7 @@ subroutine db_chiDistributionT13(n)
             print*,'Se requiere de un grid más fino para obtener la incertidumbre en t13 (db_chiDistributionT13)'
         endif
     close(196)
-    open(181,file='daya_for_global_analysis/db_data/db_t13_uncertainty.dat')
+    open(181,file='daya_for_global_analysis/db_data/analysis_1_a/db_t13_uncertainty.dat')
         write(181,*) t13_min,sin(2.0d0*t13_min)**2, uncer_t13_left, uncer_t13_right
     close(181)
     !print*, 't13: '//t13_min//' => s22t12: '//sin(2.0d0*t13_min)**2//'-'//uncer_t13_left//'+'//uncer_t13_right

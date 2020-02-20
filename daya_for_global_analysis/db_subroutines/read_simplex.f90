@@ -16,10 +16,9 @@ subroutine readSimplex(P,Y)
              
     real(8) :: FUNC
     integer :: m,k,l,i
-    character(100) :: filename
-    ! Lectura de NDIM+1 puntos con NDIM coordenadas en readSimplex
+
+    ! Lectura de NDIM+1 puntos con NDIM coordenadas en readSimplex    
     
-    filename='db_simplex.dat'
     ! Leer el array de pulls 
     ! Se leer NDIM+1 vérties
     ! con NDIM coordenadas

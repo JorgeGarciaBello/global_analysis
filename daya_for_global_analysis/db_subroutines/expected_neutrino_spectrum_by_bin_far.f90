@@ -1,7 +1,7 @@
 !#################################################################################################################
 !
 !       expectedNeutrinoSpectrumByBinFar: is the function that return 
-!           the expected neutirno spectrum bay energy-bin and by far-hall
+!           the expected neutrino spectrum bay energy-bin and by far-hall
 !
 !#################################################################################################################
 real(8) function expectedNeutrinoSpectrumByBinFar(i)
@@ -9,7 +9,7 @@ real(8) function expectedNeutrinoSpectrumByBinFar(i)
     implicit none   
     integer :: i                          ! is the number of energy bin
 
-    real(8) :: expectedNeutrinoSpectrum_H !function that return the expected neutirno spectrum by hall    
+    real(8) :: expectedNeutrinoSpectrum_H !function that return the expected neutrino spectrum by hall    
     integer,parameter :: hall=3           ! number of hall
     real(8) :: a,b                        ! limits of the bin
     real(8) :: h
@@ -42,6 +42,7 @@ real(8) function expectedNeutrinoSpectrumByBinFar(i)
                                          +expectedNeutrinoSpectrum_H(hall,x+h) &
                                         )/2.0d0
     enddo 
-    expectedNeutrinoSpectrumByBinFar=ALPHA(i)*corrections_percetage(i)*(expectedNeutrinoSpectrumByBinFar/(b-a))    
+    expectedNeutrinoSpectrumByBinFar=ALPHA(i)*corrections_percetage(i)*(expectedNeutrinoSpectrumByBinFar/(b-a))
+    !expectedNeutrinoSpectrumByBinFar=(expectedNeutrinoSpectrumByBinFar/(b-a))
     return
 end function expectedNeutrinoSpectrumByBinFar
