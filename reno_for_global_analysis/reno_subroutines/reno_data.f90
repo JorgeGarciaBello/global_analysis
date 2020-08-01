@@ -1,7 +1,7 @@
 module reno_data
     use types
     implicit none
-    integer,parameter :: NDIM=10                     ! NDIM is the number of pull parameters
+    integer,parameter :: NDIM=11                    ! NDIM is the number of pull parameters
     integer,parameter :: ADS=2                      ! ADS is the number of detectors
     integer,parameter :: RCTS=6                     ! RCTS is the number of reactors
     integer,parameter :: RIR=4                      ! RIR is the number of radioactive isotopes in the reactors     

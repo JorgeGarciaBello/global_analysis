@@ -206,7 +206,7 @@ subroutine readRENOData()
 
     !sigma_detection_efficiency = sigma_detection_efficiency*10.0d0   
     sigma_background_d         = sigma_background_d*7.0d0
-    sigma_reactor_flux         = sigma_reactor_flux*50.0d0    
+    sigma_reactor_flux         = sigma_reactor_flux*8.0d0    
     
     
     !call reno_generate_MC()
