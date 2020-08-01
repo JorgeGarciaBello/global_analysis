@@ -1,74 +1,83 @@
 program main_global
+    use types
+    use data_settings, only: n,t13_M_data,dm_M_data    
     implicit none
     real(8) :: chi_dayabay, chi_reno, chi_doubleCHOOZ, chi_min_global
-    real(8) :: Y(12)                                          !Y=( t12 , t13 , t14 , t23 , t24 , t34 , d13 , d24 , d34 , dm21 , dm31 , dm41 )
-    integer :: n=10                                        ! Es el tamaño del grid
-    real(8) :: dm_min,dm_max
-    real(8) :: t13_min,t13_max
-    real(8) :: dm_jump,t13_jump
-    integer :: i,j
-    real(8) :: time_1, time_2
-    real(8) :: FUNC
+    real(8) :: Y(12)                                          !Y=( t12 , t13 , t14 , t23 , t24 , t34 , d13 , d24 , d34 , dm21 , dm31 , dm41 )    
+    real(8) :: dm_min,dm_max    
+    real(8) :: db_chi_square_spectral_analysis2_period
+    real(8) :: DC_FUNC
+    real(8) :: RENO_data(n,n),DC_data(n,n),dmee,t13,P(11)
+    real(8) :: reno_FUNC,hola
+    real(8) :: reno_chi_square_spectral_analysis
+    real(8) :: val(3),data(n**2,3)
+    integer :: i,j,u 
+    real(dp) :: e_a,e_b,e_c
 
-
+    call grid_setting()
     call readDBData()      ! Lee datos de Dayabay
-    
-    PRINT*, FUNC(1.0D0)
-    call db_chiDistributionT13(50)
-    stop
-    !call makeFakeData()
-    
-    
-    !call gridMinLog()
-    
-    !call readRENOData()    ! Lee datos de RENO
-    !CALL ReadDC()          ! Lee datos de Double CHOOZ
+    call readRENOData()    ! Lee datos de RENO
+    CALL ReadDC()          ! Lee datos de Double CHOOZ
+    call DC_read_data()
 
+    !call DC_test()
+    !stop
+    !call reno_generate_MC()
+    !dmee=0.0d0
+    !t13=0.0d0    
     Y=0.0
-    dm_min=1.60105d-3        ! 2.105d-3
-    dm_max=2.8805d-3        ! 2.805d-3
-
-    t13_min=asin(sqrt(0.065))/2.0d0
-    t13_max=asin(sqrt(0.15))/2.0d0
-
-    dm_jump=(dm_max-dm_min)/real(n)
-    t13_jump=(t13_max-t13_min)/real(n)    
-
-       
     !open(336,file='global_data.dat')
-    !open(337,file='db_data.dat', position="append", status="old")
-    open(337,file='db_data_analysis_1_a.dat')
-   ! open(338,file='reno_data.dat')
-   ! open(339,file='dc_data.dat')   
-   call cpu_time(time_1)
-    do i=3,n
-        Y(2)=t13_min + t13_jump*(i-1)
-        do j=1,n
-            Y(11)=dm_min + dm_jump*(j-1)
+    !open(337,file='db_data.dat')
+    !open(338,file='reno_data_cal.dat')
+    !open(339,file='DC_data.dat')
+    !print*, 'inicia análisis'
+    do i=1,n
+        do j=1,n            
+          Y(2)=t13_M_data(i,j); Y(11)=dm_M_data(i,j)
+
+            !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ            
+            !chi_doubleCHOOZ=DC_FUNC(Y(2),Y(11),0.0_dp,0.0_dp,0.0_dp)            
             
-            call chi2_db(Y,chi_dayabay)      ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Daya Bay
-            !call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO
-            !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ
-            !chi_min_global=chi_dayabay+chi_reno+chi_doubleCHOOZ
-            !write (336,*)  sin(2.0d0*Y(2))**2, Y(11), chi_min_global ! Escrotura de los datos del análisis global
-            write (337,*)  sin(2.0d0*Y(2))**2, Y(11), chi_dayabay ! Escrotura de los datos del análisis db
-            !write (338,*)  sin(2.0d0*Y(2))**2, Y(11), chi_reno ! Escrotura de los datos del análisis reno
-            !write (339,*)  sin(2.0d0*Y(2))**2, Y(11), chi_doubleCHOOZ ! Escrotura de los datos del análisis dc
-            print*, j
-        enddo
-        print*,i
-        write(337,*)
+            
+
+
+            !call DC_double_chooz(Y,chi_doubleCHOOZ)
+            !DC_data(i,j)=chi_doubleCHOOZ
+            !resul_M_DB(i,j)  = db_chi_square_spectral_analysis2_period(t13_M_data(i,j),dm_M_data(i,j))
+
+            
+
+
+            call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO}           
+            !chi_reno=reno_chi_square_spectral_analysis(Y(2),Y(11))            
+            RENO_data(i,j) = chi_reno
+            !RENO_data = chi_reno
+
+
+                !chi_min_global=chi_doubleCHOOZ+chi_reno+resul_M_DB(i,j)
+                !write (336,*)  sin(2.0d0*Y(2))**2, Y(11), chi_min_global ! Escrotura de los datos del análisis global
+                !write (337,*)  sin(2.0d0*Y(2))**2, Y(11), resul_M_DB(i,j) ! Escrotura de los datos del análisis db                
+        !        write (339,*)  sin(2.0d0*Y(2))**2, Y(11), chi_doubleCHOOZ ! Escrotura de los datos del análisis dc
+                !write (338,*)  sin(2.0d0*Y(2))**2, Y(11), chi_reno ! Escrotura de los datos del análisis reno                
+     !           print*, j
+       enddo
+        !write (336,*) ' '
+        !write (337,*) ' '
+        !write (338,*)  ' '
+       ! write (339,*)  ' '
+        print*, i
     enddo
-    call cpu_time(time_2)
     !close(336)
-    close(337)
+    !close(337)
     !close(338)
     !close(339)
-    print*, 'Time: ', time_2-time_1
-    call get_chi_min_from_data_grid(n)
     
-    !call confidenceRegions(n)
-    call db_chiDistributionT13(350)
-    !call db_chiDistributionDmee(350)
-    
+    !call write_results(n,DC_data,'DC_data.dat')
+    !!call get_min_from_data(n,'DC_data.dat',val)
+    !call get_parabola_from_data(n,DC_data,'DC_data.dat')
+    !call reno_confidenceRegions(n,val,DC_data,'DC_data.dat')
+
+    call write_results(n,RENO_data,'reno_data_cal.dat')
+    call get_min_from_data(n,'reno_data_cal.dat',val)    
+    call reno_confidenceRegions(n,val,RENO_data,'reno_data_cal.dat')    
 end program main_global

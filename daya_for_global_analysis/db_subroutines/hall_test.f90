@@ -1,66 +1,79 @@
 subroutine hallTest()
     use neu_osc_parameters
-    use db_data, only: NBIN,farObs,farExp
-    implicit none
-    real(8), parameter :: PI=3.141592653589793238462643d0    
+    use db_data, only: NBIN,farObs,farExp,N_obs_near,N_obs_far
+    implicit none    
+    real(8) :: t13_db, dm31_db
+    real(8) :: t13_my, dm31_my
 
     real(8) :: expectedNumberNeutrinosDetector
     real(8) :: expectedNeutrinoSpectrum_H
     real(8) :: expectedNumberNeutrinosHall
     real(8) :: model
     integer :: num
+    
+    real(8) :: expectedNumberNeutrinoByHallAndBin
+    real(8) :: expectedNeutrinoSpectrumByHallAndBin
+    real(8) :: expectedNeutrinoSpectrumByBinNear, expectedNeutrinoSpectrumByBinFar
 
-    real(8) :: x    
-    real(8) :: L                  ! L is the length between the source of neutrinos an the position
-    real(8) :: P                  ! P es el momento del neutrino o la enerǵia total
-
-    !real(8) :: m21=7.53D-5, m32= 2.44D-3 !Jerarquia normal ! m32= 2.52E-3 !Jerarquia invertida
-    !real(8) :: s2_2t12=0.846D0, c2_t12=0.6962D0, s2_t12=0.3038D0
-
-    real(8) :: expectedNeutrinoSpectrumByBinFar
+    real(8) :: expectedNumberNeutrinoByBinNear
     real(8) :: expectedNumberNeutrinoByBinFar
+
     integer :: d
     integer :: i
+    integer :: H
     real(8) :: corrections(NBIN)
-
+    real(8) :: db_partial_chi2_alpha_r
+    
     print*, ' In hallTest'
+   
+    !t13=asin(sqrt(0.0856d0))/2.0d0
+    !dm31=2.522D-3!2.8560000000000000d-003!2.5D-3
 
-    t12=0.0d0!0.5837630475918688D0!PI/4.0D0
-    t13=0.14795088706d0!0.13023999999999999d0!
-    t23=0.0d0!0.7853981631d0!0.698356658079 !0.0D0!PI/
-    t14=0.0D0
-    t24=0.0D0
-    t34=0.0D0    
-    delta1=0.0D0
-    delta2=0.0D0
-    delta3=0.0D0
-    dm21=0.0d0!7.53D-5
-    dm31=2.5D-3!2.8560000000000000d-003!2.5D-3
-    dm41=0.0d0
-
-  
-    do i=1,NBIN
-        !print*, farObs(i), farExp(i), model(i), model(i)*farExp(i)
-        !print*, expectedNumberNeutrinoByBinFar(i)!,farObs(i)!, farExp(i),
-        print*, expectedNeutrinoSpectrumByBinFar(i)!, farExp(i)
-    enddo
-
-    !print*,'farObs(i),farExp(i)*model(i)'
-    !do i=1,NBIN
-    !    print*,farObs(i),farExp(i)*model(i),farObs(i)/(farExp(i)*model(i)),farObs(i)-(farExp(i)*model(i)),&
-    !    (farObs(i)-(farExp(i)*model(i)))**2/farObs(i)
-    !enddo
-
-    !do i=1,NBIN
-    !print*,(farObs(i)-(farExp(i)*model(i)))**2
-    !enddo
-
-    
-    
-    !print *,''
-    !do d=1,ADS
-    !print*, expectedNumberNeutrinosDetector(d)
-    !enddo
-    
+    select case(2)
+        case(1)
+            print*, '*Spectrum from H1'
+            H=1
+            do i=1,NBIN
+                print*, expectedNumberNeutrinoByHallAndBin(H,i,t13,dm31)    
+            enddo
+            print*, '*Spectrum from H2'
+            H=2
+            do i=1,NBIN
+                print*, expectedNumberNeutrinoByHallAndBin(H,i,t13,dm31)       
+            enddo
+            print*, '*Spectrum from H3'
+            H=3
+            do i=1,NBIN
+                print*, expectedNumberNeutrinoByHallAndBin(H,i,t13,dm31)        
+            enddo
+        case(2)
+            t13_db=asin(sqrt(0.0856d0))/2.0d0; dm31_db=2.522D-3
+            t13_my=asin(sqrt(0.21131558192543945d0))/2.0d0; dm31_my=2.4337748344370859d-003
+            print*, 'N_obs_Near,N_epx_Near '
+            do i=1, NBIN
+                print*,N_obs_near(i), &               
+                       expectedNumberNeutrinoByBinNear(i,t13_db,dm31_db), &
+                       expectedNumberNeutrinoByBinNear(i,t13_my,dm31_my) 
+            enddo
+            print*,''
+            print*, 'N_obs_Far,N_epx_Far '
+            do i=1, NBIN
+                print*,N_obs_far(i), &
+                       expectedNumberNeutrinoByBinFar(i,t13_db,dm31_db), &
+                       expectedNumberNeutrinoByBinFar(i,t13_my,dm31_my)
+            enddo
+        case(3)
+            t13=0.0d0
+            dm31=0.0d0
+            print*, 'Near data'
+            do i=1,NBIN                
+                print*, i,expectedNeutrinoSpectrumByBinNear(i,t13,dm31)
+            enddo
+            print*, ''
+            print*, 'Far data'
+            do i=1,NBIN                
+                print*, i,expectedNeutrinoSpectrumByBinFar(i,t13,dm31)
+            enddo
+    end select
     return
 end subroutine hallTest

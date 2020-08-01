@@ -17,9 +17,9 @@ subroutine gridMinLog()
     
     real(8) :: m_jump,t_jump
     
-    real(8) :: t_0=0.0d0
-    real(8) :: t_1=asin(1.0d0)/2
-    real(8) :: exp_m_0=-4.d0
+    real(8) :: t_0=0.1d0
+    real(8) :: t_1=0.3d0!785398163d0
+    real(8) :: exp_m_0=-3.0d0!4.d0
     real(8) :: exp_m_1=-1.d0
 
     integer :: i,j
@@ -27,13 +27,13 @@ subroutine gridMinLog()
     
     real(8) :: ji_min=1e+10,t13_min,mee_min    
     real(8) :: t1,t2    
-    integer,parameter :: n=100                  ! Number of partitions in the interest interval    
+    integer,parameter :: n=50                  ! Number of partitions in the interest interval    
 
     print*, 'Daya Bay: making grid min log . . . '
-    !open(101,file='daya_for_global_analysis/db_data/chi2_grd3_grid_min_log_1809.dat')
-    open(101,file='daya_for_global_analysis/db_data/chi2_log.dat')
-    open(102, file='daya_for_global_analysis/db_data/chi2_log_min_results.dat')
-    open(103, file='daya_for_global_analysis/db_data/chi2_log_all_info_.dat')
+    !open(101,file='db_data/chi2_grd3_grid_min_log_1809.dat')
+    open(101,file='db_data/chi2_prop_log_9PULL_sigmaF_Rtrn.dat')
+    open(102, file='db_data/chi2_prop_log_min_results_9PULL_sigmaF_Rtrn.dat')
+    open(103, file='db_data/chi2_prop_log_all_info_9PULL_sigmaF_Rtrn.dat')
 
     t_jump = (t_1-t_0)/real(n)              ! For t13
     m_jump = (exp_m_1-exp_m_0)/real(n)      ! 4.0d0 Es el exponente de la potencia de la grafica logaritmica

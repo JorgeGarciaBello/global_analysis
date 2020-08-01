@@ -4,10 +4,11 @@
 !       expected neutirno spectrum by hall
 !
 !####################################################################
-real(8) function expectedNeutrinoSpectrum_H(hall,x)
+real(8) function expectedNeutrinoSpectrum_H(hall,x,t13,dm31)
     implicit none     
     integer :: hall               ! Is the hallber of the Hall
     real(8) :: x                  ! Neutrino energy in [MeV]        
+    real(8) :: t13, dm31          ! are the neutrino oscillation parameters we are interested
 
     real(8) :: expectedNeutrinoSpectrum_d!is the expected neutirno spectrum in the detector "d" from all reactors
     integer :: d                  ! the hallber ot detector
@@ -17,17 +18,17 @@ real(8) function expectedNeutrinoSpectrum_H(hall,x)
         case(1)
             do d=1,2
                 expectedNeutrinoSpectrum_H =   expectedNeutrinoSpectrum_H      &
-                                             + expectedNeutrinoSpectrum_d(x,d)
+                                             + expectedNeutrinoSpectrum_d(x,d,t13,dm31)
             enddo
         case(2)
             do d=3,4
                 expectedNeutrinoSpectrum_H =   expectedNeutrinoSpectrum_H      &
-                                             + expectedNeutrinoSpectrum_d(x,d)
+                                             + expectedNeutrinoSpectrum_d(x,d,t13,dm31)
             enddo
         case(3)
             do d=5,8
                 expectedNeutrinoSpectrum_H =  expectedNeutrinoSpectrum_H       &
-                                            + expectedNeutrinoSpectrum_d(x,d)
+                                            + expectedNeutrinoSpectrum_d(x,d,t13,dm31)
             enddo
     end select
     return    

@@ -18,7 +18,7 @@ real(8) function reno_averageProbabilityOfSurvival_dr_bin(d,r,bin)
     real(8) :: x                  ! x es la energía del neutrino en MeV0
     real(8) :: ProbabilityOfSurvival,probability
     real(8) :: a,b,h
-    integer :: i,n=100!000
+    integer :: i,n=50!000
 
     leng=length_d_r(d,r)    
     a=bines(bin,1); b=bines(bin,2);    

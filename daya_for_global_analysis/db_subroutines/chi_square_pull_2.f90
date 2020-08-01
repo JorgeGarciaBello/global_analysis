@@ -6,7 +6,7 @@
 !
 !###############################################################################################
 real(8)  function chiSquarePull2(P)
-    use db_data, only:NDIM,ADS,RCTS,Md=>Md_2018,Bd
+    use db_data, only:NDIM,ADS,RCTS,Md_1607,Bd
     implicit none
     real(8) :: P(NDIM)
     
@@ -47,11 +47,11 @@ real(8)  function chiSquarePull2(P)
     do d=1,ADS
         Td=expectedNumberNeutrinosDetector(d)
         chiSquarePull2=chiSquarePull2   &
-                       +( Md(d)                                        &
+                       +( Md_1607(d)                                        &
                          -parR*Td*(1.0d0+eps+sum_W_alp(d,alphaR)+epsD(d))   &
                          +etaD(d)                                           &
-                         )**2/(Md(d)+Bd(d))
-                       !+(Md(d)-Td*(1.0d0+eps+sum_W_alp(d,alphaR)+epsD(d))+etaD(d))**2/(Md(d)+Bd(d))
+                         )**2/(Md_1607(d)+Bd(d))
+                       !+(Md_1607(d)-Td*(1.0d0+eps+sum_W_alp(d,alphaR)+epsD(d))+etaD(d))**2/(Md_1607(d)+Bd(d))
     enddo        
     do r=1,RCTS
         chiSquarePull2=chiSquarePull2+(alphaR(r)/sigmaR)**2

@@ -2,13 +2,13 @@ subroutine reWriteSimplex(newSimplex)
     use db_data, only: NDIM
     implicit none
     real(8) :: newSimplex(NDIM+1,NDIM)
-    integer :: i
+    integer :: i,u
 
-    open(200,file='daya_for_global_analysis/db_data/db_simplex.dat',status='old')
+    open(newunit=u,file='db_data/db_simplex.dat',status='old')
         do i=1,NDIM+1
-            write(200,*) newSimplex(i,:)
+            write(u,*) newSimplex(i,:)
         enddo
-    close(200)
+    close(u)
 
     return
 end subroutine reWriteSimplex

@@ -1,11 +1,54 @@
 subroutine readRENOData()
     use reno_data
     implicit none    
-    integer :: i,j,reason
+    integer :: i,j,u,reason
     !open(10,file="reno_for_global_analysis/reno_data/reno_weightsPerNearHall.dat", status="old")
     !open(11,file="reno_for_global_analysis/reno_data/reno_weightsPerHs.dat", status="old")
+    open(newunit=u,file="reno_for_global_analysis/reno_data/reno_near_obs.dat", status="old")
+            read(u,*,IOSTAT=reason) nearObs
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_far_obs.dat',status='old')
+        read(u,*,IOSTAT=reason) farObs
+    close(u)
+    
+
+
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_background_bin_near_far.dat', status='old')
+        read(u,*,IOSTAT=reason) ((bkg(i,j),j=1,2), i=1,NBIN)
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_detector_efficiency.dat', status='old')
+        read(u,*,IOSTAT=reason) detector_efficiency
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_neutrino_energy.dat', status='old')
+        read(u,*,IOSTAT=reason) neutrino_energy
+    close(u)
+
+
+    
+    
+
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_background_near_far.dat', status='old')
+        read(u,*,IOSTAT=reason) sigma_background_d
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_reactor_flux.dat', status='old')
+        read(u,*,IOSTAT=reason) sigma_reactor_flux
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_detection_efficiency.dat', status='old')
+        read(u,*,IOSTAT=reason) sigma_detection_efficiency
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_efficiency_corr.dat', status='old')
+        read(u,*,IOSTAT=reason) sigma_efficiency_corr
+    close(u)
+    open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_energy_scale.dat', status='old')
+        read(u,*,IOSTAT=reason) sigma_energy_scale
+    close(u)
+
+    
+    
+
+
     open(12,file="reno_for_global_analysis/reno_data/reno_contribution_reactor_flux.dat", status="old")    
-    open(13,file="reno_for_global_analysis/reno_data/reno_near_obs.dat", status="old")
+    
     open(14,file="reno_for_global_analysis/reno_data/reno_near_exp.dat", status="old")
     open(15,file="reno_for_global_analysis/reno_data/reno_total_backgroud_rate_n_f.dat", status="old")
     open(16,file="reno_for_global_analysis/reno_data/reno_background_systematic_uncertainties_n_f_percentage_total.dat", &
@@ -19,7 +62,7 @@ subroutine readRENOData()
     open(23,file="reno_for_global_analysis/reno_data/reno_bines.dat", status="old")
     !open(24,file="reno_for_global_analysis/reno_data/reno_v_ij_1.dat", status="old")
     !open(25, file='reno_for_global_analysis/reno_data/reno_n_nom_array.dat', status='old')
-    open(26,file='reno_for_global_analysis/reno_data/reno_background_bin_near_far.dat', status='old')
+    
     open(27,file='reno_for_global_analysis/reno_data/reno_fraction_nuclear_fission.dat',status='old')
     !open(28,file='reno_for_global_analysis/reno_data/reno_far_obs.dat',status='old')
     open(29,file='reno_for_global_analysis/reno_data/reno_far_exp.dat',status='old')
@@ -29,7 +72,7 @@ subroutine readRENOData()
     open(33,file='reno_for_global_analysis/reno_data/reno_far_background_Cf.dat',status='old')
     open(34,file='reno_for_global_analysis/reno_data/reno_far_background_fast_neutron.dat',status='old')
     open(35,file='reno_for_global_analysis/reno_data/reno_far_background_Li_He.dat',status='old')    
-    open(36,file='reno_for_global_analysis/reno_data/reno_far_obs.dat',status='old')
+    
     
     open(37,file='reno_for_global_analysis/reno_data/RENO_reactor_flux_corr.dat',status='old')
     open(38,file='reno_for_global_analysis/reno_data/RENO_bg_total.dat',status='old')
@@ -42,7 +85,7 @@ subroutine readRENOData()
         !read(10,*,IOSTAT=reason) ((wNH(i,j), j=1,2), i=1,34)
         !read(11,*,IOSTAT=reason) ((wH(i,j), j=1,8), i=1,34)
         read(12,*,IOSTAT=reason) ((wDR(i,j), j=1,6), i=1,2)
-        read(13,*,IOSTAT=reason) nearObs
+    
         read(14,*,IOSTAT=reason) nearExp
         read(15,*,IOSTAT=reason) TBR_n_f
         read(16,*,IOSTAT=reason) ((BSU_n_f_P_T(i,j), j=1,2), i=1,2)
@@ -55,7 +98,7 @@ subroutine readRENOData()
         read(23,*,IOSTAT=reason) ((bines(i,j), j=1,2), i=1,NBIN)
         !read(24,*,IOSTAT=reason) ((v_ij_1(i,j), j=1,34), i=1,34)
         !read(25,*,IOSTAT=reason) N_nom
-        read(26,*,IOSTAT=reason) ((bkg(i,j),j=1,2), i=1,NBIN)
+        
         read(27,*,IOSTAT=reason) FNF
         !read(28,*,IOSTAT=reason) farObs
         read(29,*,IOSTAT=reason) farExp
@@ -65,7 +108,7 @@ subroutine readRENOData()
         read(33,*,IOSTAT=reason) bkgFarCf
         read(34,*,IOSTAT=reason) bkgFarFN
         read(35,*,IOSTAT=reason) bkgFarLH
-        read(36,*,IOSTAT=reason) farObs
+        
         
         read(37,*,IOSTAT=reason) rFluxC
         read(38,*,IOSTAT=reason) bkgTotal
@@ -77,7 +120,7 @@ subroutine readRENOData()
     !close(10)
     !close(11)
     close(12)
-    close(13)
+    
     close(14)
     close(15)
     close(16)
@@ -89,8 +132,7 @@ subroutine readRENOData()
     close(22)
     close(23)
     !close(24)
-    !close(25)
-    close(26)
+    !close(25)    
     close(27)
     !close(28)
     close(29)
@@ -100,7 +142,7 @@ subroutine readRENOData()
     close(33)
     close(34)
     close(35)
-    close(36)
+    
     
     close(37)    
     close(38)
@@ -109,6 +151,64 @@ subroutine readRENOData()
     close(41)
     close(42)
     close(43)
-    return
 
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_detector_calibration.dat',status='old')
+        read(u,*,IOSTAT=reason) detector_calibration
+    close(u)
+
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_average_energy_released_per_fission.dat')
+        read(u,*) average_energy_released_per_fission
+    close(u)
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_reactor_flux_model.dat',status='old')
+        read(u,*,IOSTAT=reason) reactor_flux_model
+    close(u)
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_cross_section_v.dat',status='old')
+        read(u,*,IOSTAT=reason) cross_section_v
+    close(u)
+
+        
+
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_sigma_thermal_power.dat',status='old')
+        read(u,*) sigma_thermal_power
+    close(u)
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_sigma_fission_fraction.dat',status='old')
+        read(u,*) sigma_fission_fraction
+    close(u)    
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_sigma_average_energy_released_per_fission.dat')
+        read(u,*) sigma_average_energy_released_per_fission
+    close(u)
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_sigma_reactor_flux_model.dat',status='old')
+        read(u,*,IOSTAT=reason) sigma_reactor_flux_model
+    close(u)
+    open(newunit=u, file='reno_for_global_analysis/reno_data/reno_sigma_cross_section.dat',status='old')
+        read(u,*,IOSTAT=reason) sigma_cross_section
+    close(u)
+
+    !call reno_generate_MC()
+    
+    !########################################################
+    !
+    !   Al bajar la potencia thermal en el primer 
+    !   reactor se disminuye el valor del s22t13
+    !
+    !  TP_r(6)=1.5d0*TP_r(6)
+      !TP_r(6)=1.3d0*TP_r(6)
+    !   TP_r(2)=    no tiene un gran efecto
+    !
+    !########################################################
+    !print*, TP_r
+    !TP_r=5.0d0*TP_r  !  Subir el valor desde 1.1% disminuye  el angulo. Disminuir al valor aumenta el ji y no cambia el t13    
+    !print*, TP_r
+
+    
+    neutrino_energy=neutrino_energy*0.9612
+    detector_efficiency(2)=1.0076*detector_efficiency(2)
+
+    !sigma_detection_efficiency = sigma_detection_efficiency*10.0d0   
+    sigma_background_d         = sigma_background_d*7.0d0
+    sigma_reactor_flux         = sigma_reactor_flux*50.0d0    
+    
+    
+    !call reno_generate_MC()
+    return
 end subroutine readRENOData
