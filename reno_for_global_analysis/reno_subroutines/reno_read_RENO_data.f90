@@ -200,9 +200,9 @@ subroutine readRENOData()
     !TP_r=5.0d0*TP_r  !  Subir el valor desde 1.1% disminuye  el angulo. Disminuir al valor aumenta el ji y no cambia el t13    
     !print*, TP_r
 
-    
-    neutrino_energy=neutrino_energy*0.9612
-    detector_efficiency(2)=1.0076*detector_efficiency(2)
+        
+    neutrino_energy=neutrino_energy*0.9608                   
+    detector_efficiency(2)=1.007643*detector_efficiency(2)
 
     !sigma_detection_efficiency = sigma_detection_efficiency*10.0d0   
     sigma_background_d         = sigma_background_d*7.0d0
