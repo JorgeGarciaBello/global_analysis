@@ -28,7 +28,8 @@ subroutine DC_read_simplex(t13,dmee,P,Y)
     !open(20,file="dataService/PRUEBA_AMOEBA.dat", status="old")
         read(u,*) ( (P(k,l), l=1,NP), k=1,MP )
     close(u)
-    
+
+   
     DO m=1, NDIM+1
         ! Se carga la i-ésima coordenada del m-ésimo punto al arreglo PT
         do i=1,NDIM

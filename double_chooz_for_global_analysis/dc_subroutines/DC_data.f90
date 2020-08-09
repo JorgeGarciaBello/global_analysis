@@ -21,6 +21,11 @@ module DC_data
     real(dp) :: litio_f(NBIN)
     real(dp) :: accidental_f(NBIN)
 
+    real(dp) :: Li_per_day
+    real(dp) :: Fast_per_day
+    real(dp) :: Acc_per_day
+    real(dp) :: Res_per_day
+
     real(dp) :: spectrum(NBIN)
     real(dp) :: thermal_power(ADS)
     real(dp) :: fission_fractions(4)
@@ -46,6 +51,11 @@ module DC_data
     real(dp) :: sigma_mean_cross_section(NBIN) 
     real(dp) :: sigma_target_proton(ADS)    
     real(dp) :: sigma_efficiency(ADS)
+
+    real(dp) :: sigma_Li_per_day
+    real(dp) :: sigma_Fast_per_day
+    real(dp) :: sigma_Acc_per_day
+    real(dp) :: sigma_Res_per_day
 
     real(dp) :: rand_Nspectrum_R1(NBIN,num_experiments)
     real(dp) :: rand_Nspectrum_R2(NBIN,num_experiments)

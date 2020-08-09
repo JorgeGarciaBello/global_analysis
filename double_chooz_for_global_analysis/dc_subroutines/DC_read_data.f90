@@ -54,6 +54,20 @@ subroutine DC_read_data()
     open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_accidental_f.dat', status='old')
         read(u,*) accidental_f
     close(u)
+    
+
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_Li_per_day.dat', status='old')
+        read(u,*) Li_per_day
+    close(u)
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_Fast_per_day.dat', status='old')
+        read(u,*) Fast_per_day
+    close(u)
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_Acc_per_day.dat', status='old')
+        read(u,*) Acc_per_day
+    close(u)
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_Res_per_day.dat', status='old')
+        read(u,*) Res_per_day
+    close(u)
 
 
     open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_spectrum.dat', status='old')
@@ -126,6 +140,21 @@ subroutine DC_read_data()
         read(u,*) sigma_efficiency
     close(u)
 
+
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_sigma_Li_per_day.dat', status='old')
+        read(u,*) sigma_Li_per_day
+    close(u)
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_sigma_Fast_per_day.dat', status='old')
+        read(u,*) sigma_Fast_per_day
+    close(u)
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_sigma_Acc_per_day.dat', status='old')
+        read(u,*) sigma_Acc_per_day
+    close(u)
+    open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_sigma_Res_per_day.dat', status='old')
+        read(u,*) sigma_Res_per_day
+    close(u)
+
+
     open(newunit=u, file='double_chooz_for_global_analysis/dc_data/DC_sigma_energy.dat', status='old')
         read(u,*) sigma_energy
     close(u)
@@ -136,7 +165,9 @@ subroutine DC_read_data()
     !DO i=1, 2
     !PRINT*,'sigma_energy',sigma_energy
     !PRINT*,'ro_energy',ro_energy
-    !enddo    
+    !enddo 
+
+    live_days(1)=live_days(1)*1.033119577_dp
     call DC_generate_MC_data()
     return
 end subroutine DC_read_data
