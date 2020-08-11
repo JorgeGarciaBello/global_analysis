@@ -5,8 +5,7 @@ real(8) function db_chi_square_spectral_analysis2_period(t13,dmee)
     real(8) :: rand_W_k(156),rand_w_i(156,num_experiments)    
     real(8) :: V(NBIN*2*PD,NBIN*2*PD)
     real(8) :: N_i(156)
-    real(8) :: chi, chi_m(156,156)
-    !real(8) :: A(156,156)
+    real(8) :: chi, chi_m(156,156)    
     real(8) :: Ubar(156)
     real(8) :: Nbar_i(156,num_experiments)
     character(len=200) :: filename,count_bin,count_perc,format_string,format_string_2
@@ -34,20 +33,12 @@ real(8) function db_chi_square_spectral_analysis2_period(t13,dmee)
     filename='db_ji_vs_bines.dat'
     !filename='db_ji_per_reactor_flux_perc_'//trim(count_perc)//'_all_bin.dat'
     !filename='db_ji_per_reactor_flux_perc_'//trim(count_perc)//'_all_bin_'//trim(count_bin)//'.dat'    
-    !A=1.0d0
-    !A(53,53)=0.0d0 ! NO quitar
-    !A(55,55)=0.0d0 ! Se puede quitar
-    !A(73,73)=0.0d0 ! No se debe quitar
-    !A(79,79)=0.0d0 ! Se puede quitar
     chi=0.0d0    
     do i=1, NBIN*2*PD                                            ! (# de biines)*(# de combinaciones FAR/NEAR)*(# de periodos de colecta de datos)        
-        do j=1,NBIN*2*PD                                         ! (# de biines)*(# de combinaciones FAR/NEAR)*(# de periodos de colecta de datos)                        
-                !chi_m(i,j)=(N_i(j)*V(i,j)*N_i(i))*A(i,j)
-                !print*, 'V(i,j)', V(i,j)
+        do j=1,NBIN*2*PD                                         ! (# de biines)*(# de combinaciones FAR/NEAR)*(# de periodos de colecta de datos)
                 chi_m(i,j)=Ubar(j)*V(i,j)*Ubar(i)!*A(i,j)
                 chi=chi+chi_m(i,j)
-        enddo
-        !print*,i
+        enddo    
     enddo    
     !open(newunit=u, file='db_data/'//filename)
     !do i=1, NBIN*2*PD

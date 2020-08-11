@@ -8,7 +8,7 @@ module db_data
     integer,parameter :: NBIN=26         ! NBIN is the number of energy's bin    
     integer,parameter :: osc=1           ! osc = 1 para oscilaciones,  2 para no oscilaciones 
     integer,parameter :: n=20             ! size of the grid
-    integer,parameter :: num_experiments=200
+    integer,parameter :: num_experiments=1000
 
     
     real(8) :: t13_M_data(n,n)
@@ -100,6 +100,7 @@ module db_data
     real(8) :: N_obs_near1(NBIN)
     real(8) :: N_obs_near2(NBIN)
 
+    real(8) :: sigma_thermal_power(RCTS)
     real(8) :: sigma_energy_bin(NBIN)
     real(8) :: sigma_efficiency
     real(8) :: sigma_spectra_model_near_per_bin(156)

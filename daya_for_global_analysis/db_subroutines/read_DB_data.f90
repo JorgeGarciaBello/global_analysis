@@ -1,4 +1,5 @@
 subroutine readDBData()
+    use types, only: dp
     use db_data
     implicit none    
     integer :: i,j,reason   
@@ -84,7 +85,9 @@ subroutine readDBData()
     close(40)
     close(u)
 
-
+    open(newunit=u, file='daya_for_global_analysis/db_data/db_sigma_thermal_power.dat', status='old')
+        read(u,*,IOSTAT=reason) sigma_thermal_power
+    close(u)
 
     open(newunit=u, file='daya_for_global_analysis/db_data/db_sigma_spectra_model_near_per_bin.dat', status='old')
         read(u,*,IOSTAT=reason) sigma_spectra_model_near_per_bin
@@ -309,6 +312,13 @@ subroutine readDBData()
     open(newunit=u,file='daya_for_global_analysis/db_data/db_second_correction_8AD_per_hall.dat')
         read(u,*) ((second_correction8ADhalls(i,j), j=1,3), i=1,NBIN)
     close(u)
+
+    bin_var=0.97_dp
+    !TP_d=TP_d*0.8_dp
+    TP_d(8)=TP_d(8)*0.99_dp
+
+    !sigma_thermal_power=6.5d0
+    sigma_energy_bin=15.0_dp
 
     call db_generate_MC_data()    
     !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis.dat',status='old')    

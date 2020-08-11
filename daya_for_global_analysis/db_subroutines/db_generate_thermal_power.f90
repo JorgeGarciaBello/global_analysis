@@ -1,34 +1,31 @@
 subroutine db_generate_thermal_power()
-    use db_data, only: TP_r, rand_Nthermalpower, num_experiments, TP_SIGMA
+    use db_data, only: RCTS,TP_r, rand_Nthermalpower, num_experiments, sigma_thermal_power
     implicit none    
-    real(8) :: sigma=(0.5d0)/100.0d0
-    !real(8) :: sigma=(15.d0)/100.0d0
-    !real(8) :: sigma
+    !real(8) :: sigma=(0.5d0)/100.0d0
+    real(8) :: sigma(RCTS)
     real(8) :: min_1, max_1, min_2, max_2, min_3, max_3, min_4, max_4, min_5, max_5, min_6, max_6
     real(8) :: r,re
     integer :: i,n
 
-    !sigma=(TP_SIGMA)/100.0d0
-    sigma=(6.5d0)/100.0d0
-    PRINT*,'sigmaTp: ', sigma
+    sigma=(sigma_thermal_power)/100.0d0    
 
-    min_1=TP_r(1)-TP_r(1)*sigma
-    max_1=TP_r(1)+TP_r(1)*sigma
+    min_1=TP_r(1)-TP_r(1)*sigma(1)
+    max_1=TP_r(1)+TP_r(1)*sigma(1)
 
-    min_2=TP_r(2)-TP_r(2)*sigma
-    max_2=TP_r(2)+TP_r(2)*sigma
+    min_2=TP_r(2)-TP_r(2)*sigma(2)
+    max_2=TP_r(2)+TP_r(2)*sigma(2)
 
-    min_3=TP_r(3)-TP_r(3)*sigma
-    max_3=TP_r(3)+TP_r(3)*sigma
+    min_3=TP_r(3)-TP_r(3)*sigma(3)
+    max_3=TP_r(3)+TP_r(3)*sigma(3)
 
-    min_4=TP_r(4)-TP_r(4)*sigma
-    max_4=TP_r(4)+TP_r(4)*sigma
+    min_4=TP_r(4)-TP_r(4)*sigma(4)
+    max_4=TP_r(4)+TP_r(4)*sigma(4)
 
-    min_5=TP_r(5)-TP_r(5)*sigma
-    max_5=TP_r(5)+TP_r(5)*sigma
+    min_5=TP_r(5)-TP_r(5)*sigma(5)
+    max_5=TP_r(5)+TP_r(5)*sigma(5)
 
-    min_6=TP_r(6)-TP_r(6)*sigma
-    max_6=TP_r(6)+TP_r(6)*sigma    
+    min_6=TP_r(6)-TP_r(6)*sigma(6)
+    max_6=TP_r(6)+TP_r(6)*sigma(6) 
 
     do i=1,156
         do n=1,num_experiments

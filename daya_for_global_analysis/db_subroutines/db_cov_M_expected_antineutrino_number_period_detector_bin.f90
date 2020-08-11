@@ -1,5 +1,5 @@
 real(8) function db_cov_M_expected_antineutrino_number_period_detector_bin(P,d,j,i_bin,k,t13,dm31)
-    use db_data, only: bines,NBIN,ADS_calibration,p_bines
+    use db_data, only: bines,NBIN,ADS_calibration,p_bines,rand_Nenergy
     implicit none     
     integer :: P                  ! P is the number of the period of data collected
     integer :: d                  ! is the number of detector    
@@ -25,7 +25,8 @@ real(8) function db_cov_M_expected_antineutrino_number_period_detector_bin(P,d,j
         ! E_true is the input energy. P(E_rec,E_true) is the output energy
 
         x= db_M_energy_relation_anu_prompt(j,k,db_inv_detector_response(x)) ! E_rec is the input energy. E_nu is the output neutrino energy
-        result=result+ h*db_detector_response_model_function(x)* &
+        !result=result+ h*db_detector_response_model_function(x)* &
+        result=result+ h* &
                         (  db_cov_M_expected_antineutrino_spectrum_detector(x,P,d,i_bin,k,t13,dm31)    &
                            +db_cov_M_expected_antineutrino_spectrum_detector(x+h,P,d,i_bin,k,t13,dm31)  &
                          )/2.0d0
