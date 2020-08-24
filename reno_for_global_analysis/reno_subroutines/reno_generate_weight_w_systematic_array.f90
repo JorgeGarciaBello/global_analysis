@@ -1,6 +1,6 @@
 subroutine reno_generate_weight_w_systematic_array(t13,dmee,rand_w_i)
     use types
-    use reno_data, only: NBIN,num_experiments
+    use reno_data, only: NBIN,num_experiments,rand_Nreactorfluxmodel
     implicit none
     real(dp) :: t13,dmee
     real(dp) :: rand_w_i(NBIN,num_experiments)

@@ -10,13 +10,16 @@ subroutine reno_create_M_stat_signal_bkg(t13,dmee,U,V)
     integer  :: i,j
     
     call reno_generate_vectors_U(t13,dmee,Nbar_i,U)
+    V=0.0_dp
     do i=1,NBIN
         do j=1,NBIN
-            V(i,j)=reno_M_Total_ij(t13,dmee,i,j,Nbar_i,U)
+            V(i,i)=reno_M_Total_ij(t13,dmee,i,i,Nbar_i,U)
         enddo
     enddo
     call reno_create_statistical_covariance_matrix(t13,dmee,Vstat)
-    V=V+Vstat    
+
+    V=V+Vstat
+    !V=Vstat    
     call write_matrix(NBIN,V,'reno_M_stat_signal_bkg')
     call write_matrix_m_n(NBIN,V,'reno_M_M_stat_signal_bkg')
     call db_get_inverse_covariance_matrix(NBIN,V)

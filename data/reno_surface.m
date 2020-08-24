@@ -1,12 +1,12 @@
 # reno_surface
-data=load("reno_data_cal.dat"); data_min=load("min_param_reno_data_cal.dat");
-#data=load("reno_data_cov.dat");
+#data=load("reno_data_cal.dat"); data_min=load("min_param_reno_data_cal.dat");
+data=load("reno_data_cov.dat");  data_min=load("min_param_reno_data_cov.dat");
 #data=load("reno_data_cov_cal.dat");
 
 minimio=min(data(:,3))
 data(:,3)=data(:,3)-minimio;
 k=1;l=1;m=1;
-for i=1:302500
+for i=1:2500
 	if((data(i,3)<=2.3) && (data(i,3)>=2.1))
 	  cf_68(k,:)=[data(i,1),data(i,2)];
 	  k=k+1;
@@ -19,23 +19,21 @@ for i=1:302500
 	endif
 end
 
-#cf_68=cf_68'; cf_95=cf_95'; cf_99=cf_99';
+cf_68=cf_68'; cf_95=cf_95'; cf_99=cf_99';
 
-# file = fopen('reno_confidence_region_cov_68.dat', 'w'); fprintf(file,'%d %d \n' ,cf_68); fclose(file);
-# file = fopen('reno_confidence_region_cov_95.dat', 'w'); fprintf(file,'%d %d \n' ,cf_95); fclose(file);
-# file = fopen('reno_confidence_region_cov_99.dat', 'w'); fprintf(file,'%d %d \n' ,cf_99); fclose(file);
+ file = fopen('reno_confidence_region_cov_68.dat', 'w'); fprintf(file,'%d %d \n' ,cf_68); fclose(file);
+ file = fopen('reno_confidence_region_cov_95.dat', 'w'); fprintf(file,'%d %d \n' ,cf_95); fclose(file);
+ file = fopen('reno_confidence_region_cov_99.dat', 'w'); fprintf(file,'%d %d \n' ,cf_99); fclose(file);
+ cf_68=load("reno_confidence_region_cov_68.dat");
+ cf_95=load("reno_confidence_region_cov_95.dat");
+ cf_99=load("reno_confidence_region_cov_99.dat");
 
-# cf_68=load("reno_confidence_region_cov_68.dat");
-# cf_95=load("reno_confidence_region_cov_95.dat");
-# cf_99=load("reno_confidence_region_cov_99.dat");
-
-file = fopen('reno_confidence_region_68.dat', 'w'); fprintf(file,'%d %d \n' ,cf_68); fclose(file);
-file = fopen('reno_confidence_region_95.dat', 'w'); fprintf(file,'%d %d \n' ,cf_95); fclose(file);
-file = fopen('reno_confidence_region_99.dat', 'w'); fprintf(file,'%d %d \n' ,cf_99); fclose(file);
-
-cf_68=load("reno_confidence_region_68.dat");
-cf_95=load("reno_confidence_region_95.dat");
-cf_99=load("reno_confidence_region_99.dat");
+#file = fopen('reno_confidence_region_68.dat', 'w'); fprintf(file,'%d %d \n' ,cf_68); fclose(file);
+#file = fopen('reno_confidence_region_95.dat', 'w'); fprintf(file,'%d %d \n' ,cf_95); fclose(file);
+#file = fopen('reno_confidence_region_99.dat', 'w'); fprintf(file,'%d %d \n' ,cf_99); fclose(file);
+#cf_68=load("reno_confidence_region_68.dat");
+#cf_95=load("reno_confidence_region_95.dat");
+#cf_99=load("reno_confidence_region_99.dat");
 
 cl_68=load("reno2018_cl68.dat");
 cl_95=load("reno2018_cl95.dat");

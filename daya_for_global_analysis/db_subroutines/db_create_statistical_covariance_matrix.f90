@@ -10,7 +10,7 @@ subroutine db_create_statistical_covariance_matrix(t13,dmee,rand_W_k,Vstat)
 
     Vstat=0.0d0    
     do i=1,NBIN*2*PD        
-        Vstat(i,i)=N_obs_f(i)        
+        Vstat(i,i)=N_obs_f(i)
     enddo
     !call db_write_matrix(NBIN*2*PD,Vstat,'M_statistical_covariance_matrix')    
     !call db_write_matrix_m_n(NBIN*2*PD,Vstat,'M_M_statistical_covariance_matrix')

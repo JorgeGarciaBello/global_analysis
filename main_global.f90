@@ -17,6 +17,7 @@ program main_global
 
     call grid_setting()
     !call DC_grid_setting()
+    
     call readDBData()      ! Lee datos de Dayabay
     call readRENOData()    ! Lee datos de RENO
     call ReadDC()          ! Lee datos de Double CHOOZ
@@ -26,12 +27,13 @@ program main_global
     !stop
     !call reno_generate_MC()
     !dmee=0.0d0
-    !t13=0.0d0    
+    !t13=0.0d0
+
+    open(newunit=u, file='reno_data_cov.dat')
     Y=0.0    
     do i=1,n
         do j=1,n
           Y(2)=t13_M_data(i,j); Y(11)=dm_M_data(i,j)
-
             !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ            
             !chi_doubleCHOOZ=DC_FUNC(Y(2),Y(11),0.0_dp,0.0_dp,0.0_dp)            
             
@@ -42,7 +44,7 @@ program main_global
             !
             !#####################################################################################################
 
-            DB_data(i,j)  = db_chi_square_spectral_analysis2_period(t13_M_data(i,j),dm_M_data(i,j))
+            !DB_data(i,j)  = db_chi_square_spectral_analysis2_period(t13_M_data(i,j),dm_M_data(i,j))
             
             
 
@@ -59,23 +61,23 @@ program main_global
             !######################################   RENO  ##########################################################
             !
             !call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO}           
-            !chi_reno=reno_chi_square_spectral_analysis(Y(2),Y(11))            
-            !RENO_data(i,j) = chi_reno
-            !RENO_data = chi_reno
-
-
-          
-       enddo        
+            chi_reno=reno_chi_square_spectral_analysis(Y(2),Y(11))
+            write(u,*) sin(2.0d0*Y(2))**2, Y(11), chi_reno
+            RENO_data(i,j) = chi_reno
+            !RENO_data = chi_reno          
+       enddo
+        write(u,*) ' '
         print*, i
     enddo
+    close(u)
     !###################################################
     !
     !           DAYA BAY
     !
     !###################################################
-    call write_results(n,DB_data,'db_data.dat')
-    call get_min_from_data(n,'db_data.dat',val)    
-    call get_parabola_from_data(n,'db_data.dat')
+    !call write_results(n,DB_data,'db_data.dat')
+    !call get_min_from_data(n,'db_data.dat',val)    
+    !call get_parabola_from_data(n,'db_data.dat')
 
     !###################################################
     !
@@ -93,7 +95,7 @@ program main_global
     !
     !###################################################
 
-    !call write_results(n,RENO_data,'reno_data_cal.dat')
-    !call get_min_from_data(n,'reno_data_cal.dat',val)    
-    !call reno_confidenceRegions(n,val,RENO_data,'reno_data_cal.dat')    
+    call write_results(n,RENO_data,'reno_data_cov.dat')
+    call get_min_from_data(n,'reno_data_cov.dat',val)
+    call reno_confidenceRegions(n,val,RENO_data,'reno_data_cov.dat')
 end program main_global

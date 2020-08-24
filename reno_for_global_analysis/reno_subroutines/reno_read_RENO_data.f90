@@ -21,10 +21,7 @@ subroutine readRENOData()
     close(u)
     open(newunit=u,file='reno_for_global_analysis/reno_data/reno_neutrino_energy.dat', status='old')
         read(u,*,IOSTAT=reason) neutrino_energy
-    close(u)
-
-
-    
+    close(u)    
     
 
     open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_background_near_far.dat', status='old')
@@ -41,10 +38,7 @@ subroutine readRENOData()
     close(u)
     open(newunit=u,file='reno_for_global_analysis/reno_data/reno_sigma_energy_scale.dat', status='old')
         read(u,*,IOSTAT=reason) sigma_energy_scale
-    close(u)
-
-    
-    
+    close(u)    
 
 
     open(12,file="reno_for_global_analysis/reno_data/reno_contribution_reactor_flux.dat", status="old")    
@@ -200,15 +194,40 @@ subroutine readRENOData()
     !TP_r=5.0d0*TP_r  !  Subir el valor desde 1.1% disminuye  el angulo. Disminuir al valor aumenta el ji y no cambia el t13    
     !print*, TP_r
 
-        
-    neutrino_energy=neutrino_energy*0.9608                   
-    detector_efficiency(2)=1.007643*detector_efficiency(2)
+    !#####################################################
+    !
+    !       Valores para el análisis de pulls
+    !
+    !#####################################################    
+    !neutrino_energy=neutrino_energy*0.9608
+    !detector_efficiency(2)=1.007643*detector_efficiency(2)
+    
+    !sigma_background_d         = sigma_background_d*7.0d0
+    !sigma_reactor_flux         = sigma_reactor_flux*8.0d0    
 
-    !sigma_detection_efficiency = sigma_detection_efficiency*10.0d0   
-    sigma_background_d         = sigma_background_d*7.0d0
-    sigma_reactor_flux         = sigma_reactor_flux*8.0d0    
+    !#####################################################
+    !
+    !       Valores para el análisis de covarianza
+    !
+    !#####################################################
+    !sigma_cross_section=50.0_dp
+    !sigma_thermal_power=10.0_dp
+                    neutrino_energy=neutrino_energy*0.989
+
+                       !detector_efficiency(2)=0.9*detector_efficiency(2)
+                    detector_efficiency(2)=1.00233*detector_efficiency(2)
+                    
+
+                        !sigma_energy_scale=8.0_dp
+                     sigma_background_d         = sigma_background_d*1.2_dp
+                     sigma_detection_efficiency=1.8_dp
     
-    
-    !call reno_generate_MC()
+    !sigma_efficiency_corr=
+    !sigma_efficiency_corr(1)=
+
+    !sigma_energy_scale=50.0_dp           ! NO presentacambios al aumento de la incertidumbre    
+    !sigma_reactor_flux_model=100.0_dp    ! No tiene cambios en todos los reactores ta que se eliminan las incertidumbres
+    !sigma_reactor_flux_model=sigma_reactor_flux(1)*10.0_dp   
+    call reno_generate_MC()
     return
 end subroutine readRENOData

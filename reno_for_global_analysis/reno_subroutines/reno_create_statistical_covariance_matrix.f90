@@ -6,7 +6,7 @@ subroutine reno_create_statistical_covariance_matrix(t13,dmee,Vstat)
     integer  :: i,u
 
     Vstat=0.0d0    
-    do i=1,NBIN        
+    do i=1,NBIN
         Vstat(i,i)=farObs(i)
     enddo    
     return
