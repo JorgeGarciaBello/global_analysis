@@ -29,7 +29,7 @@ program main_global
     !dmee=0.0d0
     !t13=0.0d0
 
-    open(newunit=u, file='reno_data_cov.dat')
+    !open(newunit=u, file='reno_data_cov.dat')
     Y=0.0    
     do i=1,n
         do j=1,n
@@ -62,14 +62,14 @@ program main_global
             !
             !call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO}           
             chi_reno=reno_chi_square_spectral_analysis(Y(2),Y(11))
-            write(u,*) sin(2.0d0*Y(2))**2, Y(11), chi_reno
+            !write(u,*) sin(2.0d0*Y(2))**2, Y(11), chi_reno
             RENO_data(i,j) = chi_reno
             !RENO_data = chi_reno          
        enddo
-        write(u,*) ' '
+        !write(u,*) ' '
         print*, i
     enddo
-    close(u)
+    !close(u)
     !###################################################
     !
     !           DAYA BAY
@@ -95,7 +95,7 @@ program main_global
     !
     !###################################################
 
-    call write_results(n,RENO_data,'reno_data_cov.dat')
-    call get_min_from_data(n,'reno_data_cov.dat',val)
-    call reno_confidenceRegions(n,val,RENO_data,'reno_data_cov.dat')
+    !call write_results(n,RENO_data,'reno_data_cov.dat')
+    !call get_min_from_data(n,'reno_data_cov.dat',val)
+    !call reno_confidenceRegions(n,val,RENO_data,'reno_data_cov.dat')
 end program main_global

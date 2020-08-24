@@ -209,16 +209,12 @@ subroutine readRENOData()
     !
     !       Valores para el análisis de covarianza
     !
-    !#####################################################
-    !sigma_cross_section=50.0_dp
-    !sigma_thermal_power=10.0_dp
+    !#####################################################    
                     neutrino_energy=neutrino_energy*0.989
-
-                       !detector_efficiency(2)=0.9*detector_efficiency(2)
                     detector_efficiency(2)=1.00233*detector_efficiency(2)
                     
 
-                        !sigma_energy_scale=8.0_dp
+                        
                      sigma_background_d         = sigma_background_d*1.2_dp
                      sigma_detection_efficiency=1.8_dp
     
