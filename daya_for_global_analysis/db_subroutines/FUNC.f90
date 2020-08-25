@@ -9,7 +9,7 @@ real(8) function FUNC(P)
     real(8) :: chiSquareProposal
     real(8) :: db_covariance_matrix_function
     
-    !PRINT*,'FUNC'
+    
     !print*,'t13, dm31:*',t13,dm31
     FUNC=0.0D0
     !FUNC=1.0d0 &!+t13 + dm31 &
@@ -17,9 +17,10 @@ real(8) function FUNC(P)
     !           +(1.0d0-P(4))**2 +(1.0d0-P(5))**2 +(1.0d0-P(6))**2 &
     !           +(1.0d0-P(7))**2 +(1.0d0-P(8))**2 +(1.0d0-P(9))**2 
 
-    !FUNC=chiSquarePull1(P)
+    FUNC=chiSquarePull1(P)
     !FUNC=chiSquarePull2(P)
     !FUNC=chiSquareProposal(P)
-    FUNC=db_covariance_matrix_function(P)
+    !FUNC=db_covariance_matrix_function(P)
+    PRINT*,'FUNC: ',FUNC
     return
 end function FUNC

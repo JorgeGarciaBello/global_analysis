@@ -1,6 +1,6 @@
 real(8)  function chiSquarePull1(P)
-    use db_data, only: n,NDIM,ADS,RCTS,Md=>Md_1607,Bd,grid_events_data_points,delta_chi_db,k
-    use neu_osc_parameters, only: t13,dm31
+    use db_data, only: n,NDIM,ADS,RCTS,Md=>Md_1607,Bd,grid_events_data_points,delta_chi_db,k,neuN
+    !use neu_osc_parameters, only: t13,dm31
     implicit none
     real(8) :: P(NDIM)
     real(8) :: sigmaR             ! us the uncorrelated reactor uncertainty
@@ -28,14 +28,17 @@ real(8)  function chiSquarePull1(P)
     chiSquarePull1=0.0d0
     sigmaR=0.008D0
     sigmaD=0.002D0
-    sigmaB=(/1040,1176,875,782,155,150,150,133/);    
-    do i=1,n*n
-        if((grid_events_data_points(i,1)==t13).and.(grid_events_data_points(i,2)==dm31)) then            
-            neutrinos=grid_events_data_points(i,3:)            
-        end if
-    enddo
+    sigmaB=(/1040,1176,875,782,155,150,150,133/);
+
+    !do i=1,n*n
+    !    if((grid_events_data_points(i,1)==t13).and.(grid_events_data_points(i,2)==dm31)) then            
+    !        neutrinos=grid_events_data_points(i,3:)            
+    !    end if
+    !enddo
+    
     do d=1,ADS        
-        Td=neutrinos(d)
+        !Td=neutrinos(d)
+        Td=neuN(d)
         chiSquarePull1=chiSquarePull1   &                        
                        +(Md(d)-Td*(1.0d0+eps+sum_W_alp(d,alphaR)+epsD(d))+etaD(d))**2/(Md(d)+Bd(d))                       
     enddo
@@ -47,6 +50,6 @@ real(8)  function chiSquarePull1(P)
     enddo
     do d=1,ADS
         chiSquarePull1=chiSquarePull1+(etaD(d)/sigmaB(d))**2
-    enddo   
+    enddo 
     return
 end function chiSquarePull1

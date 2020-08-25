@@ -29,9 +29,9 @@
 !                    para valores definidos en Y (parámetros de osciulación)
 !
 !##############################################################################################
-subroutine chi2_db(Y,chi2_min)
-    use neu_osc_parameters
+subroutine chi2_db(Y,chi2_min)    
     use db_data, only: NDIM
+    use neu_osc_parameters
     implicit none
     real(8) :: Y(12)              ! Arreglo con los parámetros de oscilación
     real(8) :: chi2_min           ! is the min value of the chi-square
@@ -45,8 +45,8 @@ subroutine chi2_db(Y,chi2_min)
     t12=Y(1);     t13=Y(2);     t14=Y(3);     t23=Y(4);    t24=Y(5);    t34=Y(6);
     delta1=Y(7);  delta2=Y(8);  delta3=Y(9);
     dm21=Y(10);   dm31=Y(11);   dm41=Y(12)
-
-    select case(1)
+    call db_create_number_of_antineutrino_events_by_detector(t13,dm31)
+    select case(2)
         case(1)
             call minimization_by_solving_linear_system_equation(X)
             chi2_min=get_chi_square_from_a_set_of_pulls(X)
@@ -56,9 +56,9 @@ subroutine chi2_db(Y,chi2_min)
         case(2)
             call minimization(Z,P)
             chi2_min=Z(1)
-            open(newunit=u, file='db_data/table_of_pulls.dat',position='append',status='old')
-                write(u,*) t13, dm31, P(1,:)
-            close(u)
+            !open(newunit=u, file='db_data/table_of_pulls.dat',position='append',status='old')
+            !    write(u,*) t13, dm31, P(1,:)
+            !close(u)
     end select
     !chi2_min=FUNC(0.0d0)
     return

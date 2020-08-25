@@ -217,9 +217,9 @@ subroutine readRENOData()
                         
                      sigma_background_d         = sigma_background_d*1.2_dp
                      sigma_detection_efficiency=1.8_dp
+    !#####################################################
     
-    !sigma_efficiency_corr=
-    !sigma_efficiency_corr(1)=
+    
 
     !sigma_energy_scale=50.0_dp           ! NO presentacambios al aumento de la incertidumbre    
     !sigma_reactor_flux_model=100.0_dp    ! No tiene cambios en todos los reactores ta que se eliminan las incertidumbres

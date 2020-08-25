@@ -171,29 +171,29 @@ function reno_FUNC(t13,dmee,P)
             !
             !#############################################################
             
-            ! P(1) correccion a la eficiencia de detección
-            ! P(2-5) corrección a las fuentes de background
-            ! P(6) corrección a energy scale 
-            !engyPull=P(6)
+             !P(1) correccion a la eficiencia de detección
+             !P(2-5) corrección a las fuentes de background
+             !P(6) corrección a energy scale 
+              !engyPull=P(6)
             do i=1,NBIN
               oscModel=reno_model(far,i)
               totalBackgroundBin=bkgFarFN(i)+bkgFarAcc(i)+bkgFarLH(i)+bkgFarCf(i)
-             ! chi_2=chi_2 + ( farObs(i)+totalBackgroundBin - farExp(i)*oscModel*(1.0d0+P(1))& !*(1.0d0+P(3)+P(4))       &
-             !                              - (          bkgFarFN(i)*(P(2))         &
-             !                                          +bkgFarAcc(i)*(P(3))        &
-             !                                          +bkgFarLH(i)*(P(4))         &
-             !                                          +bkgFarCf(i)*(P(5))         &              
-              !                                    )& 
-             !                              )**2/ (rFluxU(i)**2+sigmaFar(i)**2)
+              chi_2=chi_2 + ( farObs(i)+totalBackgroundBin - farExp(i)*oscModel*(1.0d0+P(1)+P(6))& !*(1.0d0+P(3)+P(4))       &
+                                           - (          bkgFarFN(i)*(1.0d0+P(2))         &
+                                                       +bkgFarAcc(i)*(1.0d0+P(3))        &
+                                                       +bkgFarLH(i)*(1.0d0+P(4))         &
+                                                       +bkgFarCf(i)*(1.0d0+P(5))         &              
+                                                  )& 
+                                           )**2/ (farObs(i)+totalBackgroundBin)
             enddo
-            !chi_2=chi_2+(P(1)/0.0021d0)**2   ! corrección a la eficiencia de detección
-            ! Terminos correspondientes al background
-            !chi_2=chi_2 +((1.0d0-P(2))/0.027d0)**2  &
-            !            +((1.0d0-P(3))/0.021d0)**2  &
-            !            +((1.0d0-P(4))/0.081d0)**2  &
-            !            +((1.0d0-P(5))/0.093d0)**2
+            chi_2=chi_2+(P(1)/0.0021d0)**2   ! corrección a la eficiencia de detección
+             !Terminos correspondientes al background
+            chi_2=chi_2 +(P(2)/0.027d0)**2  &
+                        +(P(3)/0.021d0)**2  &
+                        +(P(4)/0.082d0)**2  &
+                        +(P(5)/0.093d0)**2
 
-            !chi_2=chi_2 +(P(6)/0.0015d0)**2   ! energy scale uncorrelated systematic uncertainty
+            chi_2=chi_2 +(P(6)/0.0015d0)**2   ! energy scale uncorrelated systematic uncertainty
           case(6)
             !#############################################################
             !

@@ -19,11 +19,11 @@ subroutine minimization_by_solving_linear_system_equation(X)
         print*, 'SE debe de quitar subroutine comentada'
         !CALL ZSPOW(FCN,NSIG,NDIM,ITMAX,PAR,X,FNORM,WK)
 
-        !open(newunit=u,file='db_data/db_solutions_to_system_of_pull_equations.dat',position='append')
-        !    write(u,*) X
-        !close(u)
-        !open(newunit=u,file='db_data/db_FNORM_of_the_solutions_system_of_pull_equations.dat',position='append')
-        !    write(u,*) FNORM
-        !close(u)  
+        open(newunit=u,file='db_data/db_solutions_to_system_of_pull_equations.dat',position='append')
+            write(u,*) X
+        close(u)
+        open(newunit=u,file='db_data/db_FNORM_of_the_solutions_system_of_pull_equations.dat',position='append')
+            write(u,*) FNORM
+        close(u)  
     return
 end subroutine minimization_by_solving_linear_system_equation
