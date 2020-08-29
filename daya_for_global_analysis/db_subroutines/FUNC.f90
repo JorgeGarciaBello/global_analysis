@@ -21,6 +21,6 @@ real(8) function FUNC(P)
     !FUNC=chiSquarePull2(P)
     !FUNC=chiSquareProposal(P)
     !FUNC=db_covariance_matrix_function(P)
-    PRINT*,'FUNC: ',FUNC
+    !PRINT*,'FUNC: ',FUNC
     return
 end function FUNC

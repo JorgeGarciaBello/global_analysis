@@ -1,5 +1,5 @@
 real(8) function db_partial_chi2_alpha_r(r,eps,alpha_r,eps_d,eta_d)
-    use db_data, only: n,ADS,RCTS,Md=>Md_1607,Bd,w=>IBD_fdr,grid_events_data_points
+    use db_data, only: n,ADS,RCTS,Md=>Md_1607,Bd,w=>IBD_fdr,grid_events_data_points,neuN
     use neu_osc_parameters, only: t13,dm31
     implicit none
     integer :: r
@@ -12,19 +12,8 @@ real(8) function db_partial_chi2_alpha_r(r,eps,alpha_r,eps_d,eta_d)
     real(8) :: sigmaR
     real(8) :: Td(ADS)
 
-    sigmaR=0.008D0
-
-     do i=1,n*n
-        if((grid_events_data_points(i,1)==t13).and.(grid_events_data_points(i,2)==dm31)) then            
-            Td=grid_events_data_points(i,3:)
-            !print*,Td
-            !print*,Md
-            !print*,r
-            !print*,alpha_r
-            !print*,eps_d
-            !print*,eta_d
-        end if
-    enddo
+    sigmaR=0.008D0     
+    Td=neuN
     db_partial_chi2_alpha_r=0.0d0
     do d=1,ADS
         db_partial_chi2_alpha_r=db_partial_chi2_alpha_r-2.0d0*Td(d)*w(d,r)* &

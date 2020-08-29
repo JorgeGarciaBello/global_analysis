@@ -46,11 +46,12 @@ subroutine chi2_db(Y,chi2_min)
     delta1=Y(7);  delta2=Y(8);  delta3=Y(9);
     dm21=Y(10);   dm31=Y(11);   dm41=Y(12)
     call db_create_number_of_antineutrino_events_by_detector(t13,dm31)
-    select case(2)
+    select case(1)
         case(1)
             call minimization_by_solving_linear_system_equation(X)
             chi2_min=get_chi_square_from_a_set_of_pulls(X)
-            open(newunit=u, file='db_data/table_of_pulls.dat',position='append',status='old')
+            open(newunit=u, file='daya_for_global_analysis/db_data/table_of_pulls.dat', &
+                            position='append',status='old')
                 write(u,*) t13, dm31, X
             close(u)
         case(2)

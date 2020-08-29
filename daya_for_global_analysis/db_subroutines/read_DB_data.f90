@@ -85,6 +85,12 @@ subroutine readDBData()
     close(40)
     close(u)
 
+    open(newunit=u,file='daya_for_global_analysis/db_data/db_solutions_to_system_of_pull_equations.dat')
+        write(u,*) , ' '
+    close(u)
+    open(newunit=u,file='daya_for_global_analysis/db_data/db_FNORM_of_the_solutions_system_of_pull_equations.dat')
+            write(u,*) ' '
+    close(u)
     open(newunit=u, file='daya_for_global_analysis/db_data/db_sigma_thermal_power.dat', status='old')
         read(u,*,IOSTAT=reason) sigma_thermal_power
     close(u)
@@ -312,15 +318,38 @@ subroutine readDBData()
     open(newunit=u,file='daya_for_global_analysis/db_data/db_second_correction_8AD_per_hall.dat')
         read(u,*) ((second_correction8ADhalls(i,j), j=1,3), i=1,NBIN)
     close(u)
+    !#######################################
+    !
+    !   Calibration for the
+    !   Rate+Shape pull analysis
+    !
+    !#######################################
+
+    !bin_var=0.97_dp
+    TP_d=TP_d*2.0_dp
+
+    !TP_d(8)=TP_d(8)*0.99_dp    
+    !########################################
+
+    !#######################################
+    !
+    !   Calibraciones para análisis
+    !   de Matriz de covarianza
+    !
+    !#######################################
 
     bin_var=0.97_dp
-    !TP_d=TP_d*0.8_dp
+            !!TP_d=TP_d*0.8_dp
     TP_d(8)=TP_d(8)*0.99_dp
 
-    !sigma_thermal_power=6.5d0
-    sigma_energy_bin=15.0_dp
+            !!sigma_thermal_power=6.5d0
+    
+    !call db_generate_MC_data()
+    !########################################   
 
-    call db_generate_MC_data()    
+
+
+
     !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis.dat',status='old')    
     !    do i=1,NBIN*PD*2
     !        read(u,*)  V(i,:)

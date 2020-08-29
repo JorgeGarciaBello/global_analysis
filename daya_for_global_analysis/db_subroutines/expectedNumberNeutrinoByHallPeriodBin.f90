@@ -25,21 +25,8 @@ real(8) function expectedNumberNeutrinoByHallPeriodBin(H,P,j,t13,dm31)
                                                  +expectedNumberNeutrinosDetectorBin(P,6,j,t13,dm31) &
                                                  +expectedNumberNeutrinosDetectorBin(P,7,j,t13,dm31) &
                                                  +expectedNumberNeutrinosDetectorBin(P,8,j,t13,dm31)
-    end select
-    !if(j==53) then
-    !    expectedNumberNeutrinoByHallPeriodBin=expectedNumberNeutrinoByHallPeriodBin* &
-    !                                            calibration_period_hall(P,H)*        &
-    !                                            (1.0d0-0.031501991977487d0)
-                                                !first_bin_calibration(P,H)
-    
-    !else if(j==55) then
-    !    expectedNumberNeutrinoByHallPeriodBin=expectedNumberNeutrinoByHallPeriodBin* &
-    !                                            calibration_period_hall(P,H)*        &
-    !                                            (1.0d0-0.030238719108675)
-                                                !second_bin_calibration(P,H)
-    !else
-    expectedNumberNeutrinoByHallPeriodBin=expectedNumberNeutrinoByHallPeriodBin* &
-                                            calibration_period_hall(P,H)
-    !end if
+    end select    
+    !expectedNumberNeutrinoByHallPeriodBin=expectedNumberNeutrinoByHallPeriodBin* &
+    !                                        calibration_period_hall(P,H)
     return
 end function expectedNumberNeutrinoByHallPeriodBin

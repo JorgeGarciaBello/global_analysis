@@ -8,12 +8,13 @@ program main_global
     real(dp) :: db_chi_square_spectral_analysis2_period
     real(dp) :: DC_FUNC
     real(dp) :: RENO_data(n,n),DC_data(n,n),DB_data(n,n)
-    REAL(DP) :: dmee,t13,P(11)
+    REAL(DP) :: dmee,P(11)
     real(dp) :: reno_FUNC,hola
     real(dp) :: reno_chi_square_spectral_analysis
     real(dp) :: val(3),data(n**2,3)
     integer :: i,j,u 
     real(dp) :: e_a,e_b,e_c
+    real(dp) :: t13,dm31
 
     call grid_setting()
     !call DC_grid_setting()
@@ -24,6 +25,9 @@ program main_global
     call DC_read_data()    
 
     !call DC_test()
+    !t13=asin(sqrt(0.086d0))/2.0d0
+    !dm31=0.0025d0
+    !call db_create_number_of_antineutrino_events_by_detector(t13,dm31)
     !stop
     !call reno_generate_MC()
     !dmee=0.0d0
