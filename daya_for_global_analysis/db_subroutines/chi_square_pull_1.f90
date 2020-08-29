@@ -46,6 +46,6 @@ real(8)  function chiSquarePull1(P)
     do d=1,ADS
         chiSquarePull1=chiSquarePull1+(etaD(d)/sigmaB(d))**2
     enddo        
-        chiSquarePull1=chiSquarePull1+((2.44D-3-dm31)/0.1d-3)**2
+        !chiSquarePull1=chiSquarePull1+((2.44D-3-dm31)/0.1d-3)**2
     return
 end function chiSquarePull1
