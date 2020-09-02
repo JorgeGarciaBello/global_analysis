@@ -5,6 +5,7 @@ subroutine reno_reWriteSimplex(newSimplex)
     integer :: i
 
     open(200,file='reno_for_global_analysis/reno_data/reno_simplex.dat',status='old')
+    !open(200,file='reno_for_global_analysis/reno_data/reno_simplex_far_data_only.dat',status='old')    
         do i=1,NDIM+1
             write(200,*) newSimplex(i,:)
         enddo

@@ -49,8 +49,8 @@ program main_global
             !#####################################################################################################
 
             !DB_data(i,j)  = db_chi_square_spectral_analysis2_period(t13_M_data(i,j),dm_M_data(i,j))
-            call chi2_db(Y,chi_dayabay)
-            DB_data(i,j)=chi_dayabay
+            !call chi2_db(Y,chi_dayabay)
+            !DB_data(i,j)=chi_dayabay
             
             
 
@@ -66,11 +66,10 @@ program main_global
             
             !######################################   RENO  ##########################################################
             !
-            !call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO}           
+            call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO}           
             !chi_reno=reno_chi_square_spectral_analysis(Y(2),Y(11))
             !write(u,*) sin(2.0d0*Y(2))**2, Y(11), chi_reno
-            !RENO_data(i,j) = chi_reno
-            !RENO_data = chi_reno          
+            RENO_data(i,j) = chi_reno            
        enddo
         !write(u,*) ' '
         print*, i
@@ -85,9 +84,9 @@ program main_global
     !call get_min_from_data(n,'db_data.dat',val)    
     !call get_parabola_from_data(n,'db_data.dat')
 
-    call write_results(n,DB_data,'db_data_rate_pull.dat')
-    call get_min_from_data(n,'db_data_rate_pull.dat',val)    
-    call get_parabola_from_data(n,'db_data_rate_pull.dat')
+    !call write_results(n,DB_data,'db_data_rate_pull.dat')
+    !call get_min_from_data(n,'db_data_rate_pull.dat',val)    
+    !call get_parabola_from_data(n,'db_data_rate_pull.dat')
 
     !###################################################
     !
@@ -104,6 +103,9 @@ program main_global
     !           RENO
     !
     !###################################################
+    call write_results(n,RENO_data,             'reno_data_far_approach.dat')
+    call get_min_from_data(n,                   'reno_data_far_approach.dat',val)
+    call reno_confidenceRegions(n,val,RENO_data,'reno_data_far_approach.dat')
 
     !call write_results(n,RENO_data,'reno_data_cov_1.dat')
     !call get_min_from_data(n,'reno_data_cov_1.dat',val)

@@ -197,33 +197,51 @@ subroutine readRENOData()
     !#####################################################
     !
     !       Valores para el análisis de pulls
+    !       para cuando se suma backgroud al 
+    !       análisis en los eventos  la sigma estadística
     !
     !#####################################################    
-    !neutrino_energy=neutrino_energy*0.9608
-    !detector_efficiency(2)=1.007643*detector_efficiency(2)
+    neutrino_energy=neutrino_energy*1.0046
+    detector_efficiency(2)=1.00613*detector_efficiency(2)
     
-    !sigma_background_d         = sigma_background_d*7.0d0
-    !sigma_reactor_flux         = sigma_reactor_flux*8.0d0    
+    sigma_background_d         = sigma_background_d*0.9d0
+    sigma_reactor_flux         = sigma_reactor_flux*2.5d0
+    !#####################################################
+    !
+    !       Valores para el análisis de pulls
+    !       para cuando el backgroud NO 
+    !       se implementa en la sigma estadística
+    !
+    !#####################################################    
+    !neutrino_energy=neutrino_energy*1.0045
+    !detector_efficiency(2)=1.0065*detector_efficiency(2)
+    
+    !sigma_background_d         = sigma_background_d*0.9d0
+    !sigma_reactor_flux         = sigma_reactor_flux*2.5d0
 
     !#####################################################
     !
     !       Valores para el análisis de covarianza
     !
     !#####################################################    
-                    neutrino_energy=neutrino_energy*0.989
-                    detector_efficiency(2)=1.00233*detector_efficiency(2)
-                    
-
+    !                neutrino_energy=neutrino_energy*0.989
+    !                detector_efficiency(2)=1.00233*detector_efficiency(2)
                         
-                     sigma_background_d         = sigma_background_d*1.2_dp
-                     sigma_detection_efficiency=1.8_dp
+    !                 sigma_background_d         = sigma_background_d*1.2_dp
+    !                 sigma_detection_efficiency=1.8_dp
     !#####################################################
     
+    !#####################################################
+    !
+    !       Valores para el análisis de Far Data Only
+    !
+    !#####################################################    
+    !neutrino_energy=neutrino_energy*1.0115d0 
+    !detector_efficiency(2)=1.0245*detector_efficiency(2)
     
-
-    !sigma_energy_scale=50.0_dp           ! NO presentacambios al aumento de la incertidumbre    
-    !sigma_reactor_flux_model=100.0_dp    ! No tiene cambios en todos los reactores ta que se eliminan las incertidumbres
-    !sigma_reactor_flux_model=sigma_reactor_flux(1)*10.0_dp   
+    !sigma_background_d         = sigma_background_d*1.0d0
+    !sigma_reactor_flux         = sigma_reactor_flux*1.0d0
+    
     call reno_generate_MC()
     return
 end subroutine readRENOData
