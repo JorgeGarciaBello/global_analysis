@@ -178,46 +178,28 @@ subroutine readRENOData()
         read(u,*,IOSTAT=reason) sigma_cross_section
     close(u)
 
-    !call reno_generate_MC()
-    
-    !########################################################
+    !#####################################################
     !
-    !   Al bajar la potencia thermal en el primer 
-    !   reactor se disminuye el valor del s22t13
+    !       RENO pull => U_i = Ui + bkg
     !
-    !  TP_r(6)=1.5d0*TP_r(6)
-      !TP_r(6)=1.3d0*TP_r(6)
-    !   TP_r(2)=    no tiene un gran efecto
-    !
-    !########################################################
-    !print*, TP_r
-    !TP_r=5.0d0*TP_r  !  Subir el valor desde 1.1% disminuye  el angulo. Disminuir al valor aumenta el ji y no cambia el t13    
-    !print*, TP_r
+    !#####################################################    
+    !neutrino_energy=neutrino_energy*1.0046
+    !detector_efficiency(2)=1.00613*detector_efficiency(2)    
+    !sigma_background_d         = sigma_background_d*0.9d0
+    !sigma_reactor_flux         = sigma_reactor_flux*2.5d0
 
     !#####################################################
     !
-    !       Valores para el análisis de pulls
-    !       para cuando se suma backgroud al 
-    !       análisis en los eventos  la sigma estadística
+    !       RENO pull => U_i only
     !
     !#####################################################    
-    neutrino_energy=neutrino_energy*1.0046
-    detector_efficiency(2)=1.00613*detector_efficiency(2)
-    
-    sigma_background_d         = sigma_background_d*0.9d0
-    sigma_reactor_flux         = sigma_reactor_flux*2.5d0
-    !#####################################################
-    !
-    !       Valores para el análisis de pulls
-    !       para cuando el backgroud NO 
-    !       se implementa en la sigma estadística
-    !
-    !#####################################################    
-    !neutrino_energy=neutrino_energy*1.0045
-    !detector_efficiency(2)=1.0065*detector_efficiency(2)
-    
-    !sigma_background_d         = sigma_background_d*0.9d0
-    !sigma_reactor_flux         = sigma_reactor_flux*2.5d0
+    neutrino_energy=neutrino_energy*0.965
+    detector_efficiency(2)=1.0078*detector_efficiency(2)
+    sigma_background_d         = sigma_background_d*3.5d0
+    sigma_reactor_flux         = sigma_reactor_flux*2.3d0
+
+
+
 
     !#####################################################
     !

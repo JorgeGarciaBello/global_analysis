@@ -55,8 +55,8 @@ function reno_FUNC(t13,dmee,P)
     sigma_scale=uS(5)/100.0d0    
         
        
-    reno_FUNC=0.0d0    
-    select case(6)
+    reno_FUNC=0.0d0
+    select case(7)
         case(1)
             !#############################################################
             !
@@ -208,21 +208,13 @@ function reno_FUNC(t13,dmee,P)
                 N_far =N_far +(1.0d0 + fr(r))*data(i,2,r)                  
               enddo              
                 nearExpC = (1.0d0+eps+eta)*N_near+ bkg(i,1)*(1.0d0+b_d(1))
-                farExpC  = (1.0d0+eps+eta)*N_far + bkg(i,2)*(1.0d0+b_d(2))
-                !nearExpC = (1.0d0+eps+eta)*N_near+ bkg(i,1)*(b_d(1))
-                !farExpC  = (1.0d0+eps+eta)*N_far + bkg(i,2)*(b_d(2))
-              O_i = (farObs(i)+bkg(i,2))/(nearObs(i)+bkg(i,1))
-              !O_i = (farObs(i))/(nearObs(i))
+                farExpC  = (1.0d0+eps+eta)*N_far + bkg(i,2)*(1.0d0+b_d(2))                
+              O_i = (farObs(i)+bkg(i,2))/(nearObs(i)+bkg(i,1))              
               T_i = farExpC/nearExpC
                 
               U2_i=(O_i**2)*(  ( sqrt( farObs(i) + bkg(i,2)) / ( farObs(i)  + bkg(i,2) ) )**2 &
-                           +   ( sqrt( nearObs(i)+ bkg(i,1)) / ( nearObs(i) + bkg(i,1) ) )**2)
-              !U2_i=(O_i**2)*(  ( sqrt( farObs(i) ) / ( farObs(i)   ) )**2 &
-              !             +   ( sqrt( nearObs(i)) / ( nearObs(i)  ) )**2)
-              !U2_i=U2_i*0.964d0
-              !U2_i=U2_i*1.2d0
-              chi_2=chi_2 + (O_i - T_i)**2/U2_i
-              !chi_2=chi_2 + (O_i - T_i)**2/O_i!U2_i
+                           +   ( sqrt( nearObs(i)+ bkg(i,1)) / ( nearObs(i) + bkg(i,1) ) )**2)              
+              chi_2=chi_2 + (O_i - T_i)**2/U2_i              
             enddo
             do r=1,RCTS
               chi_2=chi_2 + (fr(r)/(sigma_reactor_flux(r)/100.0d0))**2
@@ -232,37 +224,64 @@ function reno_FUNC(t13,dmee,P)
             enddo            
             chi_2=chi_2 + (eps/(sigma_detection_efficiency/100.0d0))**2 + (eta/(sigma_energy_scale/100.0d0))**2
         case(7)
-            b_f=P(1)
-            fr=(/P(2),P(3),P(4),P(5),P(6),P(7)/)
-            eps=P(8)
-            eta=P(9)            
+            b_d=(/P(1),P(2)/)
+            fr=(/P(3),P(4),P(5),P(6),P(7),P(8)/)
+            eps=P(9)
+            eta=P(10)
             !#############################################################
             !
-            !   Ji-cuadrada tomando únicamante Datos Far
+            !   Ji-cuadrada tomada el paper referenciado en el más reciente
             !
             !#############################################################
             do i=1,NBIN
+              N_near=0.0d0;
               N_far=0.0d0;
               do r=1,RCTS                
-                N_far =N_far +(1.0d0 + fr(r))*data(i,2,r)
-                !N_far =N_far + data(i,2,r)
+                N_near=N_near+(1.0d0 + fr(r))*data(i,1,r)
+                N_far =N_far +(1.0d0 + fr(r))*data(i,2,r)                  
               enddo
-              farExpC =( bkg(i,2)*b_f ) + (1.0d0+eps+eta)*N_far
-              !farExpC =( bkg(i,2)*b_f ) + N_far
-              !farExpC =N_far
-
-              O_i = farObs(i)
-              T_i = farExpC
-              U2_i= farObs(i)+bkg(i,2)
-              !chi_2=chi_2 + (O_i - T_i)**2/(U2_i*10.0d0)
-              chi_2=chi_2 + (O_i - T_i)**2/(U2_i)
+                nearExpC = (1.0d0+eps+eta)*N_near+ bkg(i,1)*(b_d(1))
+                farExpC  = (1.0d0+eps+eta)*N_far + bkg(i,2)*(b_d(2))
+              O_i = (farObs(i))/(nearObs(i))
+              T_i = farExpC/nearExpC
+                
+              U2_i=(O_i**2)*(  ( sqrt( farObs(i) ) / ( farObs(i)  ) )**2 &
+                           +   ( sqrt( nearObs(i)) / ( nearObs(i) ) )**2)
+              
+              chi_2=chi_2 + (O_i - T_i)**2/U2_i              
             enddo
             do r=1,RCTS
               chi_2=chi_2 + (fr(r)/(sigma_reactor_flux(r)/100.0d0))**2
             enddo
+            do d=1,ADS
+              chi_2=chi_2 + (b_d(d)/(sigma_background_d(d)/100.0d0))**2
+            enddo            
+            chi_2=chi_2 + (eps/(sigma_detection_efficiency/100.0d0))**2 + (eta/(sigma_energy_scale/100.0d0))**2
+        case(8)
+            b_f=P(1)
+            fr=(/P(2),P(3),P(4),P(5),P(6),P(7)/)
+            eps=P(8)
+            eta=P(9)
+            !#############################################################
+            !
+            !   Ji-cuadrada tomada el paper referenciado en el más reciente
+            !
+            !#############################################################
+            do i=1,NBIN              
+              N_far=0.0d0;
+              do r=1,RCTS               
+                N_far =N_far +(1.0d0 + fr(r))*data(i,2,r)                  
+              enddo                
+                farExpC  = (1.0d0+eps+eta)*N_far + bkg(i,2)*(b_f)
+              O_i = (farObs(i))
+              T_i = farExpC
+              chi_2=chi_2 + (O_i - T_i)**2/O_i
+            enddo
+            do r=1,RCTS
+              chi_2=chi_2 + (fr(r)/(sigma_reactor_flux(r)/100.0d0))**2
+            enddo            
             chi_2=chi_2 + (b_f/(sigma_background_d(2)/100.0d0))**2
-            chi_2=chi_2 + (eps/(sigma_detection_efficiency/100.0d0))**2 
-            chi_2=chi_2 + (eta/(sigma_energy_scale/100.0d0))**2
+            chi_2=chi_2 + (eps/(sigma_detection_efficiency/100.0d0))**2 + (eta/(sigma_energy_scale/100.0d0))**2  
     end select    
     reno_FUNC=chi_2    
     return

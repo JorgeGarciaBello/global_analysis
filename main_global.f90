@@ -2,19 +2,14 @@ program main_global
     use types
     use data_settings, only: n,t13_M_data,dm_M_data    
     implicit none
+    real(dp) :: RENO_data(n,n),DC_data(n,n),DB_data(n,n)    
     real(dp) :: chi_dayabay, chi_reno, chi_doubleCHOOZ, chi_min_global
-    real(dp) :: Y(12)                                          !Y=( t12 , t13 , t14 , t23 , t24 , t34 , d13 , d24 , d34 , dm21 , dm31 , dm41 )    
-    real(dp) :: dm_min,dm_max    
     real(dp) :: db_chi_square_spectral_analysis2_period
-    real(dp) :: DC_FUNC
-    real(dp) :: RENO_data(n,n),DC_data(n,n),DB_data(n,n)
-    REAL(DP) :: dmee,P(11)
-    real(dp) :: reno_FUNC,hola
+    real(dp) :: DC_FUNC    
     real(dp) :: reno_chi_square_spectral_analysis
-    real(dp) :: val(3),data(n**2,3)
-    integer :: i,j,u 
-    real(dp) :: e_a,e_b,e_c
-    real(dp) :: t13,dm31
+    real(dp) :: Y(12)                                          !Y=( t12 , t13 , t14 , t23 , t24 , t34 , d13 , d24 , d34 , dm21 , dm31 , dm41 )        
+    real(dp) :: val(3)
+    integer  :: i,j
 
     call grid_setting()
     !call DC_grid_setting()
@@ -24,27 +19,17 @@ program main_global
     call ReadDC()          ! Lee datos de Double CHOOZ
     call DC_read_data()    
 
-    !call DC_test()
-    !t13=asin(sqrt(0.086d0))/2.0d0
-    !dm31=0.0025d0
-    !call db_create_number_of_antineutrino_events_by_detector(t13,dm31)
-    !stop
-    !call reno_generate_MC()
-    !dmee=0.0d0
-    !t13=0.0d0
-
+  
+    
     !open(newunit=u, file='reno_data_cov.dat')
     Y=0.0    
     do i=1,n
         do j=1,n
           Y(2)=t13_M_data(i,j); Y(11)=dm_M_data(i,j)
-            !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ            
-            !chi_doubleCHOOZ=DC_FUNC(Y(2),Y(11),0.0_dp,0.0_dp,0.0_dp)            
-            
 
             !####################################################################################################
             !
-            !                                         DAYA BAYDB READ 
+            !                                         DAYA BAY
             !
             !#####################################################################################################
 
@@ -54,20 +39,28 @@ program main_global
             
             
 
-            !######################################  DOUBLE CHOOZ  ###################################################
+            
+            !####################################################################################################
+            !
+            !                                         DOUBLE CHOOZ 
+            !
+            !#####################################################################################################
+            !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ            
+            !chi_doubleCHOOZ=DC_FUNC(Y(2),Y(11),0.0_dp,0.0_dp,0.0_dp)
 
             !call DC_double_chooz(Y,chi_doubleCHOOZ)
             !DC_data(i,j)=chi_doubleCHOOZ
             
-            !DC_data(i,j)=DC_FUNC(Y(2),Y(11),(/0.0_dp,0.0_dp,0.0_dp/))
+            !DC_data(i,j)=DC_FUNC(Y(2),Y(11),(/0.0_dp,0.0_dp,0.0_dp/))           
 
             
-
-            
-            !######################################   RENO  ##########################################################
+            !####################################################################################################
             !
-            call renoChi2(Y,chi_reno)        ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para RENO}           
-            !chi_reno=reno_chi_square_spectral_analysis(Y(2),Y(11))
+            !                                         RENO
+            !
+            !#####################################################################################################
+            !
+            call renoChi2(Y,chi_reno)        ! RENO pull analysis
             !write(u,*) sin(2.0d0*Y(2))**2, Y(11), chi_reno
             RENO_data(i,j) = chi_reno            
        enddo

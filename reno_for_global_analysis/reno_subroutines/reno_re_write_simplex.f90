@@ -4,8 +4,10 @@ subroutine reno_reWriteSimplex(newSimplex)
     real(8) :: newSimplex(NDIM+1,NDIM)
     integer :: i
 
-    open(200,file='reno_for_global_analysis/reno_data/reno_simplex.dat',status='old')
-    !open(200,file='reno_for_global_analysis/reno_data/reno_simplex_far_data_only.dat',status='old')    
+    !open(200,file='reno_for_global_analysis/reno_data/reno_simplex.dat',status='old')
+    !open(200,file='reno_for_global_analysis/reno_data/reno_simplex_6.dat',status='old')    
+    open(200,file='reno_for_global_analysis/reno_data/reno_simplex_7.dat',status='old')
+    !open(200,file='reno_for_global_analysis/reno_data/reno_simplex_8.dat',status='old')
         do i=1,NDIM+1
             write(200,*) newSimplex(i,:)
         enddo
