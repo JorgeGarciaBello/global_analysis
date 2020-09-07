@@ -4,15 +4,14 @@ y=load("grid_data_dmee.dat");
 z=load("chi_matrix_db_data.dat");
 minimo=load("min_param_db_data.dat")
 
-xi=linspace(x(1),x(15),200);
-yi=linspace(y(1),y(15),200);
+dim=10
+DIMM=200
+xi=linspace(x(1),x(dim),DIMM);
+yi=linspace(y(1),y(dim),DIMM);
 
-#surf(x,y,z);
-# minimo=min(min(z)) perito bonito
-# [i,j]=find(z==minimo);
 
-for i=1:200
-  for j=1:200
+for i=1:DIMM
+  for j=1:DIMM
      zi(i,j) = interp2 (x, y, z, xi(i), yi(j));
   end
 end
@@ -20,8 +19,8 @@ end
 #surf(xi,yi,zi);
 
 k=1;
-for i=1:200
-  for j=1:200
+for i=1:DIMM
+  for j=1:DIMM
     data(k,:)=[xi(i), yi(j), zi(i,j)];
     k=k+1;
   end
@@ -29,7 +28,7 @@ end
 
 data(:,3)=data(:,3)-min(data(:,3));
 k=1;l=1;m=1;
-for i=1:40000
+for i=1:DIMM*DIMM
 	if(data(i,3)<=2.3)
 	  cf_68(k,:)=[data(i,1),data(i,2)];
 	  k=k+1;

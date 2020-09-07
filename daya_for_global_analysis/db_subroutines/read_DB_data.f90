@@ -337,38 +337,11 @@ subroutine readDBData()
     !   de Matriz de covarianza
     !
     !#######################################
-
-    bin_var=0.97_dp
-            !!TP_d=TP_d*0.8_dp
+    bin_var=0.97_dp            
     TP_d(8)=TP_d(8)*0.99_dp
-
-            !!sigma_thermal_power=6.5d0
     
-    !call db_generate_MC_data()
-    !########################################   
-
-
-
-
-    !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis.dat',status='old')    
-    !    do i=1,NBIN*PD*2
-    !        read(u,*)  V(i,:)
-    !    enddo
-    !close(u)
-    !do i=1,NBIN*PD*2
-    !    V(i,i)=1.0d0
-    !enddo
-    !V=(1.0d0/0.000437487422237d0)*V
-
-    !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis_6AD.dat')
-    !do i=1,NBIN*2
-    !    do j=1,NBIN*2
-    !    write(u,*) i, j, V(i,j)
-    !    enddo
-    !    write(u,*) ' '
-    !enddo
-    !close(u)
-    !call db_get_inverse_covariance_matrix(NBIN*PD*2,V)    
+    call db_generate_MC_data()
+    !########################################
     print*, 'reading end ...'
     return
 end subroutine readDBData
