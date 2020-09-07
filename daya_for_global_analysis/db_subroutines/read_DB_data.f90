@@ -315,10 +315,10 @@ subroutine readDBData()
 
     bin_var=0.97_dp
     !TP_d=TP_d*0.8_dp
-    TP_d(8)=TP_d(8)*0.99_dp
+    TP_d(8)=TP_d(8)*0.991_dp
 
     !sigma_thermal_power=6.5d0
-    sigma_energy_bin=15.0_dp
+    !sigma_energy_bin=15.0_dp
 
     call db_generate_MC_data()    
     !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis.dat',status='old')    
