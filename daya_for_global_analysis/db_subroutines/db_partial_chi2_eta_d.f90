@@ -1,5 +1,5 @@
 real(8) function db_partial_chi2_eta_d(d,eps,alpha_r,eps_d,eta_d)
-    use db_data, only: n,ADS,RCTS,Md=>Md_1607,Bd,w=>IBD_fdr,grid_events_data_points
+    use db_data, only: n,ADS,RCTS,Md=>Md_1607,Bd,w=>IBD_fdr,grid_events_data_points,neuN
     use neu_osc_parameters, only: t13,dm31
     implicit none
     integer :: d
@@ -12,12 +12,8 @@ real(8) function db_partial_chi2_eta_d(d,eps,alpha_r,eps_d,eta_d)
     real(8) :: sigmaB(ADS)
     real(8) :: Td(ADS)
 
-    sigmaB=(/1040,1176,875,782,155,150,150,133/)
-     do i=1,n*n
-        if((grid_events_data_points(i,1)==t13).and.(grid_events_data_points(i,2)==dm31)) then            
-            Td=grid_events_data_points(i,3:)            
-        end if
-    enddo
+    sigmaB=(/1040,1176,875,782,155,150,150,133/)     
+    Td=neuN
     db_partial_chi2_eta_d=0.0d0    
     db_partial_chi2_eta_d=2.0d0*(Md(d)-Td(d)*(1.0d0+eps+w(d,1)*alpha_r(1)         &
                                                        +w(d,2)*alpha_r(2)         &
@@ -30,8 +26,6 @@ real(8) function db_partial_chi2_eta_d(d,eps,alpha_r,eps_d,eta_d)
                                               +eta_d(d)                           &
                                 )                                                 &
     /(Md(d)+Bd(d))
-    
-
-    db_partial_chi2_eta_d=db_partial_chi2_eta_d+2.0d0*eta_d(d)/sigmaB(d)**2
+    db_partial_chi2_eta_d=db_partial_chi2_eta_d + 2.0d0*eta_d(d)/sigmaB(d)**2
     return
 end function db_partial_chi2_eta_d

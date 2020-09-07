@@ -41,6 +41,8 @@ subroutine renoChi2(Y,chi2_min)
     real(dp) :: Z(NDIM+1)
     real(dp) :: P(NDIM+1,NDIM)
     real(dp) :: data(NBIN,ADS,RCTS)
+    real(dp) :: reno_get_chi_square_from_a_set_of_pulls
+    REAL*8     X(NDIM),XX(NDIM-1)
     integer :: u
 
     t12=Y(1)
@@ -58,11 +60,19 @@ subroutine renoChi2(Y,chi2_min)
     
     dmee=dm31
     call reno_create_antineutrino_number_detector_reactor_bin(dmee,t13)
-    !print*,'Iniciando minimización'
-    call reno_minimization(t13,dmee,P,Z)
-    open(newunit=u,file='data/reno_data_pulls.dat')
-        write(u,*) sin(2.0d0*t13)**2, dmee, Z(1),P(1,:)
-    close(u)
-    chi2_min=Z(1)
+    select case(1)
+        case(1) ! RENO pull analysis
+            call reno_minimization_by_solving_system_equation(X)
+            chi2_min=reno_get_chi_square_from_a_set_of_pulls(X,XX)     
+        case(2) ! RENO Far Data Only  analysis
+            call reno_minimization_by_solving_system_equation_far(XX)
+            chi2_min=reno_get_chi_square_from_a_set_of_pulls(X,XX)
+        case(3) ! RENO pull analysis with AMOEBA
+            call reno_minimization(t13,dmee,P,Z)
+            open(newunit=u,file='data/reno_data_pulls.dat')
+                write(u,*) sin(2.0d0*t13)**2, dmee, Z(1),P(1,:)
+            close(u)
+            chi2_min=Z(1)
+    end select
     return
 end subroutine renoChi2

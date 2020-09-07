@@ -19,8 +19,7 @@ real(8) function expectedNeutrinoSpectrum_dr(x,d,r,t13,dm31) ![#/MeV]
     real(8) :: crossSection       ! Is the cross section for the inverse beta decay [m^2]
     real(8) :: reactorSpectrum    ! Is the spectrum of the reactors
     real(8) :: length             ! Is the length between reacto-detector [m]
-    real(8) :: corrections(NBIN)
-    real(8) :: glbl_cali=1.464051995379895d0
+    real(8) :: corrections(NBIN)    
     real(8) :: cali_ads(ADS), calibration_by_hall(ADS), cali_to_dat(ADS)
     real(8) :: cali_ads_1(ADS), final_calibration(ADS)
     real(8) :: cal(ADS)

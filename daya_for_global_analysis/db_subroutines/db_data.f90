@@ -1,4 +1,5 @@
-module db_data    
+module db_data
+    use types
     implicit none
     integer,parameter :: PD=3            ! PD is the number of period of data taking
     integer,parameter :: NDIM=23         ! NDIM is the number of pull parameters
@@ -10,9 +11,9 @@ module db_data
     integer,parameter :: n=20             ! size of the grid
     integer,parameter :: num_experiments=1000
 
-    
-    real(8) :: t13_M_data(n,n)
-    real(8) :: dm_M_data(n,n)
+    real(dp) :: neuN(ADS)    
+    real(8)  :: t13_M_data(n,n)
+    real(8)  :: dm_M_data(n,n)
     character(len=150) :: name_test
 
     real(8) :: TP_SIGMA    

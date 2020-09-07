@@ -8,7 +8,7 @@ subroutine reno_generate_energy()
     real(dp) :: r,cal
     integer :: i,j,n
     cal=1.0_dp
-    !sigma_energy_scale=0.0d0
+    !sigma_energy_scale=0.0d0    
     select case(randDis)
         case(1)            
             do i=1,NBIN

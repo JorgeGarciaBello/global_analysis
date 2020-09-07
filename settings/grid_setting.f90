@@ -18,16 +18,51 @@ subroutine grid_setting()
     dm_max=2.80d-3
     t13_min=asin(sqrt(0.072d0))/2.0d0
     t13_max=asin(sqrt(0.098d0))/2.0d0
+    !##############################################
+    !
+    !       Setting for Daya Bay RATE Only
+    !
+    !#############################################
+    !dm_min=2.00d-3
+    !dm_max=4.0d-3
+    !t13_min=asin(sqrt(0.050d0))/2.0d0
+    !t13_max=asin(sqrt(0.200d0))/2.0d0
+
+
 
     !##############################################
     !
-    !       Setting for RENO only
+    !       Setting for RENO rate pull
     !
     !#############################################
     !dm_min=2.00d-3
     !dm_max=3.25d-3
     !t13_min=asin(sqrt(0.058d0))/2.0d0
+    !t13_max=asin(sqrt(0.12d0))/2.0d0    
+
+    !##############################################
+    !
+    !       Setting for RENO covariace Matrix
+    !
+    !#############################################
+    !dm_min=2.0d-3
+    !dm_max=3.4d-3
+    !t13_min=asin(sqrt(0.058d0))/2.0d0
     !t13_max=asin(sqrt(0.12d0))/2.0d0
+
+    !##############################################
+    !
+    !       Setting for RENO Far Data Only
+    !
+    !#############################################
+    !dm_min=1.0d-3
+    !dm_max=4.5d-3
+    !t13_min=asin(sqrt(0.04d0))/2.0d0
+    !t13_max=asin(sqrt(0.15d0))/2.0d0
+
+
+
+
 
     !##############################################
     !

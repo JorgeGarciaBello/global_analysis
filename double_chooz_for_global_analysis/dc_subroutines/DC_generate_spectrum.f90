@@ -23,11 +23,11 @@ subroutine DC_generate_spectrum()
             rand_Nspectrum_R2(i,n) = min_AD2(i)*(1.0d0-r) + max_AD2(i)*r
         enddo
     enddo
-    do i=1, 1
-        print*, rand_Nspectrum_R1(4,1:5)
-        print*, rand_Nspectrum_R1(NBIN,1:5)
-        print*, rand_Nspectrum_R2(4,1:5)
-        print*, rand_Nspectrum_R2(NBIN,1:5)
-    enddo
+    !do i=1, 1
+    !    print*, rand_Nspectrum_R1(4,1:5)
+    !    print*, rand_Nspectrum_R1(NBIN,1:5)
+    !    print*, rand_Nspectrum_R2(4,1:5)
+    !    print*, rand_Nspectrum_R2(NBIN,1:5)
+    !enddo
     return
 end subroutine DC_generate_spectrum

@@ -19,7 +19,12 @@ subroutine reno_readSimplex(t13,dmee,P,Y)
     integer :: m,k,l,i,u
     character(100) :: filename
     ! Lectura de NDIM+1 puntos con NDIM coordenadas en readSimplex
-    filename='reno_simplex.dat'
+    
+    !filename='reno_simplex.dat'
+    !filename='reno_simplex_6.dat'
+    filename='reno_simplex_7.dat'
+    !filename='reno_simplex_8.dat'
+    
     ! Leer el array de pulls 
     ! Se leer NDIM+1 vérties
     ! con NDIM coordenadas

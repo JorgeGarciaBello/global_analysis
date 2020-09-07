@@ -19,11 +19,6 @@ function reno_chi_square_spectral_analysis(t13,dmee)
                 chi=chi+chi_m(i,j)
         enddo
     enddo
-    !open(newunit=u, file='db_data/'//filename)
-    !do i=1, NBIN*2*PD
-    !    write(u,*) i,chi_m(i,i)
-    !enddo
-    !close(u)
     reno_chi_square_spectral_analysis=chi
     return
 end function reno_chi_square_spectral_analysis

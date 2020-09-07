@@ -85,6 +85,12 @@ subroutine readDBData()
     close(40)
     close(u)
 
+    open(newunit=u,file='daya_for_global_analysis/db_data/db_solutions_to_system_of_pull_equations.dat')
+        write(u,*) , ' '
+    close(u)
+    open(newunit=u,file='daya_for_global_analysis/db_data/db_FNORM_of_the_solutions_system_of_pull_equations.dat')
+            write(u,*) ' '
+    close(u)
     open(newunit=u, file='daya_for_global_analysis/db_data/db_sigma_thermal_power.dat', status='old')
         read(u,*,IOSTAT=reason) sigma_thermal_power
     close(u)
@@ -313,6 +319,11 @@ subroutine readDBData()
         read(u,*) ((second_correction8ADhalls(i,j), j=1,3), i=1,NBIN)
     close(u)
 
+    !######################################
+    !
+    !     Covariance Matrix Calibration
+    !
+    !######################################
     bin_var=0.97_dp
     !TP_d=TP_d*0.8_dp
     TP_d(8)=TP_d(8)*0.991_dp
@@ -320,26 +331,7 @@ subroutine readDBData()
     !sigma_thermal_power=6.5d0
     !sigma_energy_bin=15.0_dp
 
-    call db_generate_MC_data()    
-    !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis.dat',status='old')    
-    !    do i=1,NBIN*PD*2
-    !        read(u,*)  V(i,:)
-    !    enddo
-    !close(u)
-    !do i=1,NBIN*PD*2
-    !    V(i,i)=1.0d0
-    !enddo
-    !V=(1.0d0/0.000437487422237d0)*V
-
-    !open(newunit=u, file='daya_for_global_analysis/db_data/db_my_average_cov_metrix_for_analysis_6AD.dat')
-    !do i=1,NBIN*2
-    !    do j=1,NBIN*2
-    !    write(u,*) i, j, V(i,j)
-    !    enddo
-    !    write(u,*) ' '
-    !enddo
-    !close(u)
-    !call db_get_inverse_covariance_matrix(NBIN*PD*2,V)    
+    call db_generate_MC_data()   
     print*, 'reading end ...'
     return
 end subroutine readDBData

@@ -14,7 +14,6 @@ subroutine minimization(Y,P_a)
     real(8) :: P_a(MP,NP), Y(MP)          ! Array con el que se construye AMOEBA    
     real(8) :: FTOL=1.D-4             ! Required tolerance
     integer :: ITER                     ! Número de iteraciones realizadas por AMOEBA
-
     real(8) :: newSimplex(MP,NDIM)
     integer :: i
     !do i=1,NDIM

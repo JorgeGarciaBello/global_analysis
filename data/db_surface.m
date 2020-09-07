@@ -3,6 +3,7 @@ cl_68=load("../daya_for_global_analysis/db_data/db2018_cl68.dat");
 cl_95=load("../daya_for_global_analysis/db_data/db2018_cl95.dat");
 cl_99=load("../daya_for_global_analysis/db_data/db2018_cl99.dat");
 
+
 # x=load("grid_data_s22t13_.dat");
 # y=load("grid_data_dmee.dat");
 # z=load("chi_matrix_db_data.dat");
@@ -13,6 +14,7 @@ minimo=load("min_param_db_data.dat")
 dim=500
 
 
+<<<<<<< HEAD
 #k=1;
 #for i=1:dim
 #  for j=1:dim

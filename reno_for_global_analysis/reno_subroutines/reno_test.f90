@@ -1,6 +1,6 @@
 subroutine reno_test()
     use types
-    use reno_data,only: NBIN,bines,num_experiments
+    use reno_data,only: NBIN,bines,num_experiments,data,farObs
     implicit none
     real(dp) :: t13,dmee
     real(dp) :: val,val2,reno_M_reactorSpectrum,reno_M_ExpectedNeutrinoSpectrum_dr
@@ -10,12 +10,23 @@ subroutine reno_test()
     real(dp) :: reno_M_expected_antineutrino_number_detector_bin
     real(dp) :: x, probability,l
     real(dp) :: rand_w_i(NBIN,num_experiments),reno_chi_square_spectral_analysis
+    real(dp) :: spectrum_f,spectrum_n,spectrum_d
     integer :: i,d,r,bin,k
     call reno_generate_MC()
 
-    t13=0.0_dp
-    dmee=0.0_dp
+    t13=asin(sqrt(0.0896_dp))/2.0d0
+    dmee=2.68d-3
 
+    call    reno_create_antineutrino_number_detector_reactor_bin(dmee,t13)
+    
+    do i=1,26
+        spectrum_d=0.0_dp
+        do r=1,6
+            spectrum_d=spectrum_d + data(i,2,r)
+        enddo
+        print*, spectrum_d!i, farObs(i), spectrum_d
+    enddo
+    stop
     val=reno_chi_square_spectral_analysis(t13,dmee)
     print*,'val', val
     stop

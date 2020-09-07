@@ -11,13 +11,16 @@ real(8) function expectedNumberNeutrinosDetectorFromSumOfBin(d,t13,dm31)
     integer :: d                  ! is the number of detector   
     real(8) :: t13, dm31          ! are the neutrino oscillation parameters we are interested
     real(8) :: expectedNumberNeutrinosDetectorBin    
+    integer :: P                  ! P is the number of the period of data collected
     integer :: i    
     real(8) :: result
     
-    expectedNumberNeutrinosDetectorFromSumOfBin=0.0d0
+    result=0.0d0
     do i=1,NBIN
-        expectedNumberNeutrinosDetectorFromSumOfBin= expectedNumberNeutrinosDetectorFromSumOfBin &
-                                                    +expectedNumberNeutrinosDetectorBin(d,i,t13,dm31)
+        result= result + expectedNumberNeutrinosDetectorBin(1,d,i,t13,dm31) &
+                       + expectedNumberNeutrinosDetectorBin(2,d,i,t13,dm31) &
+                       + expectedNumberNeutrinosDetectorBin(3,d,i,t13,dm31)
     enddo
+    expectedNumberNeutrinosDetectorFromSumOfBin=result
     return
 end function expectedNumberNeutrinosDetectorFromSumOfBin
