@@ -1,7 +1,11 @@
 # surface
-x=load("db_s22t13_grid_data.dat");
-y=load("db_dm_grid_data.dat");
-z=load("db_chi_matrix_db_data_prueba.dat.dat");
+cl_68=load("../daya_for_global_analysis/db_data/db2018_cl68.dat");
+cl_95=load("../daya_for_global_analysis/db_data/db2018_cl95.dat");
+cl_99=load("../daya_for_global_analysis/db_data/db2018_cl99.dat");
+
+x=load("grid_data_s22t13_.dat");
+y=load("grid_data_dmee.dat");
+z=load("chi_matrix_db_data_prueba.dat");
 
 grid_dim=15
 dim=200
@@ -52,9 +56,7 @@ file = fopen('octave_sigma_M_TP_E_68.dat', 'w'); fprintf(file,'%d %d \n' ,cf_68)
 file = fopen('octave_sigma_M_TP_E_95.dat', 'w'); fprintf(file,'%d %d \n' ,cf_95); fclose(file);
 file = fopen('octave_sigma_M_TP_E_99.dat', 'w'); fprintf(file,'%d %d \n' ,cf_99); fclose(file);
 
-cl_68=load("db2018_cl68.dat");
-cl_95=load("db2018_cl95.dat");
-cl_99=load("db2018_cl99.dat");
+
 cf_68=load("octave_sigma_M_TP_E_68.dat");
 cf_95=load("octave_sigma_M_TP_E_95.dat");
 cf_99=load("octave_sigma_M_TP_E_99.dat");

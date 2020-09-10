@@ -37,7 +37,7 @@ function DC_FUNC(t13,dmee,P)
         DC_FUNC=DC_FUNC+((bkg_pull_day(i)-bkg_pull(i))/sigma_bkg_pull_day(i))**2
     enddo
 
-    DC_FUNC=DC_FUNC+((2.44D-3-dmee)/0.1d-3)**2
+    DC_FUNC=DC_FUNC+((2.484D-3-dmee)/0.036d-3)**2
     !print*,'IN FUNC e_a, e_b, e_c, dmee: ', e_a, e_b, e_c, dmee,DC_FUNC
     print*, 'DC_FUNC: ', DC_FUNC
 end function DC_FUNC

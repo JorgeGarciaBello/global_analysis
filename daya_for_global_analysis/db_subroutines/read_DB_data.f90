@@ -323,14 +323,14 @@ subroutine readDBData()
     !     Pull Approach Calibration
     !
     !######################################    
-    TP_d(8)=TP_d(8)*1.007_dp    
+    !TP_d(8)=TP_d(8)*1.007_dp
     !######################################
     !
     !     Covariance Matrix Calibration
     !
     !######################################
-    !bin_var=0.97_dp
-    !TP_d(8)=TP_d(8)*0.991_dp
+    bin_var=0.97_dp
+    TP_d(8)=TP_d(8)*0.991_dp
     !######################################    
 
     call db_generate_MC_data()   

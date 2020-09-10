@@ -11,7 +11,7 @@ cl_99=load("../daya_for_global_analysis/db_data/db2018_cl99.dat");
 data=load('db_data.dat');
 minimo=load("min_param_db_data.dat")
 
-dim=500
+dim=200
 
 #k=1;
 #for i=1:dim
