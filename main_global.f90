@@ -36,14 +36,14 @@ program main_global
             !   Covariance Matrix Approach
             !
             !#################################
-            DB_data(i,j)  = db_chi_square_spectral_analysis2_period(t13_M_data(i,j),dm_M_data(i,j))
+            !DB_data(i,j)  = db_chi_square_spectral_analysis2_period(t13_M_data(i,j),dm_M_data(i,j))
             !#################################
             !
             !           Pull Approach
             !
             !#################################
-            !call chi2_db(Y,chi_dayabay)
-            !DB_data(i,j)=chi_dayabay
+            call chi2_db(Y,chi_dayabay)
+            DB_data(i,j)=chi_dayabay
             
             
 
@@ -81,17 +81,17 @@ program main_global
     !           DAYA BAY
     !
     !###################################################
-    call write_results(n,DB_data,'db_data.dat')
-    call get_min_from_data(n,'db_data.dat',val)    
-    call get_parabola_from_data(n,'db_data.dat')
+    !call write_results(n,DB_data,'db_data.dat')
+    !call get_min_from_data(n,'db_data.dat',val)    
+    !call get_parabola_from_data(n,'db_data.dat')
 
-    !call write_results(n,DB_data,'db_data_rate_pull.dat')
-    !call get_min_from_data(n,'db_data_rate_pull.dat',val)    
-    !call get_parabola_from_data(n,'db_data_rate_pull.dat')
+    call write_results(n,DB_data,'db_data_rate_pull.dat')
+    call get_min_from_data(n,'db_data_rate_pull.dat',val)    
+    call get_parabola_from_data(n,'db_data_rate_pull.dat')
 
     !###################################################
     !
-    !           Double Choo
+    !           Double Chooz
     !
     !###################################################    
     !call write_results(n,DC_data,'DC_data.dat')

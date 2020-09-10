@@ -318,18 +318,20 @@ subroutine readDBData()
     open(newunit=u,file='daya_for_global_analysis/db_data/db_second_correction_8AD_per_hall.dat')
         read(u,*) ((second_correction8ADhalls(i,j), j=1,3), i=1,NBIN)
     close(u)
-
+    !######################################
+    !
+    !     Pull Approach Calibration
+    !
+    !######################################    
+    TP_d(8)=TP_d(8)*1.007_dp    
     !######################################
     !
     !     Covariance Matrix Calibration
     !
     !######################################
-    bin_var=0.97_dp
-    !TP_d=TP_d*0.8_dp
-    TP_d(8)=TP_d(8)*0.991_dp
-
-    !sigma_thermal_power=6.5d0
-    !sigma_energy_bin=15.0_dp
+    !bin_var=0.97_dp
+    !TP_d(8)=TP_d(8)*0.991_dp
+    !######################################    
 
     call db_generate_MC_data()   
     print*, 'reading end ...'

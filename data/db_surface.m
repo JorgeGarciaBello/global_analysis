@@ -13,8 +13,6 @@ minimo=load("min_param_db_data.dat")
 
 dim=500
 
-
-<<<<<<< HEAD
 #k=1;
 #for i=1:dim
 #  for j=1:dim

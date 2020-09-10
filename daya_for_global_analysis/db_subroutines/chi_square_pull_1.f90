@@ -28,9 +28,7 @@ real(8)  function chiSquarePull1(P)
     chiSquarePull1=0.0d0
     sigmaR=0.008D0
     sigmaD=0.002D0
-    sigmaB=(/1040,1176,875,782,155,150,150,133/);
-
-    
+    sigmaB=(/1040,1176,875,782,155,150,150,133/);    
     
     do d=1,ADS    
         Td=neuN(d)
@@ -46,6 +44,6 @@ real(8)  function chiSquarePull1(P)
     do d=1,ADS
         chiSquarePull1=chiSquarePull1+(etaD(d)/sigmaB(d))**2
     enddo        
-        !chiSquarePull1=chiSquarePull1+((2.44D-3-dm31)/0.1d-3)**2
+        chiSquarePull1=chiSquarePull1+((2.484D-3-dm31)/0.036d-3)**2
     return
 end function chiSquarePull1
