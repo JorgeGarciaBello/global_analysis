@@ -23,20 +23,20 @@ subroutine grid_setting()
     !       Setting for Daya Bay RATE Only
     !
     !#############################################
-    dm_min=2.00d-3
-    dm_max=2.90d-3
-    t13_min=asin(sqrt(0.07d0))/2.0d0
-    t13_max=asin(sqrt(0.10d0))/2.0d0
+    !dm_min=2.00d-3
+    !dm_max=2.90d-3
+    !t13_min=asin(sqrt(0.07d0))/2.0d0
+    !t13_max=asin(sqrt(0.10d0))/2.0d0
 
     !##############################################
     !
     !       Setting for RENO rate pull
     !
     !#############################################
-    !dm_min=2.00d-3
-    !dm_max=3.25d-3
-    !t13_min=asin(sqrt(0.058d0))/2.0d0
-    !t13_max=asin(sqrt(0.12d0))/2.0d0    
+    dm_min=2.00d-3
+    dm_max=3.25d-3
+    t13_min=asin(sqrt(0.058d0))/2.0d0
+    t13_max=asin(sqrt(0.12d0))/2.0d0    
 
     !##############################################
     !
