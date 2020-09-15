@@ -53,7 +53,7 @@ program main_global
             !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ            
             !chi_doubleCHOOZ=DC_FUNC(Y(2),Y(11),0.0_dp,0.0_dp,0.0_dp)
 
-            call DC_double_chooz(Y,chi_doubleCHOOZ); DC_data(i,j)=chi_doubleCHOOZ
+            !call DC_double_chooz(Y,chi_doubleCHOOZ); DC_data(i,j)=chi_doubleCHOOZ
             
             !####################################################################################################
             !
@@ -75,9 +75,9 @@ program main_global
     !call get_min_from_data(n,'db_data.dat',val)    
     !call get_parabola_from_data(n,'db_data.dat')
 
-    !call write_results(n,DB_data,'db_data_prueba.dat')
-    !call get_min_from_data(n,'db_data_prueba.dat',val)    
-    !call get_parabola_from_data(n,'db_data_prueba.dat')
+    call write_results(n,DB_data,'db_data_prueba.dat')
+    call get_min_from_data(n,'db_data_prueba.dat',val)    
+    
 
     !###################################################
     !

@@ -7,8 +7,6 @@ real(8) function db_create_w_i(t13,dmee,i)
     real(8) :: db_expected_antineutrino_number_all_bin_f
     
     db_create_w_i=0.0d0    
-    !db_create_w_i=(db_expected_antineutrino_number_all_bin_f(i,t13,dmee)+bkg_t_N_f(i))/     &
-    !               (db_expected_antineutrino_number_all_bin_n(i,t13,dmee)+bkg_t_N_n(i))
     db_create_w_i=(db_expected_antineutrino_number_all_bin_f(i,t13,dmee))/     &
                   (db_expected_antineutrino_number_all_bin_n(i,t13,dmee))
     return

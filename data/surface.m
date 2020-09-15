@@ -7,7 +7,7 @@ x=load("grid_data_s22t13_.dat");
 y=load("grid_data_dmee.dat");
 z=load("chi_matrix_db_data_prueba.dat");
 
-grid_dim=15
+grid_dim=5
 dim=200
 xi=linspace(x(1),x(grid_dim),dim);
 yi=linspace(y(1),y(grid_dim),dim);
