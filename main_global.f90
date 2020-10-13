@@ -53,14 +53,14 @@ program main_global
             !call chi2_D_C(Y,chi_doubleCHOOZ) ! Subroutina que dado Y, regresa el valor de la chi-cuadrada para Double CHOOZ            
             !chi_doubleCHOOZ=DC_FUNC(Y(2),Y(11),0.0_dp,0.0_dp,0.0_dp)
 
-            call DC_double_chooz(Y,chi_doubleCHOOZ); DC_data(i,j)=chi_doubleCHOOZ
+            !call DC_double_chooz(Y,chi_doubleCHOOZ); DC_data(i,j)=chi_doubleCHOOZ
             
             !####################################################################################################
             !
             !                                         RENO
             !
             !#####################################################################################################
-            !call renoChi2(Y,chi_reno); RENO_data(i,j) = chi_reno            
+            call renoChi2(Y,chi_reno); RENO_data(i,j) = chi_reno            
        enddo
         !write(u,*) ' '
         print*, i
@@ -98,7 +98,7 @@ program main_global
     !call get_min_from_data(n,                   'reno_data_far_approach.dat',val)
     !call reno_confidenceRegions(n,val,RENO_data,'reno_data_far_approach.dat')
 
-    !call write_results(n,RENO_data,'reno_data_cov_1.dat')
-    !call get_min_from_data(n,'reno_data_cov_1.dat',val)
-    !call reno_confidenceRegions(n,val,RENO_data,'reno_data_cov_1.dat')
+    !call write_results(n,RENO_data,'reno_data_for_unified_analysis.dat')
+    !call get_min_from_data(n,'reno_data_for_unified_analysis.dat',val)
+    !call reno_confidenceRegions(n,val,RENO_data,'reno_data_for_unified_analysis.dat')
 end program main_global
