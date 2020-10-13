@@ -13,9 +13,8 @@ real(8) function db_cov_M_expected_antineutrino_number_period_detector_bin(P,d,j
     real(8) :: db_detector_response_model_function
     real(8) :: db_inv_detector_response
     real(8) :: a,b,h              ! parameters for the integral
-    integer :: i,n=10
- 
-    !a=bines(j,1);    b=bines(j,2)
+    integer :: i,n=10 
+    
     a=p_bines(j,1);  b=p_bines(j,2)
     h=(b-a)/real(n)
     result=0.0d0

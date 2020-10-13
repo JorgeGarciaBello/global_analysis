@@ -56,8 +56,8 @@ subroutine renoChi2(Y,chi2_min)
     delta3=Y(9)
     dm21=Y(10)
     dm31=Y(11)
-    dm41=Y(12)
-    
+    dm41=Y(12)    
+
     dmee=dm31
     call reno_create_antineutrino_number_detector_reactor_bin(dmee,t13)
     select case(1)

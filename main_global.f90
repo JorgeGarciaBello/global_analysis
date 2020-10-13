@@ -15,8 +15,7 @@ program main_global
     !call DC_grid_setting()
     
     call readDBData()      ! Lee datos de Dayabay
-    call readRENOData()    ! Lee datos de RENO
-    call ReadDC()          ! Lee datos de Double CHOOZ
+    call readRENOData()    ! Lee datos de RENO    
     call DC_read_data()    
 
   
@@ -77,7 +76,7 @@ program main_global
 
     !call write_results(n,DB_data,'db_data_prueba.dat')
     !call get_min_from_data(n,'db_data_prueba.dat',val)    
-    !call get_parabola_from_data(n,'db_data_prueba.dat')
+    
 
     !###################################################
     !
@@ -94,6 +93,10 @@ program main_global
     !           RENO
     !
     !###################################################
+    !call write_results(n,RENO_data,             'reno_data_prueba.dat')
+    !call get_min_from_data(n,                   'reno_data_prueba.dat',val)
+    !call reno_confidenceRegions(n,val,RENO_data,'reno_data_prueba.dat')
+
     !call write_results(n,RENO_data,             'reno_data_far_approach.dat')
     !call get_min_from_data(n,                   'reno_data_far_approach.dat',val)
     !call reno_confidenceRegions(n,val,RENO_data,'reno_data_far_approach.dat')

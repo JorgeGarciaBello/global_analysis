@@ -26,7 +26,5 @@ real(8) function expectedNumberNeutrinoByHallPeriodBin(H,P,j,t13,dm31)
                                                  +expectedNumberNeutrinosDetectorBin(P,7,j,t13,dm31) &
                                                  +expectedNumberNeutrinosDetectorBin(P,8,j,t13,dm31)
     end select    
-    !expectedNumberNeutrinoByHallPeriodBin=expectedNumberNeutrinoByHallPeriodBin* &
-    !                                        calibration_period_hall(P,H)
     return
 end function expectedNumberNeutrinoByHallPeriodBin

@@ -11,8 +11,8 @@ subroutine reno_generate_efficiency()
     real(dp) :: ZBQLNOR
     real(dp) :: r
     integer :: i,n,d
-    print*,'sigma_detection_efficiency', sigma_detection_efficiency
-    print*,'sigma_efficiency_corr', sigma_efficiency_corr
+    !print*,'sigma_detection_efficiency', sigma_detection_efficiency
+    !print*,'sigma_efficiency_corr', sigma_efficiency_corr
     !sigma_detection_efficiency=0.0d0
     !sigma_efficiency_corr=0.0d0
     !sigma_efficiency_corr=0.21d0
