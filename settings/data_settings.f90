@@ -1,7 +1,7 @@
 module data_settings
     implicit none
     !integer,parameter :: n=1000             ! size of the grid   for RENO only
-    integer,parameter :: n=500                ! size of the grid
+    integer,parameter :: n=50                ! size of the grid
 
 
     real(8) :: t13_M_data(n,n)

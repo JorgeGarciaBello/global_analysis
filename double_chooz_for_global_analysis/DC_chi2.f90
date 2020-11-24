@@ -5,7 +5,7 @@
 !   
 !   Autor: M. en C. Benito Vargaz Perez
 !
-!   chi2_D_C. Subroutina del experimento de oscilaciones de neutrinos Double CHOOZ.
+!   DC_chi2. Subroutina del experimento de oscilaciones de neutrinos Double CHOOZ.
 !       Tiene la estructura ( Vector Y: son los parámetros de oscilación en un modelo de 4 neutrinos,
 !                             chi_doubleCHOOZ: es el valor minimo de la estadśitica chi-square para
 !                                       valores definidos en el vector Y )
@@ -31,7 +31,7 @@
 !##############################################################################################
 !##################################################
 !
-!   subroutine chi2_D_C: subroutine que recibe un 
+!   subroutine DC_chi2: subroutine que recibe un 
 !       vector Y de parámetros de oscilación y 
 !       regresa un chi_doubleCHOOZ que es el Valor
 !       mínimo de la estadśitica Chi-cuadrada del 
@@ -40,7 +40,7 @@
 !##################################################
 
 
-Subroutine chi2_D_C(Y,chi_doubleCHOOZ)  !Calcula las integrales Ppromedio
+Subroutine DC_chi2(Y,chi_doubleCHOOZ)  !Calcula las integrales Ppromedio
     use DC_espectros
     use DC_condiciones
     use matriz
@@ -87,4 +87,4 @@ Subroutine chi2_D_C(Y,chi_doubleCHOOZ)  !Calcula las integrales Ppromedio
     58 format (3(E16.10,12X))
     CALL SaveP_DC(PP)
     return
-end Subroutine chi2_D_C
+end Subroutine DC_chi2
