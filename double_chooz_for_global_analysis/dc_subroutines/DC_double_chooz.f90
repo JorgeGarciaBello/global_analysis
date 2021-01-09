@@ -20,7 +20,7 @@ subroutine DC_double_chooz(YY,dc_ji_min)
     NPT=2*N+1
     X(1)=DFLOAT(1)/DFLOAT(N+1)    
     RHOBEG=0.2D0*X(1)  
-    CALL NEWUOA (N,NPT,X,RHOBEG,RHOEND,IPRINT,MAXFUN,W)    
+    CALL NEWUOA (N,NPT,X,RHOBEG,RHOEND,IPRINT,MAXFUN,W)
     !call DC_minimization(t13,dmee,P,Y)
     !dc_ji_min=Y(1)
     return

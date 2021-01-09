@@ -63,7 +63,7 @@ program main_global
             !
             !#####################################################################################################
 
-            !call DC_double_chooz(Y,chi_doubleCHOOZ); DC_data(i,j)=chi_doubleCHOOZ
+            call DC_double_chooz(Y,chi_doubleCHOOZ); DC_data(i,j)=chi_doubleCHOOZ
             
             !####################################################################################################
             !
